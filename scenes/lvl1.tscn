@@ -1,14 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2hdstu70nyx7"]
+[gd_scene load_steps=14 format=3 uid="uid://b2hdstu70nyx7"]
 
 [ext_resource type="Script" path="res://scripts/lvl1.gd" id="1_8u543"]
 [ext_resource type="PackedScene" uid="uid://de0bpxweuff3e" path="res://scenes/player.tscn" id="2_r1w16"]
 [ext_resource type="Texture2D" uid="uid://bl8trwvomot62" path="res://images/pillarLeft.png" id="3_4so2q"]
 [ext_resource type="Texture2D" uid="uid://cnl6h787hia7k" path="res://images/pillarRight.png" id="4_kssje"]
+[ext_resource type="Texture2D" uid="uid://bb5xdmwh2j814" path="res://images/Salami.png" id="5_eq3v8"]
 [ext_resource type="Texture2D" uid="uid://dhy6527v6h5r6" path="res://images/attic.png" id="5_fxwye"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="6_e6eef"]
+[ext_resource type="Texture2D" uid="uid://dmp1eoaxw0fqh" path="res://images/Miguel.png" id="6_x51go"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vask0"]
-size = Vector2(115, 54)
+size = Vector2(117, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c1g2y"]
+size = Vector2(26, 20.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgte5"]
+size = Vector2(30, 20.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kfpsw"]
+size = Vector2(7.3334, 4.66666)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxsvc"]
+size = Vector2(21.5, 7)
 
 [node name="lvl1" type="Node2D"]
 z_as_relative = false
@@ -20,7 +34,6 @@ script = ExtResource("1_8u543")
 y_sort_enabled = true
 
 [node name="Attic" type="Sprite2D" parent="StaticBody2D"]
-z_index = 1
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(820, 196)
@@ -39,20 +52,60 @@ position = Vector2(-481.333, 71.3333)
 texture = ExtResource("3_4so2q")
 offset = Vector2(0, -101)
 
+[node name="ladder" type="Area2D" parent="StaticBody2D/Attic"]
+position = Vector2(162.667, 21.3333)
+scale = Vector2(0.666667, 0.666667)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/ladder"]
+shape = SubResource("RectangleShape2D_vask0")
+
+[node name="salami2" type="Area2D" parent="StaticBody2D/Attic"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(10.6667, 2)
+
+[node name="salami" type="Sprite2D" parent="StaticBody2D/Attic/salami2"]
+position = Vector2(5.33331, 20)
+texture = ExtResource("5_eq3v8")
+offset = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/salami2"]
+position = Vector2(1.66663, 15.3333)
+shape = SubResource("RectangleShape2D_c1g2y")
+
+[node name="miguel2" type="Area2D" parent="StaticBody2D/Attic"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(38.6667, 0)
+
+[node name="miguel" type="Sprite2D" parent="StaticBody2D/Attic/miguel2"]
+position = Vector2(18, 20)
+texture = ExtResource("6_x51go")
+offset = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/miguel2"]
+position = Vector2(17.6666, 17)
+shape = SubResource("RectangleShape2D_pgte5")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 z_index = 2
 position = Vector2(567, 69)
 polygon = PackedVector2Array(-564, 322, 646, 318, 605, 235, 589, 235, 575, 213, 577, 213, 554, 134, 518, 134, 536, 180, 468, 180, 454, 128, 400, 128, 396, 154, 374, 154, 368, 130, 248, 130, 248, 154, 212, 154, 206, 128, 52, 128, 52, 156, 28, 156, 28, 130, -120, 130, -124, 154, -150, 154, -154, 130, -174, 130, -186, 180, -272, 180, -272, 130, -292, 130, -297, 155, -333, 155, -333, 131, -461, 131, -495, 215, -489, 215, -499, 235, -519, 235, -566, 322, -472, 128, 553, 121, 652, 322)
 
-[node name="ladder" type="Area2D" parent="StaticBody2D"]
-position = Vector2(1064, 228)
+[node name="salamiRectangle" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 1
+position = Vector2(845.5, 226)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_kfpsw")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/ladder"]
-position = Vector2(-1.5, 3)
-shape = SubResource("RectangleShape2D_vask0")
+[node name="miguelRectange" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 1
+position = Vector2(904, 225.5)
+shape = SubResource("RectangleShape2D_yxsvc")
 
 [node name="player" parent="." instance=ExtResource("2_r1w16")]
-position = Vector2(1024, 294)
+position = Vector2(827, 225)
+scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="player" node_paths=PackedStringArray("map")]
 position = Vector2(0, -25)
@@ -61,5 +114,9 @@ limit_top = -30
 script = ExtResource("6_e6eef")
 map = NodePath("../../StaticBody2D/Attic")
 
-[connection signal="body_entered" from="StaticBody2D/ladder" to="." method="_on_ladder_body_entered"]
-[connection signal="body_exited" from="StaticBody2D/ladder" to="." method="_on_ladder_body_exited"]
+[connection signal="body_entered" from="StaticBody2D/Attic/ladder" to="." method="_on_ladder_body_entered"]
+[connection signal="body_exited" from="StaticBody2D/Attic/ladder" to="." method="_on_ladder_body_exited"]
+[connection signal="body_entered" from="StaticBody2D/Attic/salami2" to="." method="_on_salami_2_body_entered"]
+[connection signal="body_exited" from="StaticBody2D/Attic/salami2" to="." method="_on_salami_2_body_exited"]
+[connection signal="body_entered" from="StaticBody2D/Attic/miguel2" to="." method="_on_miguel_2_body_entered"]
+[connection signal="body_exited" from="StaticBody2D/Attic/miguel2" to="." method="_on_miguel_2_body_exited"]

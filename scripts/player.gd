@@ -23,6 +23,10 @@ func _process(delta):
 func get_input():
 	var input_direction :Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = input_direction * speed
+
+	#dont move while the textbox is on
+	if text_box.current_state!=text_box.State.ready:
+		velocity=Vector2.ZERO
 	
 	
 	if velocity!=Vector2(0,0):

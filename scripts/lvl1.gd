@@ -63,7 +63,9 @@ func _on_salami_2_body_entered(body:Node2D):
 
 
 func _on_miguel_2_body_exited(body:Node2D):
-	nearMiguel=false
+	if body is CharacterBody2D:
+		nearMiguel=false
 
 func _on_miguel_2_body_entered(body:Node2D):
-	nearMiguel=true
+	if body is CharacterBody2D:
+		nearMiguel=true

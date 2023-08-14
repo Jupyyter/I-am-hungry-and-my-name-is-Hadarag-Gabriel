@@ -88,6 +88,7 @@ position = Vector2(17.6666, 17)
 shape = SubResource("RectangleShape2D_pgte5")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
 z_index = 2
 position = Vector2(567, 69)
 polygon = PackedVector2Array(-564, 322, 646, 318, 605, 235, 589, 235, 575, 213, 577, 213, 554, 134, 518, 134, 536, 180, 468, 180, 454, 128, 400, 128, 396, 154, 374, 154, 368, 130, 248, 130, 248, 154, 212, 154, 206, 128, 52, 128, 52, 156, 28, 156, 28, 130, -120, 130, -124, 154, -150, 154, -154, 130, -174, 130, -186, 180, -272, 180, -272, 130, -292, 130, -297, 155, -333, 155, -333, 131, -461, 131, -495, 215, -489, 215, -499, 235, -519, 235, -566, 322, -472, 128, 553, 121, 652, 322)
@@ -104,7 +105,7 @@ position = Vector2(904, 225.5)
 shape = SubResource("RectangleShape2D_yxsvc")
 
 [node name="player" parent="." instance=ExtResource("2_r1w16")]
-position = Vector2(827, 225)
+position = Vector2(805, 261)
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="player" node_paths=PackedStringArray("map")]

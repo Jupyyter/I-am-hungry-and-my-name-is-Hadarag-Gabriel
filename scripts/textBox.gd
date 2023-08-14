@@ -42,6 +42,7 @@ func _process(delta):
 		State.finished:
 			#ui_accept must be set in godot
 			if Input.is_action_just_pressed("ui_accept"):
+				colorReset()
 				current_state = State.newText
 				if text_queue.is_empty():
 					hide_textbox()
@@ -58,17 +59,29 @@ func queue_text(next_text: String):
 func displayText():
 	show_textbox()
 	var next_text: String = text_queue.pop_front()
-	var parts:int = next_text.find("-")
-	#below i make sure that the image of the character speaking is shown correctly or not at all
-	if parts != -1:
-		var before: String = next_text.substr(0, parts).strip_edges()
-		var after: String = next_text.substr(parts + 1).strip_edges()
-		setTexture(after)
-		start_symbol.text = ""
-		label.text = before
-	else:
-		label.text = next_text
-		setTexture(null)
+
+	var loopTimes:int =next_text.count("-")+1
+	for i in loopTimes:
+		var parts:int = next_text.find("-")
+		#below i make sure that the image of the character speaking is shown correctly or not at all
+		if parts != -1:
+			var before: String = next_text.substr(0, parts).strip_edges()
+			print(before)
+			var after: String = next_text.substr(parts + 1).strip_edges()
+			if(after!=""):
+				next_text=after
+			match i:
+				0:
+					label.text = before
+					setTexture(null)
+				1:
+					setTexture(before)
+					start_symbol.text = ""
+				2: 
+					text_box.colorRed()
+		elif i==0:
+			label.text = next_text
+			setTexture(null)
 	label.visible_ratio = 0
 	current_state = State.reading
 	tween = create_tween()
@@ -106,3 +119,12 @@ func setTexture(texture):
 		textureRect.texture = null
 	else:
 		textureRect.texture = load("res://images/" + texture + ".png")
+
+func colorRed():
+	label.add_theme_color_override("font_color",Color(180,0,0))
+
+func changeTextColor(text:Color):
+	label.add_theme_color_override("font_color",text)
+
+func colorReset():
+	label.add_theme_color_override("font_color",Color.WHITE)

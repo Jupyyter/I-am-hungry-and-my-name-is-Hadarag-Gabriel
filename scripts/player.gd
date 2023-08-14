@@ -15,10 +15,12 @@ func _ready():
 
 func _process(delta):
 	get_input()
-	move_and_slide()
 	if(nearLadder):
 		if(Input.is_action_just_pressed("ui_accept")):
 			get_tree().change_scene_to_file("scenes/lvl2.tscn")
+
+func _physics_process(delta):
+	move_and_slide()
 
 func get_input():
 	var input_direction :Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

@@ -49,14 +49,16 @@ func _process(delta):
 
 
 func queue_text(next_text: String):
-	text_queue.push_back(next_text)
+	var lines:PackedStringArray = next_text.split("\n")
+	for line in lines:
+		text_queue.push_back(line)
 
 
 #display 1 text at a time using tween
 func displayText():
 	show_textbox()
 	var next_text: String = text_queue.pop_front()
-	var parts := next_text.find("-")
+	var parts:int = next_text.find("-")
 	#below i make sure that the image of the character speaking is shown correctly or not at all
 	if parts != -1:
 		var before: String = next_text.substr(0, parts).strip_edges()
@@ -103,4 +105,4 @@ func setTexture(texture):
 	if texture == null:
 		textureRect.texture = null
 	else:
-		textureRect.texture = load("res://sprites/" + texture + ".png")
+		textureRect.texture = load("res://images/" + texture + ".png")

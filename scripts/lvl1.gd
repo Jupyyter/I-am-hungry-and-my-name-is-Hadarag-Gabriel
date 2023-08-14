@@ -21,7 +21,8 @@ func _process(delta):
 		if(Input.is_action_just_pressed("ui_accept") and textBox.current_state==text_box.State.ready):
 			match salamiConv:
 				0:
-					text_box.queue_text("hi, i'm your brother, im Salami")
+					text_box.queue_text("hi, i'm your brother, Salami
+					:):):):)")
 					salamiConv=salamiConv+1
 				1:
 					text_box.queue_text("...")
@@ -30,7 +31,7 @@ func _process(delta):
 		if(Input.is_action_just_pressed("ui_accept") and textBox.current_state==text_box.State.ready):
 			match miguelConv:
 				0:
-					text_box.queue_text("hi, i'm your brother, im Miguel")
+					text_box.queue_text("hi, i'm your brother, Miguel")
 					miguelConv=miguelConv+1
 				1:
 					text_box.queue_text("...")

@@ -22,8 +22,9 @@ func _process(delta):
 func _physics_process(delta):
 	move_and_slide()
 
-func get_input():
+func get_input()->void:
 	var input_direction :Vector2 = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	input_direction=round(input_direction)
 	velocity = input_direction * speed
 
 	#dont move while the textbox is on

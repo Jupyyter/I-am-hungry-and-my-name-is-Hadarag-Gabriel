@@ -21,21 +21,29 @@ func _process(delta):
 		if(Input.is_action_just_pressed("ui_accept") and textBox.current_state==text_box.State.ready):
 			match salamiConv:
 				0:
-					text_box.queue_text("hi, i'm your brother, Salami-red
-					:):):):)
-					:):):):):):):):)
-					:):):):)
-					:):):):)asasasa")
-					salamiConv=salamiConv+1
-				1:
-					text_box.queue_text("...")
+					text_box.queue_questionResponse("hi, i'm your brother, Salami-red
+					aaaaaaaaa
+					bbbbbbbbb
+					ccccccccccc
+					dddddddddd")
+					salamiConv+=1
+					if text_box.IndexChosen==0:
+						text_box.queue_text("you chose hi, i'm your brother, Salami-red")
+					elif text_box.IndexChosen==1:
+						text_box.queue_text("you chose aaaaaaaaaa")
+					elif text_box.IndexChosen==2:
+						text_box.queue_text("you chose bbbbbb")
+					elif text_box.IndexChosen==3:
+						text_box.queue_text("you chose cccccccc")
+					elif text_box.IndexChosen==4:
+						text_box.queue_text("you chose ddddddd")
 
 	if(nearMiguel):
 		if(Input.is_action_just_pressed("ui_accept") and textBox.current_state==text_box.State.ready):
 			match miguelConv:
 				0:
 					text_box.queue_text("hi, i'm your brother, Miguel")
-					miguelConv=miguelConv+1
+					miguelConv+=1
 				1:
 					text_box.queue_text("...")
 

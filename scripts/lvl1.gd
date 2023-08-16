@@ -22,7 +22,10 @@ func _process(delta):
 			match salamiConv:
 				0:
 					text_box.queue_text("hi, i'm your brother, Salami-red
-					:):):):)")
+					:):):):)
+					:):):):):):):):)
+					:):):):)
+					:):):):)asasasa")
 					salamiConv=salamiConv+1
 				1:
 					text_box.queue_text("...")

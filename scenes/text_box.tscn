@@ -10,13 +10,14 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(1, 1, 1, 1)
 
-[node name="textBox" type="CanvasLayer" node_paths=PackedStringArray("textureRect", "textbox_container", "start_symbol", "end_symbol", "label")]
+[node name="textBox" type="CanvasLayer" node_paths=PackedStringArray("textureRect", "textbox_container", "start_symbol", "end_symbol", "label", "boxContainer")]
 script = ExtResource("1_csfmo")
 textureRect = NodePath("TextboxContainer/MarginContainer/HBoxContainer/TextureRect")
 textbox_container = NodePath("TextboxContainer")
 start_symbol = NodePath("TextboxContainer/MarginContainer/HBoxContainer/start")
 end_symbol = NodePath("TextboxContainer/MarginContainer/HBoxContainer/end")
-label = NodePath("TextboxContainer/MarginContainer/HBoxContainer/Label2")
+label = NodePath("TextboxContainer/MarginContainer/HBoxContainer/Label")
+boxContainer = NodePath("TextboxContainer/MarginContainer/HBoxContainer")
 
 [node name="TextboxContainer" type="MarginContainer" parent="."]
 anchors_preset = 12
@@ -59,7 +60,8 @@ layout_mode = 2
 size_flags_vertical = 1
 text = "*"
 
-[node name="Label2" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0

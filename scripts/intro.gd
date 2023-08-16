@@ -3,8 +3,12 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	text_box.queue_text("France")
-	text_box.queue_text("Year 1772")
+	text_box.queue_questionResponse("France")
+	text_box.queue_questionResponse("Year 1772-red")
+	text_box.queue_questionResponse("ccccccccc")
+	text_box.queue_questionResponse(":):):):):)")
+	text_box.queue_questionResponse("aaaaaaaaaaa")
+	text_box.queue_questionResponse("bbbbbbbbbbb")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

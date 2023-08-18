@@ -18,6 +18,7 @@ config/icon="res://scripts/icon.svg"
 [autoload]
 
 text_box="*res://scenes/text_box.tscn"
+player="*res://scenes/player.tscn"
 
 [display]
 

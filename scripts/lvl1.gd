@@ -18,7 +18,8 @@ func _process(delta):
 			get_tree().change_scene_to_file("scenes/lvl2.tscn")
 
 	if(nearSalami):
-		if(Input.is_action_just_pressed("ui_accept") and textBox.current_state==text_box.State.ready):
+		if (textBox.current_state==text_box.State.ready and Input.is_action_just_pressed("ui_accept")) or player.inConversation:
+			player.inConversation=true
 			match salamiConv:
 				0:
 					text_box.queue_questionResponse("hi, i'm your brother, Salami-red
@@ -27,22 +28,35 @@ func _process(delta):
 					ccccccccccc
 					dddddddddd")
 					salamiConv+=1
-					if text_box.IndexChosen==0:
-						text_box.queue_text("you chose hi, i'm your brother, Salami-red")
-					elif text_box.IndexChosen==1:
-						text_box.queue_text("you chose aaaaaaaaaa")
-					elif text_box.IndexChosen==2:
-						text_box.queue_text("you chose bbbbbb")
-					elif text_box.IndexChosen==3:
-						text_box.queue_text("you chose cccccccc")
-					elif text_box.IndexChosen==4:
-						text_box.queue_text("you chose ddddddd")
+				1:
+					if textBox.current_state==text_box.State.ready:
+						if text_box.IndexChosen==0:
+							text_box.queue_text("you chose hi, i'm your brother, Salami-red")
+							player.inConversation=false
+						elif text_box.IndexChosen==1:
+							text_box.queue_text("you chose aaaaaaaaaa")
+							player.inConversation=false
+						elif text_box.IndexChosen==2:
+							text_box.queue_text("you chose bbbbbb")
+							player.inConversation=false
+						elif text_box.IndexChosen==3:
+							text_box.queue_text("you chose cccccccc")
+							player.inConversation=false
+						elif text_box.IndexChosen==4:
+							text_box.queue_text("you chose ddddddd")
+							player.inConversation=false
+						salamiConv+=1
+				2:
+					text_box.queue_text("saddsadsadsadsa
+					sadadsdsa")
+					salamiConv+=1
 
 	if(nearMiguel):
 		if(Input.is_action_just_pressed("ui_accept") and textBox.current_state==text_box.State.ready):
 			match miguelConv:
 				0:
-					text_box.queue_text("hi, i'm your brother, Miguel")
+					text_box.queue_text("hi, i'm your brother, Miguel
+					aaaaaaaaaaaaaaaaaaa")
 					miguelConv+=1
 				1:
 					text_box.queue_text("...")

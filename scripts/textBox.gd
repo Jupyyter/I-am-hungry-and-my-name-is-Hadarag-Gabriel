@@ -17,10 +17,10 @@ var lastIndexChosen:int=0
 enum State { ready, newText, reading, finished }
 var current_state: State = State.ready
 var text_queue: Array = []
+var conv_queue:Array=[]
 var tween: Tween
 var chooseMode:bool=false
 var endOfConversation : bool = false
-var doStuff1FrameLater:bool=false
 
 var LabelList2:Array[Label]
 var currentStateList2:Array[State]
@@ -35,9 +35,6 @@ func _ready():
 #displays all the queued texts
 func _process(delta):
 	choosingResponse()
-	if doStuff1FrameLater:
-		current_state=State.ready
-		doStuff1FrameLater=false
 	for lbl in LabelList2:
 		match currentStateList2[LabelList2.find(lbl)]:
 			State.ready:
@@ -50,8 +47,18 @@ func _process(delta):
 					colorReset(lbl)
 					displayText(lbl)
 				else:
-					currentStateList2[LabelList2.find(lbl)] = State.ready
-					current_state= State.ready
+					if !conv_queue.is_empty():
+						var next_text:String=conv_queue.pop_front()
+						if next_text.begins_with("!-"):
+							next_text=next_text.substr(2)
+							createConvPage(next_text)
+							
+						elif next_text.begins_with("#-"):
+							next_text=next_text.substr(2)
+							createQuestionPage(next_text)
+					else:
+						currentStateList2[LabelList2.find(lbl)] = State.ready
+						current_state= State.ready
 			State.reading:
 				#ui_end must be set in godot
 				if Input.is_action_just_pressed("ui_end"):
@@ -68,33 +75,25 @@ func _process(delta):
 					if text_queue.is_empty():
 						#DELETE ALL THE CHILDREN DIEDIEDIEDIEDIE
 						#GABRIEL EATING MY MEMORY HAHAHAHAHAHAHAHAAHAHAHAHAHAHAHAAHAHAHAHAHAHAAHAHA
-						findThingInNode(lbl,boxContainer).queue_free()
-						currentStateList.erase(currentStateList[LabelList.find(lbl)])
-						LabelList.erase(lbl)
-						if LabelList.is_empty():
-							doStuff1FrameLater=true
-							LabelList2=[]
-							currentStateList2=[]
-							hide_textbox()
-							endOfConversation=true
-							chooseMode=false
+						hide_textbox()
+
+						chooseMode=false
 
 
 
 func queue_text(next_text: String)->void:
-	var lines:PackedStringArray = next_text.split("\n")
-	initializeNewLabel()
-	for line in lines:
-		text_queue.push_back(line)
-
+	if text_queue.is_empty():
+		createConvPage(next_text)
+	else:
+		next_text="!-"+next_text
+		conv_queue.push_back(next_text)
 func queue_questionResponse(next_text: String)->void:
-	IndexChosen=0
-	lastIndexChosen=0
-	chooseMode=true
-	var lines:PackedStringArray = next_text.split("\n")
-	for line in lines:
-		text_queue.push_back(line)
-		initializeNewLabel()
+	if text_queue.is_empty():
+		createQuestionPage(next_text)
+
+	else:
+		next_text="#-"+next_text
+		conv_queue.push_back(next_text)
 
 #display 1 text at a time using tween, changes texture and the color accordingly
 func displayText(lbl:Label)->void:
@@ -130,13 +129,13 @@ func displayText(lbl:Label)->void:
 	tween.tween_property(lbl, "visible_ratio", 1, CHAR_READ_RATE)
 	tween.connect("finished", finishedTweening )
 
-
+#guess what it does
 func hide_textbox()->void:
 	start_symbol.text = ""
 	end_symbol.text = ""
 	textbox_container.hide()
 
-
+#guess what it does
 func show_textbox()->void:
 	start_symbol.text = "*"
 	textbox_container.show()
@@ -148,15 +147,15 @@ func finishedTweening()->void:  #connedcted with tween's finished signal
 		currentStateList[LabelList.find(lbl)] = State.finished
 		currentStateList2[LabelList2.find(lbl)] = State.finished
 
-
+#character speaking or something
 func enableImage()->void:
 	textureRect.visible = true
 
-
+#character no longer speaking or something
 func disableImage()->void:
 	textureRect.visible = false
 
-
+#what character is speaking
 func setTexture(texture)->void:
 	if texture == null:
 		textureRect.texture = null
@@ -171,6 +170,7 @@ func colorReset(lbl:Label)->void:
 	#lbl.add_theme_color_override("font_color",Color.WHITE)
 	lbl.add_theme_color_override("font_color",Color.WHITE)
 
+#create new label :)
 func initializeNewLabel()->void:
 
 	var lblInstance=label.duplicate()
@@ -184,6 +184,7 @@ func initializeNewLabel()->void:
 	currentStateList.push_back(stateInstance)
 	currentStateList2=currentStateList.duplicate()
 
+#when choosing a response or an action
 func choosingResponse()->int:
 	if(!chooseMode):
 		return 0
@@ -200,9 +201,9 @@ func choosingResponse()->int:
 	if(IndexChosen!=lastIndexChosen):
 		LabelList2[lastIndexChosen].remove_theme_stylebox_override("normal")
 		lastIndexChosen=IndexChosen
-	print(IndexChosen)
 	return IndexChosen
 
+#returns a reference to an object within the array
 func findThingInArray(lbl: Node, arr: Array) -> Node:
 	for labell in arr:
 		if labell == lbl:
@@ -216,7 +217,8 @@ func findThingInNode(child:Node,nod2:Node)->Node:
 			return child
 	return null
 
-func createStyleBox():
+#returns a styleBox
+func createStyleBox()->StyleBoxFlat:
 	var style_box = StyleBoxFlat.new()
 	style_box.bg_color = Color(183, 196, 67)
 	style_box.border_color = Color("B7C443")
@@ -225,3 +227,29 @@ func createStyleBox():
 	style_box.set_content_margin_all(0)
 	style_box.set_expand_margin_all(4)
 	return style_box
+
+#kill all the labels
+func resetLabels()->void:
+	for lbl in LabelList2:
+		findThingInNode(lbl,boxContainer).queue_free()
+		currentStateList.erase(currentStateList[LabelList.find(lbl)])
+		LabelList.erase(lbl)
+	currentStateList2.clear()
+	LabelList2.clear()
+
+func createConvPage(next_text:String)->void:
+	var lines:PackedStringArray = next_text.split("\n")
+	resetLabels()
+	initializeNewLabel()
+	for line in lines:
+		text_queue.push_back(line)
+
+func createQuestionPage(next_text:String)->void:
+	resetLabels()
+	IndexChosen=0
+	lastIndexChosen=0
+	chooseMode=true
+	var lines:PackedStringArray = next_text.split("\n")
+	for line in lines:
+		text_queue.push_back(line)
+		initializeNewLabel()

@@ -4,6 +4,7 @@ var speed:int=150
 var animation_name:String="Down"
 var flipped:bool=false
 var nearLadder:bool=false
+var inConversation=false
 @onready var animationPlayer =$AnimationPlayer
 @onready var collisionshape2D =$CollisionShape2D
 @onready var sprite2D =$Sprite2D

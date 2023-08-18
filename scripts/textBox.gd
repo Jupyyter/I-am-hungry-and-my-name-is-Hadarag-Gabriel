@@ -73,10 +73,11 @@ func _process(delta):
 					currentStateList2[LabelList2.find(lbl)] = State.newText
 					current_state= State.newText
 					if text_queue.is_empty():
+						print("aaaaaaa")
 						#DELETE ALL THE CHILDREN DIEDIEDIEDIEDIE
 						#GABRIEL EATING MY MEMORY HAHAHAHAHAHAHAHAAHAHAHAHAHAHAHAAHAHAHAHAHAHAAHAHA
 						hide_textbox()
-
+						endOfConversation=true
 						chooseMode=false
 
 
@@ -124,6 +125,7 @@ func displayText(lbl:Label)->void:
 	#basically makes the text tween instead of spawning
 	lbl.visible_ratio = 0
 	currentStateList[LabelList.find(lbl)]  = State.reading
+	current_state=State.reading
 	currentStateList2=currentStateList.duplicate()
 	tween = create_tween()
 	tween.tween_property(lbl, "visible_ratio", 1, CHAR_READ_RATE)
@@ -144,8 +146,10 @@ func show_textbox()->void:
 func finishedTweening()->void:  #connedcted with tween's finished signal
 	end_symbol.text = ":)"
 	for lbl in LabelList2:
-		currentStateList[LabelList.find(lbl)] = State.finished
-		currentStateList2[LabelList2.find(lbl)] = State.finished
+		if current_state!=State.newText: # this is "if" absolutely needed in case a label finished tweening but the others don't and you press "ui_accept"
+			currentStateList[LabelList.find(lbl)] = State.finished
+			currentStateList2[LabelList2.find(lbl)] = State.finished
+			current_state=State.finished
 
 #character speaking or something
 func enableImage()->void:
@@ -237,13 +241,14 @@ func resetLabels()->void:
 	currentStateList2.clear()
 	LabelList2.clear()
 
+#creates 1 label and queues queue_texts based on the number of lines
 func createConvPage(next_text:String)->void:
 	var lines:PackedStringArray = next_text.split("\n")
 	resetLabels()
 	initializeNewLabel()
 	for line in lines:
 		text_queue.push_back(line)
-
+#creates n labels and n queue _texts based on tbe number of lines and 
 func createQuestionPage(next_text:String)->void:
 	resetLabels()
 	IndexChosen=0

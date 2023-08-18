@@ -22,31 +22,23 @@ func _process(delta):
 			player.inConversation=true
 			match salamiConv:
 				0:
-					text_box.queue_questionResponse("hi, i'm your brother, Salami-red
-					aaaaaaaaa
-					bbbbbbbbb
-					ccccccccccc
-					dddddddddd")
+					text_box.queue_text("hi, i'm your brother, Salami-red
+					do you need anything?")
 					salamiConv+=1
 				1:
+					text_box.queue_questionResponse("I'm hungry
+					Hi, Im Gabriel, and i wish to inform you that I'm hungry")
+					salamiConv+=1
+				2:
 					if textBox.current_state==text_box.State.ready:
 						if text_box.IndexChosen==0:
-							text_box.queue_text("you chose hi, i'm your brother, Salami-red")
+							text_box.queue_text("Yea, I'm hungry too")
 							player.inConversation=false
 						elif text_box.IndexChosen==1:
-							text_box.queue_text("you chose aaaaaaaaaa")
-							player.inConversation=false
-						elif text_box.IndexChosen==2:
-							text_box.queue_text("you chose bbbbbb")
-							player.inConversation=false
-						elif text_box.IndexChosen==3:
-							text_box.queue_text("you chose cccccccc")
-							player.inConversation=false
-						elif text_box.IndexChosen==4:
-							text_box.queue_text("you chose ddddddd")
+							text_box.queue_text("skill issue")
 							player.inConversation=false
 						salamiConv+=1
-				2:
+				3:
 					text_box.queue_text("saddsadsadsadsa
 					sadadsdsa")
 					salamiConv+=1

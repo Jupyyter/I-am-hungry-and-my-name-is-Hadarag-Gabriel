@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="I Am Hungry And My Name Is Hadarag Gabriel"
-run/main_scene="res://scenes/intro.tscn"
+run/main_scene="res://scenes/attic1.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://scripts/icon.svg"
 
 [autoload]
 
 text_box="*res://scenes/text_box.tscn"
-player="*res://scenes/player.tscn"
+globals="*res://scripts/globals.gd"
 
 [display]
 

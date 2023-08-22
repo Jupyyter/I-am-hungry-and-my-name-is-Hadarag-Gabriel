@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2mddhficdrk1"
-path="res://.godot/imported/terrareWalk.png-b82d6af3a680c7fe3c6f44400fedee13.ctex"
+uid="uid://cs1ewn5dj6j86"
+path="res://.godot/imported/flapjack1.png-a10965397faf610ddef4df98d83337a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/terrareWalk.png"
-dest_files=["res://.godot/imported/terrareWalk.png-b82d6af3a680c7fe3c6f44400fedee13.ctex"]
+source_file="res://images/flapjack1.png"
+dest_files=["res://.godot/imported/flapjack1.png-a10965397faf610ddef4df98d83337a9.ctex"]
 
 [params]
 

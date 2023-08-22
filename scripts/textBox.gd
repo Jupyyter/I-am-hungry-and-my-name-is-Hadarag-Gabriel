@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name textBoxClass
 
 #the higher the number, the slower the text will appear
-const CHAR_READ_RATE = 0.3
+const CHAR_READ_RATE = 0.03
 
 @export var textureRect: TextureRect
 @export var textbox_container: MarginContainer
@@ -20,7 +20,6 @@ var text_queue: Array = []
 var conv_queue:Array=[]
 var tween: Tween
 var chooseMode:bool=false
-var endOfConversation : bool = false
 
 var LabelList2:Array[Label]
 var currentStateList2:Array[State]
@@ -35,6 +34,7 @@ func _ready():
 #displays all the queued texts
 func _process(delta):
 	choosingResponse()
+	
 	for lbl in LabelList2:
 		match currentStateList2[LabelList2.find(lbl)]:
 			State.ready:
@@ -61,9 +61,9 @@ func _process(delta):
 						current_state= State.ready
 			State.reading:
 				#ui_end must be set in godot
-				if Input.is_action_just_pressed("ui_end"):
-					label.visible_ratio = 1
+				if Input.is_action_just_pressed("ui_end") and !chooseMode:
 					tween.kill()
+					visibleRacio1()
 					end_symbol.text = ":)"
 					currentStateList2[LabelList2.find(lbl)] = State.finished
 					current_state= State.finished
@@ -72,13 +72,11 @@ func _process(delta):
 				if Input.is_action_just_pressed("ui_accept"):
 					currentStateList2[LabelList2.find(lbl)] = State.newText
 					current_state= State.newText
-					if text_queue.is_empty():
-						print("aaaaaaa")
+					chooseMode=false
+					if text_queue.is_empty() and conv_queue.is_empty():
 						#DELETE ALL THE CHILDREN DIEDIEDIEDIEDIE
 						#GABRIEL EATING MY MEMORY HAHAHAHAHAHAHAHAAHAHAHAHAHAHAHAAHAHAHAHAHAHAAHAHA
 						hide_textbox()
-						endOfConversation=true
-						chooseMode=false
 
 
 
@@ -128,7 +126,7 @@ func displayText(lbl:Label)->void:
 	current_state=State.reading
 	currentStateList2=currentStateList.duplicate()
 	tween = create_tween()
-	tween.tween_property(lbl, "visible_ratio", 1, CHAR_READ_RATE)
+	tween.tween_property(lbl, "visible_ratio", 1, CHAR_READ_RATE*lbl.text.length())
 	tween.connect("finished", finishedTweening )
 
 #guess what it does
@@ -145,8 +143,8 @@ func show_textbox()->void:
 
 func finishedTweening()->void:  #connedcted with tween's finished signal
 	end_symbol.text = ":)"
-	for lbl in LabelList2:
-		if current_state!=State.newText: # this is "if" absolutely needed in case a label finished tweening but the others don't and you press "ui_accept"
+	if current_state==State.reading: # this is "if" absolutely needed in case a label finished tweening but the others don't and you press "ui_accept"
+		for lbl in LabelList2:
 			currentStateList[LabelList.find(lbl)] = State.finished
 			currentStateList2[LabelList2.find(lbl)] = State.finished
 			current_state=State.finished
@@ -201,8 +199,9 @@ func choosingResponse()->int:
 		IndexChosen=LabelList2.size()-1
 	elif IndexChosen < 0:
 		IndexChosen=0
-	LabelList2[IndexChosen].add_theme_stylebox_override("normal",createStyleBox())
-	if(IndexChosen!=lastIndexChosen):
+	if !LabelList2[IndexChosen].has_theme_stylebox_override ("normal"):
+		LabelList2[IndexChosen].add_theme_stylebox_override("normal",createStyleBox())
+	elif IndexChosen!=lastIndexChosen:
 		LabelList2[lastIndexChosen].remove_theme_stylebox_override("normal")
 		lastIndexChosen=IndexChosen
 	return IndexChosen
@@ -258,3 +257,8 @@ func createQuestionPage(next_text:String)->void:
 	for line in lines:
 		text_queue.push_back(line)
 		initializeNewLabel()
+
+#set all labels visible ratio to 1
+func visibleRacio1():
+	for lbl in LabelList2:
+		lbl.visible_ratio=1

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://upuvkq08ihpa"
-path="res://.godot/imported/terrareAnimation.png-7e38dad38c6b5b17b8a1bb597e7025d4.ctex"
+uid="uid://cnyy60eqrrth7"
+path="res://.godot/imported/noodle.png-0b3d7d8cd7c4279fbb8cbff686968a91.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/terrareAnimation.png"
-dest_files=["res://.godot/imported/terrareAnimation.png-7e38dad38c6b5b17b8a1bb597e7025d4.ctex"]
+source_file="res://images/noodle.png"
+dest_files=["res://.godot/imported/noodle.png-0b3d7d8cd7c4279fbb8cbff686968a91.ctex"]
 
 [params]
 

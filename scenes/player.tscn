@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://de0bpxweuff3e"]
+[gd_scene load_steps=10 format=3 uid="uid://de0bpxweuff3e"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r4nhh"]
 [ext_resource type="Texture2D" uid="uid://cedf53w8n3pcu" path="res://images/terrareIdle.png" id="2_0h1bk"]
@@ -38,6 +38,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_oifcx"]
+resource_name = "idleKnife"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
+}
+
 [sub_resource type="Animation" id="Animation_13gb8"]
 resource_name = "walk"
 loop_mode = 1
@@ -55,14 +72,33 @@ tracks/0/keys = {
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_bj2ev"]
+resource_name = "walkKnife"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_84bi6"]
 _data = {
 "RESET": SubResource("Animation_qvqhu"),
 "idle": SubResource("Animation_8bafa"),
-"walk": SubResource("Animation_13gb8")
+"idleKnife": SubResource("Animation_oifcx"),
+"walk": SubResource("Animation_13gb8"),
+"walkKnife": SubResource("Animation_bj2ev")
 }
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
@@ -76,7 +112,7 @@ texture_filter = 1
 texture = ExtResource("2_0h1bk")
 offset = Vector2(0, -32)
 hframes = 4
-vframes = 2
+vframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)

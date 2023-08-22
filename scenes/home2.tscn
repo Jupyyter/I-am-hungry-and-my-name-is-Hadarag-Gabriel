@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=3 uid="uid://jp2rws6k1u4u"]
+
+[ext_resource type="Texture2D" uid="uid://dty41h8j5ka5p" path="res://images/home2.png" id="1_l8ohr"]
+[ext_resource type="Script" path="res://scripts/home1.gd" id="1_oxcmn"]
+[ext_resource type="Texture2D" uid="uid://bqi2frsfehbe" path="res://images/cazan.png" id="2_q146o"]
+[ext_resource type="Texture2D" uid="uid://kkvbbrgettok" path="res://images/veranda.png" id="2_r76t4"]
+[ext_resource type="Texture2D" uid="uid://dags24tfu5bds" path="res://images/bucket2.png" id="3_3amsc"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="3_r0mix"]
+[ext_resource type="Texture2D" uid="uid://bov7lcc5wgusm" path="res://images/table.png" id="4_6dylw"]
+[ext_resource type="Texture2D" uid="uid://82mfivgl2vu0" path="res://images/knife.png" id="5_mflwy"]
+[ext_resource type="Texture2D" uid="uid://dhl28k8p2v87e" path="res://images/table2.png" id="6_u66fm"]
+[ext_resource type="Texture2D" uid="uid://dik4am43pooch" path="res://images/chair1.png" id="7_ln3bb"]
+[ext_resource type="Texture2D" uid="uid://bn1bvunbelwfo" path="res://images/chair2.png" id="8_atxxx"]
+[ext_resource type="PackedScene" uid="uid://de0bpxweuff3e" path="res://scenes/player.tscn" id="9_bhxeg"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="10_2xg57"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksb14"]
+size = Vector2(11.5, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rh0fc"]
+size = Vector2(58.5, 21.6245)
+
+[node name="home2" type="StaticBody2D" node_paths=PackedStringArray("knife")]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_oxcmn")
+knife = NodePath("hause/table1/knife")
+
+[node name="hause" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(812, 178)
+scale = Vector2(2, 2)
+texture = ExtResource("1_l8ohr")
+
+[node name="bucket" type="Sprite2D" parent="hause"]
+position = Vector2(-48, 29.5)
+texture = ExtResource("3_3amsc")
+
+[node name="bucket" parent="hause/bucket" instance=ExtResource("3_r0mix")]
+position = Vector2(0, 7.5)
+scale = Vector2(2.105, 1.025)
+
+[node name="Cazan" type="Sprite2D" parent="hause"]
+position = Vector2(-351.5, 43)
+texture = ExtResource("2_q146o")
+offset = Vector2(0, 4)
+
+[node name="veranda" type="Sprite2D" parent="hause"]
+y_sort_enabled = true
+position = Vector2(-239, 44)
+texture = ExtResource("2_r76t4")
+offset = Vector2(0, -27)
+
+[node name="npc" parent="hause/veranda" instance=ExtResource("3_r0mix")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/veranda/npc"]
+position = Vector2(1.75, -1.5)
+shape = SubResource("RectangleShape2D_ksb14")
+
+[node name="table1" type="Sprite2D" parent="hause"]
+position = Vector2(-354, 44)
+texture = ExtResource("4_6dylw")
+offset = Vector2(0, -2)
+
+[node name="knife" type="Sprite2D" parent="hause/table1"]
+position = Vector2(2, -18)
+texture = ExtResource("5_mflwy")
+
+[node name="npc" parent="hause/table1/knife" instance=ExtResource("3_r0mix")]
+visible = false
+position = Vector2(-0.5, 25.5)
+scale = Vector2(2, 2)
+skew = 0.734784
+
+[node name="table2" type="Sprite2D" parent="hause"]
+position = Vector2(-256.667, 78)
+texture = ExtResource("6_u66fm")
+offset = Vector2(0, -12)
+
+[node name="chair1" type="Sprite2D" parent="hause"]
+position = Vector2(-320, 88)
+texture = ExtResource("7_ln3bb")
+offset = Vector2(0, -25)
+
+[node name="chair2" type="Sprite2D" parent="hause"]
+position = Vector2(-187.5, 80)
+texture = ExtResource("8_atxxx")
+offset = Vector2(0, -16)
+
+[node name="chair3" type="Sprite2D" parent="hause"]
+position = Vector2(326.5, 79)
+texture = ExtResource("8_atxxx")
+offset = Vector2(0, -16)
+
+[node name="Sprite2D6" type="Sprite2D" parent="hause"]
+
+[node name="ladder" type="Area2D" parent="hause"]
+position = Vector2(313.5, 42.688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/ladder"]
+position = Vector2(1.25, -1.50026)
+shape = SubResource("RectangleShape2D_rh0fc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2(-1, -100)
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0.5, 228.5, 61.5, 169, 752.5, 169, 813, 227.5, 0.5, 228.5, 72, 228.5, 84, 216.5, 101.5, 216.5, 91.5, 226, 115.5, 226, 124.5, 213.5, 185, 213.5, 178, 226, 206, 226.5, 210, 218.5, 230, 218.5, 225.5, 227, 719.5, 226.5, 725.5, 218, 744, 218, 739, 226.5, 810, 226.5, 750, 170, 725.5, 170, 717, 182, 703, 170, 384, 170, 380, 179, 371, 179, 365, 177, 353.5, 184, 345.5, 178, 334.5, 174.5, 318.5, 180, 259, 180, 257, 182, 254.5, 180, 190.5, 180, 190.5, 171, 176, 171, 176, 179.5, 156, 179.5, 153, 170.5, 103.5, 170.5, 100, 173.5, 92.5, 173.5, 88, 170, 62, 170, 50, 181.5, 76.5, 181.5, 49, 201.5, 30, 201.5)
+
+[node name="player" parent="." instance=ExtResource("9_bhxeg")]
+position = Vector2(1440, 307)
+scale = Vector2(1.5, 1.5)
+
+[node name="Camera2D" type="Camera2D" parent="player" node_paths=PackedStringArray("map")]
+position = Vector2(0, -25)
+limit_left = 0
+limit_top = -30
+script = ExtResource("10_2xg57")
+map = NodePath("../../hause")
+
+[connection signal="body_entered" from="hause/ladder" to="." method="_on_ladder_body_entered"]
+[connection signal="body_exited" from="hause/ladder" to="." method="_on_ladder_body_exited"]

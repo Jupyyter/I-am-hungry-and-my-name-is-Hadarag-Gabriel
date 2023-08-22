@@ -53,9 +53,9 @@ position = Vector2(-239, 44)
 texture = ExtResource("2_tiq6b")
 offset = Vector2(0, -27)
 
-[node name="npc" parent="hause/veranda" instance=ExtResource("3_ev7yt")]
+[node name="veranda" parent="hause/veranda" instance=ExtResource("3_ev7yt")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/veranda/npc"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/veranda/veranda"]
 position = Vector2(1.75, -1.5)
 shape = SubResource("RectangleShape2D_5qg3f")
 
@@ -68,7 +68,7 @@ offset = Vector2(0, -2)
 position = Vector2(2, -18)
 texture = ExtResource("5_8662y")
 
-[node name="npc" parent="hause/table1/knife" instance=ExtResource("3_ev7yt")]
+[node name="knife" parent="hause/table1/knife" instance=ExtResource("3_ev7yt")]
 visible = false
 position = Vector2(-0.5, 25.5)
 scale = Vector2(2, 2)

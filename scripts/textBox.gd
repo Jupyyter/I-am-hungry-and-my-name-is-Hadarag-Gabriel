@@ -34,7 +34,6 @@ func _ready():
 #displays all the queued texts
 func _process(delta):
 	choosingResponse()
-	
 	for lbl in LabelList2:
 		match currentStateList2[LabelList2.find(lbl)]:
 			State.ready:

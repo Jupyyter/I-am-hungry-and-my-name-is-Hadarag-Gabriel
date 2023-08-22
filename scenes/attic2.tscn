@@ -123,10 +123,10 @@ scale = Vector2(1.5, 1.5)
 texture = ExtResource("5_wefqm")
 offset = Vector2(0, -20)
 
-[node name="npc" parent="StaticBody2D/Attic/salami" instance=ExtResource("6_1umch")]
+[node name="salami" parent="StaticBody2D/Attic/salami" instance=ExtResource("6_1umch")]
 position = Vector2(-0.000305176, -1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/salami/npc"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/salami/salami"]
 position = Vector2(6.10352e-05, 0)
 shape = SubResource("RectangleShape2D_dgy80")
 

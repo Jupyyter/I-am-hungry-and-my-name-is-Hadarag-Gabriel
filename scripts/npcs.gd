@@ -71,6 +71,10 @@ func _process(delta):
 									inConversation=false
 			"attic2":
 				match npcName:
+					"noodle":
+						match npcConv:
+							0:
+								text_box.queue_text("im Noodle Doodle-Doo")
 					"salami":
 						match npcConv:
 							0:
@@ -84,12 +88,16 @@ func _process(delta):
 
 								"(give Salami some crisps and biscuits)",
 
+								"who are those people?",
+
 								"Miduel died
 								he was caught in a field fire and burned to death
 								crazy story isn't it?",
 
 								"(he is so happy to see those biscuits and crisps)
-								(he ate all the biscuits and crisps)"])
+								(he ate all the biscuits and crisps)",
+							
+								"those are your siblings"])
 					"bed":
 						match npcConv:
 							0:
@@ -118,7 +126,7 @@ func _process(delta):
 								text_box.queue_text("hei gabriel
 								time flies doesn't it?
 								i should inform you that you smell really really really bad
-								(he told you that you smell and that you should take a shower)")
+								(he basically made fun of you playing League of Legends)")
 								text_box.queue_text("where is Miguel
 								(give Salami some crisps and biscuits)")
 								npcConv+=1
@@ -132,7 +140,8 @@ func _process(delta):
 					"miguel":
 						match npcConv:
 							0:
-								text_box.queue_text("hi, i'm Miguel, i like fire
+								text_box.queue_text("hi, i'm Miguel
+								i like fire
 								if you want we could go and set fire to some cats and let them run into the field
 								then we could watch the field burn
 								that would be fun")
@@ -178,7 +187,7 @@ func _process(delta):
 							
 							"he'll be here soon
 							he just went for some milk",
-							
+
 							"you hungry?
 							skill issue
 							just dont be hungry anymore wtf",])

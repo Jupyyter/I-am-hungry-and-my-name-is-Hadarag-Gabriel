@@ -78,22 +78,18 @@ func _process(delta):
 								time flies doesn't it?
 								i should inform you that you smell really really really bad
 								(he just made fun of you playing League of Legends)")
-								text_box.queue_questionResponse("what happened in the timeskip?
-								(give Salami some crisps and biscuits)")
 								npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
-									match text_box.IndexChosen:
-										0:
-											text_box.queue_text("Miduel died
-											he got caught in a fire on the field and burn to death
-											crazy story isn't it?")
-										1:
-											text_box.queue_text("(he is so happy to see those biscuits and crisps)
-											(he ate all the biscuits and crisps)")
-										2:
-											npcConv=0
-									inConversation=false
+								conversation(["what happened in the timeskip?",
+
+								"(give Salami some crisps and biscuits)",
+
+								"Miduel died
+								he was caught in a field fire and burned to death
+								crazy story isn't it?",
+
+								"(he is so happy to see those biscuits and crisps)
+								(he ate all the biscuits and crisps)"])
 					"bed":
 						match npcConv:
 							0:
@@ -177,9 +173,12 @@ func _process(delta):
 								npcConv+=1
 							1:
 								conversation(["where is dad, mommy?",
+
 							"hi mommy, give me food please",
+							
 							"he'll be here soon
 							he just went for some milk",
+							
 							"you hungry?
 							skill issue
 							just dont be hungry anymore wtf",])

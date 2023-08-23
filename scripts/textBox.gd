@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name textBoxClass
 
 #the higher the number, the slower the text will appear
-const CHAR_READ_RATE = 0.03
+const CHAR_READ_RATE = 0.02
 
 @export var textureRect: TextureRect
 @export var textbox_container: MarginContainer

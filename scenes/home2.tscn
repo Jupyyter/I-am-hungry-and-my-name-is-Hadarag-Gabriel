@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://jp2rws6k1u4u"]
+[gd_scene load_steps=18 format=3 uid="uid://jp2rws6k1u4u"]
 
 [ext_resource type="Texture2D" uid="uid://dty41h8j5ka5p" path="res://images/home2.png" id="1_l8ohr"]
 [ext_resource type="Script" path="res://scripts/home1.gd" id="1_oxcmn"]
@@ -7,12 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://dags24tfu5bds" path="res://images/bucket2.png" id="3_3amsc"]
 [ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="3_r0mix"]
 [ext_resource type="Texture2D" uid="uid://bov7lcc5wgusm" path="res://images/table.png" id="4_6dylw"]
-[ext_resource type="Texture2D" uid="uid://82mfivgl2vu0" path="res://images/knife.png" id="5_mflwy"]
 [ext_resource type="Texture2D" uid="uid://dhl28k8p2v87e" path="res://images/table2.png" id="6_u66fm"]
 [ext_resource type="Texture2D" uid="uid://dik4am43pooch" path="res://images/chair1.png" id="7_ln3bb"]
 [ext_resource type="Texture2D" uid="uid://bn1bvunbelwfo" path="res://images/chair2.png" id="8_atxxx"]
+[ext_resource type="Texture2D" uid="uid://cynij7hyy38bj" path="res://images/beans.png" id="8_i7axn"]
 [ext_resource type="PackedScene" uid="uid://de0bpxweuff3e" path="res://scenes/player.tscn" id="9_bhxeg"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="10_2xg57"]
+[ext_resource type="Texture2D" uid="uid://u87ykuieiqqe" path="res://images/fiddlesticks.png" id="12_4bmwi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksb14"]
 size = Vector2(11.5, 3)
@@ -20,11 +21,14 @@ size = Vector2(11.5, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rh0fc"]
 size = Vector2(58.5, 21.6245)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qul5m"]
+size = Vector2(10, 2)
+
 [node name="home2" type="StaticBody2D" node_paths=PackedStringArray("knife")]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_oxcmn")
-knife = NodePath("hause/table1/knife")
+knife = NodePath("hause/table1/beans")
 
 [node name="hause" type="Sprite2D" parent="."]
 z_index = 1
@@ -48,12 +52,11 @@ offset = Vector2(0, 4)
 
 [node name="veranda" type="Sprite2D" parent="hause"]
 y_sort_enabled = true
-position = Vector2(-239, 44)
+position = Vector2(-201.5, 69)
 texture = ExtResource("2_r76t4")
 offset = Vector2(0, -27)
 
 [node name="veranda" parent="hause/veranda" instance=ExtResource("3_r0mix")]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hause/veranda/veranda"]
 position = Vector2(1.75, -1.5)
@@ -64,14 +67,13 @@ position = Vector2(-354, 44)
 texture = ExtResource("4_6dylw")
 offset = Vector2(0, -2)
 
-[node name="knife" type="Sprite2D" parent="hause/table1"]
-position = Vector2(2, -18)
-texture = ExtResource("5_mflwy")
+[node name="beans" type="Sprite2D" parent="hause/table1"]
+position = Vector2(6, -20.5)
+texture = ExtResource("8_i7axn")
 
-[node name="knife" parent="hause/table1/knife" instance=ExtResource("3_r0mix")]
-visible = false
-position = Vector2(-0.5, 25.5)
-scale = Vector2(2, 2)
+[node name="beans" parent="hause/table1/beans" instance=ExtResource("3_r0mix")]
+position = Vector2(-0.5, 27.04)
+scale = Vector2(1.345, 2.56)
 skew = 0.734784
 
 [node name="table2" type="Sprite2D" parent="hause"]
@@ -102,6 +104,18 @@ position = Vector2(313.5, 42.688)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hause/ladder"]
 position = Vector2(1.25, -1.50026)
 shape = SubResource("RectangleShape2D_rh0fc")
+
+[node name="fiddlesticks" type="Sprite2D" parent="hause"]
+position = Vector2(35.5, 74.5)
+texture = ExtResource("12_4bmwi")
+offset = Vector2(0, -20)
+flip_h = true
+
+[node name="fiddlesticks" parent="hause/fiddlesticks" instance=ExtResource("3_r0mix")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/fiddlesticks/fiddlesticks"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_qul5m")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false

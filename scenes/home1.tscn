@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bqi2frsfehbe" path="res://images/cazan.png" id="3_krs3j"]
 [ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="4_thk0d"]
 [ext_resource type="Texture2D" uid="uid://bov7lcc5wgusm" path="res://images/table.png" id="5_oe0dj"]
-[ext_resource type="Texture2D" uid="uid://82mfivgl2vu0" path="res://images/knife.png" id="6_ah2wf"]
+[ext_resource type="Texture2D" uid="uid://inf5351c4onw" path="res://images/potato.png" id="7_cr57l"]
 [ext_resource type="Texture2D" uid="uid://dhl28k8p2v87e" path="res://images/table2.png" id="7_gkns8"]
 [ext_resource type="Texture2D" uid="uid://dik4am43pooch" path="res://images/chair1.png" id="8_7f4b6"]
 [ext_resource type="Texture2D" uid="uid://bn1bvunbelwfo" path="res://images/chair2.png" id="9_5axig"]
@@ -28,7 +28,7 @@ size = Vector2(13.6667, 3)
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_jjnm3")
-knife = NodePath("StaticBody2D/hause/table1/knife")
+knife = NodePath("StaticBody2D/hause/table1/potato")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true
@@ -63,14 +63,14 @@ position = Vector2(-354, 44)
 texture = ExtResource("5_oe0dj")
 offset = Vector2(0, -2)
 
-[node name="knife" type="Sprite2D" parent="StaticBody2D/hause/table1"]
-position = Vector2(2, -18)
-texture = ExtResource("6_ah2wf")
+[node name="potato" type="Sprite2D" parent="StaticBody2D/hause/table1"]
+position = Vector2(4, -20)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_cr57l")
 
-[node name="knife" parent="StaticBody2D/hause/table1/knife" instance=ExtResource("4_thk0d")]
-visible = false
-position = Vector2(-0.5, 25.5)
-scale = Vector2(2, 2)
+[node name="potato" parent="StaticBody2D/hause/table1/potato" instance=ExtResource("4_thk0d")]
+position = Vector2(-0.5, 34.14)
+scale = Vector2(2.345, 3.56)
 skew = 0.734784
 
 [node name="table2" type="Sprite2D" parent="StaticBody2D/hause"]

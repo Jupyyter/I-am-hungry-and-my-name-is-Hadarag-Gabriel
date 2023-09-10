@@ -3,6 +3,7 @@ extends Node
 var playerAnimation:String=""
 var levelStart:bool=true
 var knifeTaken:bool=false
+var convState:Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

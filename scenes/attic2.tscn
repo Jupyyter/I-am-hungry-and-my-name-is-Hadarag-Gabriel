@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://txcyc4jvg0bt"]
+[gd_scene load_steps=18 format=3 uid="uid://txcyc4jvg0bt"]
 
 [ext_resource type="Texture2D" uid="uid://bo0srpnpw4f1y" path="res://images/attic2.png" id="1_hmrm0"]
 [ext_resource type="Script" path="res://scripts/attic1.gd" id="1_yktym"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://de0bpxweuff3e" path="res://scenes/player.tscn" id="7_gjn45"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="8_c3abr"]
 [ext_resource type="Texture2D" uid="uid://r1nsx1uk8kxi" path="res://images/Sassy.png" id="8_w4xtn"]
-[ext_resource type="Texture2D" uid="uid://u87ykuieiqqe" path="res://images/fiddlesticks.png" id="9_mcl20"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqg81"]
 size = Vector2(117, 56)
@@ -23,18 +22,17 @@ size = Vector2(10, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_er0ym"]
 size = Vector2(10, 2)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahyvc"]
-size = Vector2(10, 2)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t7w44"]
 size = Vector2(12, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgy80"]
 size = Vector2(10, 2.0625)
 
-[node name="attic2" type="Node2D"]
+[node name="attic2" type="Node2D" node_paths=PackedStringArray("nodesToRemove", "nodesToAdd")]
 y_sort_enabled = true
 script = ExtResource("1_yktym")
+nodesToRemove = [NodePath("StaticBody2D/Attic/sussy"), NodePath("StaticBody2D/Attic/snitel"), NodePath("StaticBody2D/Attic/salami"), NodePath("StaticBody2D/Attic/noodle")]
+nodesToAdd = [NodePath("StaticBody2D/Attic/Rat")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true
@@ -76,33 +74,22 @@ position = Vector2(64.6667, 31.3333)
 texture = ExtResource("6_cas63")
 offset = Vector2(0, -20)
 
-[node name="npc" parent="StaticBody2D/Attic/noodle" instance=ExtResource("6_1umch")]
+[node name="noodle" parent="StaticBody2D/Attic/noodle" instance=ExtResource("6_1umch")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/noodle/npc"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/noodle/noodle"]
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_kf7tw")
 
-[node name="sassy" type="Sprite2D" parent="StaticBody2D/Attic"]
+[node name="sussy" type="Sprite2D" parent="StaticBody2D/Attic"]
 position = Vector2(104, 111.333)
 texture = ExtResource("8_w4xtn")
 offset = Vector2(0, -20)
 
-[node name="npc" parent="StaticBody2D/Attic/sassy" instance=ExtResource("6_1umch")]
+[node name="sussy" parent="StaticBody2D/Attic/sussy" instance=ExtResource("6_1umch")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/sassy/npc"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/sussy/sussy"]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_er0ym")
-
-[node name="Fiddlesticks" type="Sprite2D" parent="StaticBody2D/Attic"]
-position = Vector2(158.667, 105.333)
-texture = ExtResource("9_mcl20")
-offset = Vector2(0, -20)
-
-[node name="npc" parent="StaticBody2D/Attic/Fiddlesticks" instance=ExtResource("6_1umch")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/Fiddlesticks/npc"]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_ahyvc")
 
 [node name="snitel" type="Sprite2D" parent="StaticBody2D/Attic"]
 position = Vector2(364, 76.6667)
@@ -110,9 +97,9 @@ texture = ExtResource("6_jleux")
 offset = Vector2(0, -21)
 flip_h = true
 
-[node name="npc" parent="StaticBody2D/Attic/snitel" instance=ExtResource("6_1umch")]
+[node name="snitel" parent="StaticBody2D/Attic/snitel" instance=ExtResource("6_1umch")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/snitel/npc"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/snitel/snitel"]
 position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_t7w44")
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://jp2rws6k1u4u"]
+[gd_scene load_steps=16 format=3 uid="uid://jp2rws6k1u4u"]
 
 [ext_resource type="Texture2D" uid="uid://dty41h8j5ka5p" path="res://images/home2.png" id="1_l8ohr"]
 [ext_resource type="Script" path="res://scripts/home1.gd" id="1_oxcmn"]
@@ -13,16 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://cynij7hyy38bj" path="res://images/beans.png" id="8_i7axn"]
 [ext_resource type="PackedScene" uid="uid://de0bpxweuff3e" path="res://scenes/player.tscn" id="9_bhxeg"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="10_2xg57"]
-[ext_resource type="Texture2D" uid="uid://u87ykuieiqqe" path="res://images/fiddlesticks.png" id="12_4bmwi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ksb14"]
 size = Vector2(11.5, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rh0fc"]
 size = Vector2(58.5, 21.6245)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qul5m"]
-size = Vector2(10, 2)
 
 [node name="home2" type="StaticBody2D" node_paths=PackedStringArray("knife")]
 y_sort_enabled = true
@@ -104,18 +100,6 @@ position = Vector2(313.5, 42.688)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hause/ladder"]
 position = Vector2(1.25, -1.50026)
 shape = SubResource("RectangleShape2D_rh0fc")
-
-[node name="fiddlesticks" type="Sprite2D" parent="hause"]
-position = Vector2(35.5, 74.5)
-texture = ExtResource("12_4bmwi")
-offset = Vector2(0, -20)
-flip_h = true
-
-[node name="fiddlesticks" parent="hause/fiddlesticks" instance=ExtResource("3_r0mix")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/fiddlesticks/fiddlesticks"]
-position = Vector2(1, 0)
-shape = SubResource("RectangleShape2D_qul5m")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false

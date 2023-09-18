@@ -7,6 +7,7 @@ var speed:int=150
 var flipped:bool=false
 var nearLadder:bool=false
 var atticStartPos=Vector2i(147,227)
+var inAnimation:bool=false
 @onready var animationPlayer =$AnimationPlayer
 @onready var collisionshape2D =$CollisionShape2D
 @onready var sprite2D =$Sprite2D
@@ -18,9 +19,6 @@ func _ready():
 
 func _process(delta):
 	get_input()
-	if(nearLadder):
-		if(Input.is_action_just_pressed("ui_accept")):
-			get_tree().change_scene_to_file("scenes/home1.tscn")
 
 func _physics_process(delta):
 	move_and_slide()
@@ -31,7 +29,7 @@ func get_input()->void:
 	velocity = input_direction * speed*speedMultiplier
 
 	#dont move while the textbox is on
-	if text_box.current_state!=text_box.State.ready:
+	if text_box.current_state!=text_box.State.ready or inAnimation:
 		velocity=Vector2.ZERO
 	
 	if velocity!=Vector2(0,0):
@@ -50,11 +48,20 @@ func get_input()->void:
 		sprite2D.scale.x=1
 		collisionshape2D.scale.x=1
 
-func animationChange(mode:String):
-	if mode=="Knife":
-		globals.playerAnimation=mode
-	elif mode=="Blood":
+func changeMode(mode:String):
+	if ["Knife","Blood1","Blood0","EatRat","EatCat","EatFlapjack"].has(mode):
 		globals.playerAnimation=mode
 
 func animationReset():
 	globals.playerAnimation=""
+
+func _on_animation_player_animation_finished(anim_name:StringName):
+	inAnimation=false
+	match anim_name:
+		"idleEatRat":
+			changeMode("Blood0")
+		"idleEatCat":
+			changeMode("Blood1")
+		"idleEatFlapjack":
+			animationReset()
+			get_tree().change_scene_to_file("scenes/intro.tscn")

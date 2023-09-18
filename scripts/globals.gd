@@ -3,6 +3,10 @@ extends Node
 var playerAnimation:String=""
 var levelStart:bool=true
 var knifeTaken:bool=false
+var nearRat:bool=false
+var nearCat:bool=false
+var flapjackCry:bool=false
+var nearFlapjack2:bool=false
 var convState:Dictionary
 
 # Called when the node enters the scene tree for the first time.
@@ -19,3 +23,9 @@ func getPlayer()->player:
 
 func getCurrentScene()->Node:
 	return get_tree().current_scene
+
+func removeNode(node:Node,delete:bool=false):
+	if !delete:
+		node.get_parent().remove_child(node)
+	else:
+		node.queue_free()

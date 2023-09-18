@@ -3,14 +3,22 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	text_box.queue_text("this is Gabriel
-	intelligence: not much
-	math skills: 3/10
-	language in general: 1/10
-	physique: very big
-	note: he is very hungry
-	quote: \"it's ok to like muscular men\"
-	idk lets start-red")
+	if globals.nearFlapjack2:
+		text_box.queue_text("this is Gabriel
+		he is
+		very
+		very
+		very
+		hungry--red")
+	else:
+		text_box.queue_text("this is Gabriel
+		intelligence: not much
+		math skills: 3/10
+		language in general: 1/10
+		physique: very big
+		note: he is very hungry
+		quote: \"it's ok to like muscular men\"
+		idk lets start--red")
 
 
 

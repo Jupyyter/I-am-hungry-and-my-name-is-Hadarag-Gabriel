@@ -20,6 +20,8 @@ var text_queue: Array = []
 var conv_queue:Array=[]
 var tween: Tween
 var chooseMode:bool=false
+var fastText:bool=false
+var inConversation:bool=false
 
 var LabelList2:Array[Label]
 var currentStateList2:Array[State]
@@ -68,11 +70,12 @@ func _process(delta):
 					current_state= State.finished
 			State.finished:
 				#ui_accept must be set in godot
-				if Input.is_action_just_pressed("ui_accept"):
+				if Input.is_action_just_pressed("ui_accept") or fastText:
 					currentStateList2[LabelList2.find(lbl)] = State.newText
 					current_state= State.newText
 					chooseMode=false
-					if text_queue.is_empty() and conv_queue.is_empty():
+					fastText=false
+					if text_queue.is_empty() and conv_queue.is_empty() and !inConversation:
 						#DELETE ALL THE CHILDREN DIEDIEDIEDIEDIE
 						#GABRIEL EATING MY MEMORY HAHAHAHAHAHAHAHAAHAHAHAHAHAHAHAAHAHAHAHAHAHAAHAHA
 						hide_textbox()
@@ -97,25 +100,27 @@ func queue_questionResponse(next_text: String)->void:
 func displayText(lbl:Label)->void:
 	show_textbox()
 	var next_text: String = text_queue.pop_front()
-	for i in next_text.count("-")+1:
-		var parts:int = next_text.find("-")
+	for i in next_text.count("--")+1:
+		var parts:int = next_text.find("--")
 		#dealing with the text properties (like colored text)
 		if parts != -1 or i!=0:
 			var after: String = next_text.substr(parts + 1).strip_edges()
 			var before: String= next_text.substr(0, parts).strip_edges()
 			next_text=after
 			#idk
-			match i:
-				0:
+			if i==0:
 					lbl.text = before
 					setTexture(null)
-				1:
-					if before=="red":
+			else:
+				match before:
+					"-red":
 						text_box.colorRed(lbl)
-				2: 
-					setTexture(before)
-					start_symbol.text = ""
-					
+					"-fast":
+						fastText=true
+					_:
+						setTexture(before)
+						start_symbol.text = ""
+			
 		elif i==0:
 			lbl.text = next_text
 			setTexture(null)

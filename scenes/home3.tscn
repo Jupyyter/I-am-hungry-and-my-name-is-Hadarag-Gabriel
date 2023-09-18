@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmbvtkqic86oi"]
+[gd_scene load_steps=18 format=3 uid="uid://dmbvtkqic86oi"]
 
 [ext_resource type="Script" path="res://scripts/home1.gd" id="1_fgwgs"]
 [ext_resource type="Texture2D" uid="uid://c83xj8m7kski" path="res://images/home3.png" id="1_srlah"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bn1bvunbelwfo" path="res://images/chair2.png" id="8_uiqo5"]
 [ext_resource type="PackedScene" uid="uid://de0bpxweuff3e" path="res://scenes/player.tscn" id="9_dcg50"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="10_8eryw"]
+[ext_resource type="Texture2D" uid="uid://u87ykuieiqqe" path="res://images/fiddlesticks.png" id="12_g8mtc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qg3f"]
 size = Vector2(11.5, 3)
@@ -20,12 +21,16 @@ size = Vector2(11.5, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6sxbd"]
 size = Vector2(58.5, 21.6245)
 
-[node name="home3" type="StaticBody2D" node_paths=PackedStringArray("knife")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_supry"]
+size = Vector2(10, 2)
+
+[node name="home3" type="StaticBody2D" node_paths=PackedStringArray("knife", "nodesToRemove")]
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, 20)
+position = Vector2(-1, 20)
 script = ExtResource("1_fgwgs")
 knife = NodePath("hause/table1/knife")
+nodesToRemove = [NodePath("hause/veranda"), NodePath("hause/fiddlesticks")]
 
 [node name="hause" type="Sprite2D" parent="."]
 z_index = 1
@@ -101,6 +106,18 @@ position = Vector2(313.5, 42.688)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hause/ladder"]
 position = Vector2(1.25, -1.50026)
 shape = SubResource("RectangleShape2D_6sxbd")
+
+[node name="fiddlesticks" type="Sprite2D" parent="hause"]
+position = Vector2(35.5, 74.5)
+texture = ExtResource("12_g8mtc")
+offset = Vector2(0, -20)
+flip_h = true
+
+[node name="fiddlesticks" parent="hause/fiddlesticks" instance=ExtResource("3_ev7yt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/fiddlesticks/fiddlesticks"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_supry")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false

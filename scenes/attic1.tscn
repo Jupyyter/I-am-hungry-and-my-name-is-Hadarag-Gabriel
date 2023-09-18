@@ -16,14 +16,15 @@ size = Vector2(117, 56)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkjba"]
 size = Vector2(10, 2.0625)
 
-[node name="attic1" type="Node2D" node_paths=PackedStringArray("nodesToRemove", "nodesToAdd")]
+[node name="attic1" type="Node2D" node_paths=PackedStringArray("nodesToRemove", "nodesToAdd", "rat")]
 z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(1, 1)
 script = ExtResource("1_qligt")
 nodesToRemove = [NodePath("StaticBody2D/Attic/salami")]
-nodesToAdd = [NodePath("StaticBody2D/Attic/Rat")]
+nodesToAdd = [NodePath("StaticBody2D/Attic/rat")]
+rat = NodePath("StaticBody2D/Attic/rat")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true
@@ -41,10 +42,6 @@ texture_filter = 1
 position = Vector2(339, 71.333)
 texture = ExtResource("3_um02u")
 offset = Vector2(0, -101)
-
-[node name="Rat" type="Sprite2D" parent="StaticBody2D/Attic"]
-position = Vector2(-133.333, 97.3333)
-texture = ExtResource("4_gd4ym")
 
 [node name="pillarLeft" type="Sprite2D" parent="StaticBody2D/Attic"]
 texture_filter = 1
@@ -76,6 +73,16 @@ shape = SubResource("RectangleShape2D_vkjba")
 [node name="bed" parent="StaticBody2D/Attic" instance=ExtResource("7_6l8f3")]
 position = Vector2(-294, 20)
 scale = Vector2(3.89, 1.465)
+
+[node name="rat" type="Sprite2D" parent="StaticBody2D/Attic"]
+y_sort_enabled = true
+position = Vector2(-20.6667, 73.3333)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("4_gd4ym")
+
+[node name="rat" parent="StaticBody2D/Attic/rat" instance=ExtResource("7_6l8f3")]
+position = Vector2(-0.000305176, -1)
+scale = Vector2(1.77, 1.66)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 visible = false

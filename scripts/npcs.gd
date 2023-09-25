@@ -514,10 +514,10 @@ func _process(delta):
 								if textReady():
 									match text_box.IndexChosen:
 										0:
+											npcConv+=2
+										1:
 											text_box.queue_text("(should have thought about that before you ate your brother)")
 											npcConv+=1
-										1:
-											npcConv+=2
 							2:
 								if textReady():
 									npcConv+=1
@@ -525,6 +525,11 @@ func _process(delta):
 								text_box.queue_text("gabriel ate the huge pile of cockroaches with such an unnatural dexterity no cockroach escaped his furry")
 								endOfChat()
 								get_parent().queue_free()
+					"garbage":
+						match npcConv:
+							0:
+								text_box.queue_text("garbage")
+								endOfChat()
 
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat

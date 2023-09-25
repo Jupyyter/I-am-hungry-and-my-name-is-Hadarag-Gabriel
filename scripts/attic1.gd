@@ -12,10 +12,8 @@ var nearLadder:bool=false
 @onready var textBox :textBoxClass = get_node("/root/text_box")
 
 func _ready():
-	removeAddNodes()
-	if globals.knifeTaken:
-		removeNodes()
-		addNodes()
+	globals.nearCat=false
+	globals.nearRat=false
 	#after sleeping, reset character sprite and position
 	if globals.levelStart:
 		match self.name:
@@ -28,6 +26,10 @@ func _ready():
 		globals.knifeTaken=false
 		globals.levelStart=false
 		globals.getPlayer().animationReset()
+	removeAddNodes()
+	if globals.knifeTaken:
+		removeNodes()
+		addNodes()
 
 func _process(delta):
 	match self.name:
@@ -35,10 +37,9 @@ func _process(delta):
 			if(Input.is_action_just_pressed("ui_accept")) :
 				if nearLadder:
 					get_tree().change_scene_to_file("scenes/home1.tscn")
-			if globals.nearRat==true and text_box.current_state==text_box.State.ready:
+			if globals.nearRat==true and rat!=null and text_box.current_state==text_box.State.ready:
 				globals.getPlayer().changeMode("EatRat")
-				globals.removeNode(rat)
-				globals.nearRat=false
+				globals.removeNode(rat,true)
 				globals.getPlayer().inAnimation=true
 		"attic2":
 			if(Input.is_action_just_pressed("ui_accept")) :
@@ -48,18 +49,16 @@ func _process(delta):
 				globals.getPlayer().changeMode("EatRat")
 				globals.removeNode(rat,true)
 				globals.getPlayer().inAnimation=true
-			if globals.nearCat==true and text_box.current_state==text_box.State.ready:
+			if globals.nearCat==true and cat!=null and text_box.current_state==text_box.State.ready:
 				globals.getPlayer().changeMode("EatCat")
-				globals.removeNode(cat)
-				globals.nearCat=false
+				globals.removeNode(cat,true)
 				globals.getPlayer().inAnimation=true
 		"attic3":
 			if(Input.is_action_just_pressed("ui_accept")) :
 				if nearLadder:
 					get_tree().change_scene_to_file("scenes/home3.tscn")
-			if globals.nearFlapjack2==true and text_box.current_state==text_box.State.ready:
+			if globals.nearFlapjack2==true and flapjack2!=null and text_box.current_state==text_box.State.ready:
 				globals.getPlayer().changeMode("EatFlapjack")
-				globals.removeNode(flapjack2)
 				#globals.nearFlapjack2=false
 				globals.getPlayer().inAnimation=true
 

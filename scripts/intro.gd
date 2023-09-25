@@ -1,5 +1,5 @@
 extends Node2D
-
+@export var house:Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,4 +26,11 @@ func _ready():
 func _process(delta):
 	#called when the textBox has just finished showing an entire conversation
 	if(text_box.current_state==text_box.State.ready):
-		get_tree().change_scene_to_file("scenes/attic1.tscn")
+		if globals.nearFlapjack2:
+			house.visible=true
+			text_box.queue_text("after gabriel ate flapjack, he was kicked out from his home
+			what adventures awaits him outside?
+			how many humans will he eat throughout the game?
+			find out in the next episode")
+		else:
+			get_tree().change_scene_to_file("scenes/attic1.tscn")

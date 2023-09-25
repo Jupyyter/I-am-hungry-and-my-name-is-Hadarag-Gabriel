@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://de0bpxweuff3e"]
+[gd_scene load_steps=17 format=3 uid="uid://bjslxs2nfkoew"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r4nhh"]
 [ext_resource type="Texture2D" uid="uid://cedf53w8n3pcu" path="res://images/terrareIdle.png" id="2_0h1bk"]

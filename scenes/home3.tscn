@@ -46,6 +46,7 @@ texture = ExtResource("3_qkj3e")
 [node name="bucket" parent="hause/bucket" instance=ExtResource("3_ev7yt")]
 position = Vector2(1.5, 6)
 scale = Vector2(3.22, 1.48)
+flipCharacter = false
 
 [node name="Cazan" type="Sprite2D" parent="hause"]
 position = Vector2(-351.5, 43)
@@ -77,6 +78,7 @@ texture = ExtResource("5_8662y")
 position = Vector2(-0.5, 27.04)
 scale = Vector2(1.345, 2.56)
 skew = 0.734784
+flipCharacter = false
 
 [node name="table2" type="Sprite2D" parent="hause"]
 position = Vector2(-256.667, 78)

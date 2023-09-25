@@ -8,9 +8,9 @@ var flipped:bool=false
 var nearLadder:bool=false
 var atticStartPos=Vector2i(147,227)
 var inAnimation:bool=false
-@onready var animationPlayer =$AnimationPlayer
-@onready var collisionshape2D =$CollisionShape2D
-@onready var sprite2D =$Sprite2D
+@onready var animationPlayer:AnimationPlayer =$AnimationPlayer
+@onready var collisionshape2D:CollisionShape2D =$CollisionShape2D
+@onready var sprite2D:Sprite2D =$Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +29,7 @@ func get_input()->void:
 	velocity = input_direction * speed*speedMultiplier
 
 	#dont move while the textbox is on
-	if text_box.current_state!=text_box.State.ready or inAnimation:
+	if inAnimation or text_box.isOn():
 		velocity=Vector2.ZERO
 	
 	if velocity!=Vector2(0,0):

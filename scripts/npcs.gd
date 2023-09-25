@@ -4,22 +4,31 @@ var npcName:String
 var npcConv:int=0
 var npcConv2:int=0
 var nearNpc:bool=false
-var inConversation:bool=false
+var inChat:bool=false
 var stringArray2:Array[String]#used in "conversation" function
 var currentScene:String
+var parent #usually Sprite2D
+@export var flipCharacter:bool=true
 
 # called when the node enters the scene tree for the first time
 func _ready():
 	currentScene=globals.getCurrentScene().name
 	npcName=self.name
+	parent=self.get_parent()
 	if !globals.convState.has(npcName+currentScene):
 		globals.convState[npcName+currentScene]=npcConv
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if nearNpc and ((text_box.current_state==text_box.State.ready and Input.is_action_just_pressed("ui_accept")) or inConversation):
+	if nearNpc and ((textReady() and Input.is_action_just_pressed("ui_accept")) or inChat):
 		npcConv=globals.convState[npcName+currentScene]
-		inConversation=true
+		inChat=true
+		#guess what does this code do
+		if flipCharacter:
+			if globals.getPlayer().global_position.x>self.global_position.x:
+				parent.flip_h=false
+			else:
+				parent.flip_h=true
 		match currentScene:
 			"attic1":
 				match npcName:
@@ -50,42 +59,48 @@ func _process(delta):
 
 								"yes, indeed, good sir, i'm sorry to inform you but i currently dont have any food and i believe there is no edible food around here. tho i'm delighted to inform you that we are located in France in the year 1779
 								have a good day sir"],
-								1)
+								[1])
+							2:
+								endOfChat()
 					"rat":
 						match npcConv:
 							0:
 								text_box.queue_questionResponse("pet the dead rat")
 								npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									text_box.queue_text("gabriel reaches for the rat")
 									globals.nearRat=true
-									endOfChat()
+									endOfChat(npcConv+1)
 
 
 					"bed":
-						match npcConv:
-							0:
-								text_box.queue_text("bed")
-								text_box.queue_questionResponse("go to bed
-									sleep
-									sleep later")
-								npcConv+=1
-							1:
-								if text_box.current_state==text_box.State.ready:
-									match text_box.IndexChosen:
-										0:
-											globals.levelStart=true
-											get_tree().change_scene_to_file("scenes/attic2.tscn")
-											globals.knifeTaken=false
-											endOfChat()
-										1:
-											globals.levelStart=true
-											get_tree().change_scene_to_file("scenes/attic2.tscn")
-											globals.knifeTaken=false
-											endOfChat()
-										2:
-											endOfChat(0)
+						if globals.nearRat:
+							match npcConv:
+								0:
+									text_box.queue_text("bed")
+									text_box.queue_questionResponse("go to bed
+										sleep
+										sleep later")
+									npcConv+=1
+								1:
+									if textReady():
+										match text_box.IndexChosen:
+											0:
+												globals.levelStart=true
+												get_tree().change_scene_to_file("scenes/attic2.tscn")
+												globals.knifeTaken=false
+												endOfChat(npcConv+1)
+											1:
+												globals.levelStart=true
+												get_tree().change_scene_to_file("scenes/attic2.tscn")
+												globals.knifeTaken=false
+												endOfChat(npcConv+1)
+											2:
+												endOfChat(0)
+						else:
+							text_box.queue_text("but gabriel is still hungry")
+							inChat=false
 			"attic2":
 				match npcName:
 					"cat":
@@ -98,14 +113,14 @@ func _process(delta):
 									pet Garfield")
 									npcConv+=1
 								1:
-									if text_box.current_state==text_box.State.ready:
+									if textReady():
 										match text_box.IndexChosen:
 											0:
 												text_box.queue_text("too bad")
 											1:
 												text_box.queue_text(":)")
 										globals.nearCat=true
-										endOfChat()
+										endOfChat(npcConv+1)
 						else:
 							text_box.queue_text("gabriel is too hungry to look at the dead cat")
 							endOfChat(0)
@@ -117,7 +132,7 @@ func _process(delta):
 								noh")
 								npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									match text_box.IndexChosen:
 										0:
 											npcConv+=2
@@ -127,30 +142,30 @@ func _process(delta):
 											noh")
 											npcConv+=1
 							2:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									match text_box.IndexChosen:
 										0:
 											npcConv+=1
-										1:
 											text_box.queue_text("(i don't believe you)")
+										1:
 											npcConv+=1
 							3:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									text_box.queue_text("gabriel approaches the rat to pet it")
 									globals.nearRat=true
-									endOfChat()
+									endOfChat(npcConv+1)
 					"sussy":
 						match npcConv:
 							0:
 
 								text_box.queue_text("(keep in mind \"it's ok to like muscular men\"- gabriel)
-								(you should make her avoid you)
+								(its in gabriel's interest to avoid women)
 								hi im Sussy")
 								text_box.queue_questionResponse("i play league of legends")
 								text_box.queue_text("that explains the smell
 								take a shower
 								and dont come near me")
-								endOfChat()
+								endOfChat(npcConv+1)
 					"noodle":
 						match npcConv:
 							0:
@@ -161,15 +176,17 @@ func _process(delta):
 								text_box.queue_text("yes got a probblem with people born run over by cars?")
 								npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									conversation(["no, i personally was born run over by a traktor",
 
-									"yes, i im very racist. i hate everyone run over by anything but men. in fact i have every person with a sightly darker RGBA skin color then mine",
+									"yes, i im very racist. i hate everyone run over by anything but men. in fact i have every person with a slightly darker RGBA skin color than mine",
 
 									"fair enough",
 
 									"ah is that so?
-									i wish you a night full of warm pillows"])
+									i wish you a night full of warm pillows"],[0,1])
+							2:
+								endOfChat()
 							
 					"salami":
 						match npcConv:
@@ -184,11 +201,10 @@ func _process(delta):
 
 								"(give Salami some crisps and biscuits)",
 
-								"who are those people?",
+								"what are these strangers doing in my house?",
 
-								"Miduel died
-								he was caught in a field fire and burned to death
-								crazy story isn't it?",
+								"Miguel died
+								his last words where \"i need more bullets, please sir give me more bullets\"",
 
 								"(he is so happy to see those biscuits and crisps)
 								(he ate all the biscuits and crisps)",
@@ -198,6 +214,8 @@ func _process(delta):
 								see that one in the corner?
 								he's Schnitzel
 								go to him and say the word \"crazy\" "])
+							2:
+								endOfChat()
 					"snitel":
 						match npcConv:
 							0:
@@ -206,7 +224,7 @@ func _process(delta):
 								crazy bastard")
 								npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									match text_box.IndexChosen:
 										0:
 											text_box.queue_text("Crazy?
@@ -222,42 +240,48 @@ func _process(delta):
 											A RUBBER ROOM.
 											A RUBBER ROOM WITH RATS.
 											AND RATS MAKE ME CRAZY.")
-									inConversation=false
+									endOfChat()
 											
 					"bed":
-						match npcConv:
-							0:
-								text_box.queue_text("bed")
-								text_box.queue_questionResponse("go to bed
-									sleep
-									sleep later")
-								npcConv+=1
-							1:
-								if text_box.current_state==text_box.State.ready:
-									match text_box.IndexChosen:
-										0:
-											globals.levelStart=true
-											get_tree().change_scene_to_file("scenes/attic3.tscn")
-											endOfChat()
-										1:
-											globals.levelStart=true
-											get_tree().change_scene_to_file("scenes/attic3.tscn")
-											endOfChat()
-										2:
-											endOfChat(0)
+						if globals.nearCat:
+							match npcConv:
+								0:
+									text_box.queue_text("bed")
+									text_box.queue_questionResponse("go to bed
+										sleep
+										sleep later")
+									npcConv+=1
+								1:
+									if textReady():
+										match text_box.IndexChosen:
+											0:
+												globals.levelStart=true
+												get_tree().change_scene_to_file("scenes/attic3.tscn")
+												endOfChat()
+											1:
+												globals.levelStart=true
+												get_tree().change_scene_to_file("scenes/attic3.tscn")
+												endOfChat()
+											2:
+												endOfChat(0)
+						else:
+							text_box.queue_text("but gabriel is still hungry")
+							inChat=false
 			"attic3":
 				match npcName:
 					"snitel":
 						match npcConv:
 							0:
 								text_box.queue_questionResponse("CRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZY")
-								text_box.queue_text("Crazy?
-								I was crazy once.
-								They locked me in a room.
-								A rubber room.
-								A rubber room with rats.
-								And rats make me crazy.")
-								endOfChat()
+								npcConv+=1
+							1:
+								text_box.queue_text("CRAZY?
+								I WAS CRAZY ONCE.
+								THEY LOCKED ME IN A ROOM.
+								A RUBBER ROOM.
+								A RUBBER ROOM WITH RATS.
+								AND RATS MAKE ME CRAZY.")
+								inChat=false
 					"sussy":
 						match npcConv:
 							0:
@@ -265,12 +289,12 @@ func _process(delta):
 								text_box.queue_text("dont get near me you filthy League of Legends player
 								(i mean.......)
 								(you smell really really bad)")
-								endOfChat()
+								endOfChat(npcConv+1)
 					"flapjack2":
 						match npcConv:
 							0:
 								globals.nearFlapjack2=true
-								endOfChat()
+								endOfChat(npcConv+1)
 					"flapjack":
 						match npcConv:
 							0:
@@ -280,40 +304,49 @@ func _process(delta):
 								IIHHHHHHH PLYYYYYYYYYY HHYROOOOES OFFFFF DAAAAAA STROOOOOOOOOOOOOM
 								(imagine playing Heroes of the Storm)")
 								text_box.queue_questionResponse("so thats why you look like the Rake?")
+								text_box.queue_text("(just my opinion but you look like mini-putin)")
 								npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									text_box.queue_text("flapjack started crying")
 									globals.flapjackCry=true
-									endOfChat()
+									endOfChat(npcConv+1)
 					"salami":
 						match npcConv:
 							0:
 								text_box.queue_text("imagine sleeping 4 years")
-								conversation(["where is Noodle Doodle-Doo",
-								"have you ever thought about switching from windows to AmogOS?",
-								"he got run over by a bicycle",
-								"no
-								i use LindowsOS"])
 								npcConv+=1
-							
+							1:
+								if textReady():
+									conversation(["where is Noodle Doodle-Doo",
+									"have you ever thought about switching from windows to AmogOS?",
+									"he got run over by a bicycle",
+									"no
+									i use LindowsOS"])
+							2:
+								endOfChat()
+								
 			"home1":
 				match npcName:
 					"bucket":
 						match npcConv:
 							0:
 								text_box.queue_text("buckets")
-								inConversation=false
+								inChat=false
 					"miguel":
 						match npcConv:
 							0:
-								text_box.queue_text("hi, i'm Miguel
-								i like fire
-								later i plan going to set fire to some cats and let them run into the field
-								then i could watch the field burn
-								that would be fun
-								if you want you can come with me")
-								endOfChat()
+								text_box.queue_text("(he is trembling either because her saw your biceps or he is poisoned)
+								(imagine the next text as mumbling)
+								bullets bulletsbulletsbullets bulletsbulletsbullets bullets bulletsbullets bulletsbullets 
+								i need more of them (bullets)
+								yes
+								and bigger weapons (weapons)
+								i love bigger weapons
+								yes yes yes yes yes
+								i need more bullets (and bigger weapons)")
+								endOfChat(npcConv+1)
+
 					"potato":
 						match npcConv:
 							0:
@@ -324,7 +357,7 @@ func _process(delta):
 									eat the poato later")
 									npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									match text_box.IndexChosen:
 										0:
 											text_box.queue_text("you ate the raw potato
@@ -334,7 +367,7 @@ func _process(delta):
 											(imagine beeng poor)
 											it might be amimir time (amimir = speel)")
 											globals.knifeTaken=true
-											endOfChat()
+											endOfChat(npcConv+1)
 										1:
 											text_box.queue_text("you accidentally ate the raw potato
 											it was full of dirt, but gabriel ate it anyway
@@ -343,28 +376,30 @@ func _process(delta):
 											(imagine beeng poor)
 											it might be amimir time (amimir = speel)")
 											globals.knifeTaken=true
-											endOfChat()
+											endOfChat(npcConv+1)
 										2:
-											npcConv=0
-											inConversation=false
+											endOfChat(0)
 					"veranda":
 						match npcConv:
 							0:
 								text_box.queue_text(":)
-								I am your mother
-								you WILL call me \"mommy\" ")
+								i am mommy")
 								npcConv+=1
 							1:
 								conversation(["where is dad, mommy?",
 
-							"hi mommy, give me food please",
-							
-							"he'll be here soon
-							he just went for some milk",
+								"hi mommy, give me food please",
+								
+								"when you were born, your dad wanted to shoot you
+								the bullet came out a little and said \"i don't enter in in this thing\"
+								he threw a grenade at you. it stopped in the air and said \"what more damage can i do to him?\"
+								after some time he gave up and left",
 
-							"you hungry?
-							skill issue
-							just dont be hungry anymore wtf"])
+								"you hungry?
+								skill issue
+								dont be hungry anymore"])
+							2:
+								endOfChat()
 								
 			"home2":
 				match npcName:
@@ -374,7 +409,7 @@ func _process(delta):
 								text_box.queue_text("what do you want?")
 								npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									conversation(["food",
 
 									"i want to play Raid Shadow Legends, one of the biggest mobile role-playing games of 2019 and it's totally free! Currently almost 10 million users have joined Raid over the last six months, and it's one of the most impressive games in its class with detailed models, environments and smooth 60 frames per second animations! All the champions in the game can be customized with unique gear that changes your strategic buffs and abilities! The dungeon bosses have some ridiculous skills of their own and figuring out the perfect party and strategy to overtake them's a lot of fun! Currently with over 300,000 reviews, Raid has almost a perfect score on the Play Store! The community is growing fast and the highly anticipated new faction wars feature is now live, you might even find my squad out there in the arena! It's easier to start now than ever with rates program for new players you get a new daily login reward for the first 90 days that you play in the game! So what are you waiting for? Go to the video description, click on the special links and you'll get 50,000 silver and a free epic champion as part of the new player program to start your journey! Good luck and I'll see you there!",
@@ -383,14 +418,16 @@ func _process(delta):
 									(how can you respond to that?)
 									(you cant)",
 									
-									"don't you want to suck my di--fast
+									"don't you want to suck my di--fast--0.04
 									:)"])
+							2:
+								endOfChat()
 
 					"bucket":
 						match npcConv:
 							0:
 								text_box.queue_text("more buckets")
-								inConversation=false
+								inChat=false
 					"beans":
 						match npcConv:
 							0:
@@ -401,7 +438,7 @@ func _process(delta):
 									eat the beans later")
 									npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									match text_box.IndexChosen:
 										0:
 											text_box.queue_text("you ate the raw beans
@@ -409,17 +446,16 @@ func _process(delta):
 											...
 											amimir time")
 											globals.knifeTaken=true
-											npcConv+=1
+											endOfChat(npcConv+1)
 										1:
 											text_box.queue_text("you accidentally ate the raw beans
 											did you know that raw beans are toxic?
 											...
 											amimir time")
 											globals.knifeTaken=true
-											npcConv+=1
+											endOfChat(npcConv+1)
 										2:
-											npcConv=0
-									inConversation=false
+											endOfChat(0)
 			"home3":
 				match npcName:
 					"fiddlesticks":
@@ -432,7 +468,7 @@ func _process(delta):
 								i bet you even play League of Legends
 								get away from me
 								(mission accomplished)")
-								endOfChat()
+								endOfChat(npcConv+1)
 					"veranda":
 						match npcConv:
 							0:
@@ -441,18 +477,18 @@ func _process(delta):
 						match npcConv:
 							0:
 								text_box.queue_text("even more buckets")
-								inConversation=false
+								inChat=false
 					"knife":
 						match npcConv:
 							0:
 								if globals.knifeTaken==false:
-									text_box.queue_text("an old knife lays before you")
-									text_box.queue_questionResponse("take the knife :)
-									don't take the knife
-									take the knife later")
+									text_box.queue_text("this is obviously a pen")
+									text_box.queue_questionResponse("take the pen :)
+									don't take the pen
+									take the pen later")
 									npcConv+=1
 							1:
-								if text_box.current_state==text_box.State.ready:
+								if textReady():
 									match text_box.IndexChosen:
 										0:
 											text_box.queue_text("you took the knife")
@@ -464,14 +500,38 @@ func _process(delta):
 											npcConv+=1
 										2:
 											npcConv=0
-									inConversation=false
+									inChat=false
+			"alley":
+				match npcName:
+					"cockroach":
+						match npcConv:
+							0:
+								text_box.queue_text("big pile of cockroaches")
+								text_box.queue_questionResponse(":)
+								no thank you, im vegetarian")
+								npcConv+=1
+							1:
+								if textReady():
+									match text_box.IndexChosen:
+										0:
+											text_box.queue_text("(should have thought about that before you ate your brother)")
+											npcConv+=1
+										1:
+											npcConv+=2
+							2:
+								if textReady():
+									npcConv+=1
+							3:
+								text_box.queue_text("gabriel ate the huge pile of cockroaches with such an unnatural dexterity no cockroach escaped his furry")
+								endOfChat()
+								get_parent().queue_free()
 
 		globals.convState[npcName+currentScene]=npcConv
-		text_box.inConversation=inConversation
+		text_box.inChat=inChat
 
 
 #give this function 5 statements and 5 responses (must be equal otherwise error) and after every response, kill the precedent statement							
-func conversation(stringArray:Array[String],correctAnswer:int=-1):
+func conversation(stringArray:Array[String],correctAnswers:Array[int]=[]):
 	match npcConv2:
 		0:
 			stringArray2=stringArray.duplicate()
@@ -487,13 +547,17 @@ func conversation(stringArray:Array[String],correctAnswer:int=-1):
 			text_box.queue_questionResponse(questions)
 			npcConv2+=1
 		2:
-			if text_box.current_state==text_box.State.ready:
+			if textReady():
 				text_box.queue_text(stringArray2[text_box.IndexChosen+stringArray2.size()/2])
 				npcConv2-=1
-				inConversation=false
 				stringArray2.remove_at(text_box.IndexChosen+stringArray2.size()/2)
 				stringArray2.remove_at(text_box.IndexChosen)
-				if stringArray2.is_empty() or (correctAnswer!=-1 and text_box.IndexChosen==correctAnswer):#if you chose the right answer and choice==true then npcConv+=1
+
+				if correctAnswers.has(text_box.IndexChosen):#if you chose the right answer continue
+					npcConv+=1
+				elif stringArray2.is_empty():
+					npcConv+=777
+				else:
 					endOfChat()
 
 
@@ -506,13 +570,14 @@ func _on_area_2d_body_exited(body:Node2D):
 	if body is CharacterBody2D:
 		nearNpc=false
 
+func textReady():
+	return text_box.current_state==text_box.State.ready
+
 #use this only if you wont speak with the character any further
 func endOfChat(npcConvv:int=-1):
-	if npcConvv==-1:
-		npcConv+=1
-	else:
+	if  npcConvv!=-1:
 		npcConv=npcConvv
-	inConversation=false
+	inChat=false
 	if text_box.text_queue.is_empty() and text_box.conv_queue.is_empty(): #i should be executed for this
 		text_box.hide_textbox()#this is morally wrong in many ways
 		#the reason i do this is because in between some statements text text_box.current_state==text_box.State.ready and it makes the textbox disappear for 1 frame and it looks bad

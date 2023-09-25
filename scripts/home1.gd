@@ -28,12 +28,11 @@ func _process(delta):
 			if Input.is_action_just_pressed("ui_accept") and nearLadder:
 				get_tree().change_scene_to_file("scenes/attic2.tscn")
 		"home3":
-			if globals.knifeTaken==true:
+			if globals.knifeTaken==true and knife.visible:
 				knife.visible=false
 				globals.getPlayer().changeMode("Knife")
 				makeDark()
 				removeNodes()
-				globals.knifeTaken=false
 
 			if Input.is_action_just_pressed("ui_accept") and nearLadder:
 				get_tree().change_scene_to_file("scenes/attic3.tscn")

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bl8trwvomot62" path="res://images/pillarLeft.png" id="5_h1ltl"]
 [ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="7_6l8f3"]
 [ext_resource type="Texture2D" uid="uid://bb5xdmwh2j814" path="res://images/Salami.png" id="8_xsnfc"]
-[ext_resource type="PackedScene" uid="uid://de0bpxweuff3e" path="res://scenes/player.tscn" id="9_bd0ua"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="9_bd0ua"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="10_yrcif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vask0"]
@@ -73,6 +73,7 @@ shape = SubResource("RectangleShape2D_vkjba")
 [node name="bed" parent="StaticBody2D/Attic" instance=ExtResource("7_6l8f3")]
 position = Vector2(-294, 20)
 scale = Vector2(3.89, 1.465)
+flipCharacter = false
 
 [node name="rat" type="Sprite2D" parent="StaticBody2D/Attic"]
 y_sort_enabled = true
@@ -83,6 +84,7 @@ texture = ExtResource("4_gd4ym")
 [node name="rat" parent="StaticBody2D/Attic/rat" instance=ExtResource("7_6l8f3")]
 position = Vector2(-0.000305176, -1)
 scale = Vector2(1.77, 1.66)
+flipCharacter = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 visible = false

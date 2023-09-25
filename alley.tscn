@@ -1,0 +1,74 @@
+[gd_scene load_steps=12 format=3 uid="uid://bjv5rnjgqdnh3"]
+
+[ext_resource type="Texture2D" uid="uid://ca2q52pi3bjr1" path="res://images/alley.png" id="1_i838h"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="2_fups5"]
+[ext_resource type="Texture2D" uid="uid://cn7ox0382tjw3" path="res://images/Cockroach.png" id="3_mht1v"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="4_1a8gh"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="4_ewofe"]
+[ext_resource type="Script" path="res://scripts/cockroach.gd" id="5_4uc77"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tv7am"]
+atlas = ExtResource("3_mht1v")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcxay"]
+atlas = ExtResource("3_mht1v")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3ndh"]
+atlas = ExtResource("3_mht1v")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gc1rg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tv7am")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcxay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3ndh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ynec"]
+size = Vector2(35, 20)
+
+[node name="alley" type="Node2D"]
+texture_filter = 1
+
+[node name="Alley" type="Sprite2D" parent="."]
+position = Vector2(1202, 841)
+scale = Vector2(2, 2)
+texture = ExtResource("1_i838h")
+
+[node name="player" parent="Alley" instance=ExtResource("2_fups5")]
+position = Vector2(-366, -271)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="Alley/player" node_paths=PackedStringArray("map")]
+limit_left = 0
+limit_top = -30
+script = ExtResource("4_1a8gh")
+map = NodePath("../..")
+
+[node name="cockroach" type="AnimatedSprite2D" parent="Alley"]
+position = Vector2(-149.5, -275.5)
+sprite_frames = SubResource("SpriteFrames_gc1rg")
+frame = 1
+frame_progress = 0.380739
+script = ExtResource("5_4uc77")
+
+[node name="cockroach" parent="Alley/cockroach" instance=ExtResource("4_ewofe")]
+position = Vector2(-1, 0.5)
+scale = Vector2(2.245, 1.255)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alley/cockroach/cockroach"]
+position = Vector2(1.11359, -0.796814)
+scale = Vector2(0.445434, 0.796813)
+shape = SubResource("RectangleShape2D_7ynec")

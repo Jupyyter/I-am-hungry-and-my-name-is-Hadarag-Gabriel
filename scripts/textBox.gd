@@ -21,7 +21,7 @@ var conv_queue:Array=[]
 var tween: Tween
 var chooseMode:bool=false
 var fastText:bool=false
-var inConversation:bool=false
+var inChat:bool=false
 
 var LabelList2:Array[Label]
 var currentStateList2:Array[State]
@@ -75,7 +75,7 @@ func _process(delta):
 					current_state= State.newText
 					chooseMode=false
 					fastText=false
-					if text_queue.is_empty() and conv_queue.is_empty() and !inConversation:
+					if text_queue.is_empty() and conv_queue.is_empty() and !inChat:
 						#DELETE ALL THE CHILDREN DIEDIEDIEDIEDIE
 						#GABRIEL EATING MY MEMORY HAHAHAHAHAHAHAHAAHAHAHAHAHAHAHAAHAHAHAHAHAHAAHAHA
 						hide_textbox()
@@ -139,6 +139,8 @@ func hide_textbox()->void:
 	end_symbol.text = ""
 	textbox_container.hide()
 
+func isOn()->bool:
+	return textbox_container.visible
 #guess what it does
 func show_textbox()->void:
 	start_symbol.text = "*"

@@ -42,9 +42,7 @@ func _process(delta):
 								(he is looking down on you)")
 								text_box.queue_questionResponse("well, what are we doing here?")
 								text_box.queue_text("talking
-								(omg you are so inferiour to him)")
-								text_box.queue_questionResponse("not that, i mean, in general")
-								text_box.queue_text("you know...eating, sleeping, breathing
+								(omg you are so inferiour to him)
 								(you got outplayed. you should change your strategy)")
 								npcConv+=1
 							1:

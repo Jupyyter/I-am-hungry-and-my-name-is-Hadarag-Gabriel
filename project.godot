@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="I am hungry and my name is Hadarag Gabriel"
-run/main_scene="res://scenes/attic2.tscn"
+run/main_scene="res://scenes/alley.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://scripts/icon.svg"
 config/main_scene=""

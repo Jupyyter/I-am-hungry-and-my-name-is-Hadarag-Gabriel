@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddrgqu2sxk87"]
+
+[ext_resource type="Texture2D" uid="uid://dw07tqvmil2lt" path="res://images/town.png" id="1_hub5g"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="2_i51m2"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="3_ctmel"]
+
+[node name="Node2D" type="Node2D"]
+texture_filter = 1
+
+[node name="Town" type="Sprite2D" parent="."]
+position = Vector2(2279, 476)
+scale = Vector2(2, 2)
+texture = ExtResource("1_hub5g")
+
+[node name="player" parent="Town" instance=ExtResource("2_i51m2")]
+position = Vector2(-1018, -31)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="Town/player" node_paths=PackedStringArray("map")]
+position = Vector2(0, -25)
+offset = Vector2(0, -30)
+limit_left = 0
+limit_top = 0
+script = ExtResource("3_ctmel")
+map = NodePath("../..")

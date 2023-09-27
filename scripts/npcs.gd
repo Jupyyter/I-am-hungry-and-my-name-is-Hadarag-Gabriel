@@ -40,8 +40,8 @@ func _process(delta):
 								text_box.queue_questionResponse("where am i?")
 								text_box.queue_text("we are in the attic of the house obviously
 								(he is looking down on you)")
-								text_box.queue_questionResponse("well, what are we doing here?")
-								text_box.queue_text("talking
+								text_box.queue_questionResponse("i mean... why am i here?")
+								text_box.queue_text("because this is our house, so you obviusly stay in it sometimes
 								(omg you are so inferiour to him)
 								(you got outplayed. you should change your strategy)")
 								npcConv+=1
@@ -63,11 +63,13 @@ func _process(delta):
 					"rat":
 						match npcConv:
 							0:
-								text_box.queue_questionResponse("pet the dead rat")
+								text_box.queue_text("congratulations :)
+								you found Jerry")
+								text_box.queue_questionResponse("pet Jerry")
 								npcConv+=1
 							1:
 								if textReady():
-									text_box.queue_text("gabriel reaches for the rat")
+									text_box.queue_text("gabriel reaches for Jerry")
 									globals.nearRat=true
 									endOfChat(npcConv+1)
 
@@ -125,7 +127,9 @@ func _process(delta):
 					"rat":
 						match npcConv:
 							0:
-								text_box.queue_text("pet the dead rat?")
+								text_box.queue_text("congratulations :)
+								you found Jerry's brother
+								pet Jerry's brother?")
 								text_box.queue_questionResponse("yeah
 								noh")
 								npcConv+=1
@@ -458,11 +462,10 @@ func _process(delta):
 					"fiddlesticks":
 						match npcConv:
 							0:
-								text_box.queue_text("(don't forget gabriel doesn't like women)
-								hello, im Fiddlesticks")
+								text_box.queue_text("hello, im Fiddlesticks")
 								text_box.queue_questionResponse("hi i use Arch Linux")
 								text_box.queue_text("i see
-								i bet you even play League of Legends
+								i bet you play League of Legends or even Dota2
 								get away from me
 								(mission accomplished)")
 								endOfChat(npcConv+1)

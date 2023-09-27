@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ew1axsd8a21v"]
+[gd_scene load_steps=24 format=3 uid="uid://ew1axsd8a21v"]
 
 [ext_resource type="Texture2D" uid="uid://bq33m8q2jm2vf" path="res://images/attic3.png" id="1_hreuw"]
 [ext_resource type="Script" path="res://scripts/attic1.gd" id="1_o54qx"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bb5xdmwh2j814" path="res://images/Salami.png" id="5_smtyv"]
 [ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="6_yk6ni"]
 [ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="7_c0k0d"]
-[ext_resource type="Texture2D" uid="uid://r1nsx1uk8kxi" path="res://images/Sassy.png" id="7_qngde"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="8_wwwbs"]
 [ext_resource type="Texture2D" uid="uid://wwrqch8natn5" path="res://images/snitel.png" id="9_81kei"]
 [ext_resource type="Script" path="res://scenes/flapjack.gd" id="10_5cfh6"]
@@ -17,9 +16,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_df222"]
 size = Vector2(117, 56)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1otgi"]
-size = Vector2(10, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4h6l"]
 size = Vector2(12, 2)
@@ -111,7 +107,7 @@ _data = {
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_o54qx")
-nodesToRemove = [NodePath("StaticBody2D/Attic/sassy"), NodePath("StaticBody2D/Attic/snitel"), NodePath("StaticBody2D/Attic/flapjack"), NodePath("StaticBody2D/Attic/salami")]
+nodesToRemove = [NodePath("StaticBody2D/Attic/snitel"), NodePath("StaticBody2D/Attic/flapjack"), NodePath("StaticBody2D/Attic/salami")]
 nodesToAdd = [NodePath("StaticBody2D/Attic/flapjack2")]
 flapjack2 = NodePath("StaticBody2D/Attic/flapjack2")
 
@@ -150,18 +146,6 @@ shape = SubResource("RectangleShape2D_df222")
 position = Vector2(-294, 20)
 scale = Vector2(3.89, 1.465)
 flipCharacter = false
-
-[node name="sassy" type="Sprite2D" parent="StaticBody2D/Attic"]
-position = Vector2(-104.667, 100.667)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("7_qngde")
-offset = Vector2(0, -20)
-
-[node name="sassy" parent="StaticBody2D/Attic/sassy" instance=ExtResource("6_yk6ni")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/sassy/sassy"]
-position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_1otgi")
 
 [node name="snitel" type="Sprite2D" parent="StaticBody2D/Attic"]
 position = Vector2(-353.333, 81.3333)
@@ -239,7 +223,7 @@ position = Vector2(567, 69)
 polygon = PackedVector2Array(-564, 322, 646, 318, 605, 235, 583, 235, 564, 213, 577, 213, 554, 134, 518, 134, 536, 180, 468, 180, 454, 128, 410, 128, 410, 154, 374, 154, 368, 130, 248, 130, 248, 154, 212, 154, 206, 128, 52, 128, 52, 156, 28, 156, 28, 130, -120, 130, -124, 154, -150, 154, -156, 143, -173, 143, -186, 180, -272, 180, -272, 130, -292, 130, -297, 155, -333, 155, -333, 131, -461, 131, -495, 215, -489, 215, -499, 235, -519, 235, -566, 322, -472, 128, 553, 121, 652, 322)
 
 [node name="player" parent="." instance=ExtResource("7_c0k0d")]
-position = Vector2(956, 278)
+position = Vector2(1017, 274)
 
 [node name="Camera2D" type="Camera2D" parent="player" node_paths=PackedStringArray("map")]
 position = Vector2(0, -25)

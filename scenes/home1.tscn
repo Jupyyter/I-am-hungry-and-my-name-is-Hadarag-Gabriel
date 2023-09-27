@@ -1,0 +1,147 @@
+[gd_scene load_steps=19 format=3 uid="uid://cyb4o3nxyu5tc"]
+
+[ext_resource type="Script" path="res://scripts/home1.gd" id="1_jjnm3"]
+[ext_resource type="Texture2D" uid="uid://h0sxtsrob7st" path="res://images/home.png" id="2_pfay3"]
+[ext_resource type="Texture2D" uid="uid://kkvbbrgettok" path="res://images/veranda.png" id="3_k7b1w"]
+[ext_resource type="Texture2D" uid="uid://bqi2frsfehbe" path="res://images/cazan.png" id="3_krs3j"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="4_thk0d"]
+[ext_resource type="Texture2D" uid="uid://bov7lcc5wgusm" path="res://images/table.png" id="5_oe0dj"]
+[ext_resource type="Texture2D" uid="uid://inf5351c4onw" path="res://images/potato.png" id="7_cr57l"]
+[ext_resource type="Texture2D" uid="uid://dhl28k8p2v87e" path="res://images/table2.png" id="7_gkns8"]
+[ext_resource type="Texture2D" uid="uid://dik4am43pooch" path="res://images/chair1.png" id="8_7f4b6"]
+[ext_resource type="Texture2D" uid="uid://bn1bvunbelwfo" path="res://images/chair2.png" id="9_5axig"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="10_hokkb"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="11_gquow"]
+[ext_resource type="Texture2D" uid="uid://dmp1eoaxw0fqh" path="res://images/Miguel.png" id="11_w2u2a"]
+[ext_resource type="Script" path="res://scenes/miguel.gd" id="12_5n6ja"]
+[ext_resource type="Texture2D" uid="uid://chm7oaswlaxvo" path="res://images/bucket.png" id="12_ycqll"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ih6da"]
+size = Vector2(11.5, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7erkl"]
+size = Vector2(58.5, 21.6245)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n38en"]
+size = Vector2(13.6667, 3)
+
+[node name="home1" type="Node2D" node_paths=PackedStringArray("knife")]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_jjnm3")
+knife = NodePath("StaticBody2D/hause/table1/potato")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 20)
+
+[node name="hause" type="Sprite2D" parent="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(812, 178)
+scale = Vector2(2, 2)
+texture = ExtResource("2_pfay3")
+
+[node name="Cazan" type="Sprite2D" parent="StaticBody2D/hause"]
+position = Vector2(-351.5, 43)
+texture = ExtResource("3_krs3j")
+offset = Vector2(0, 4)
+
+[node name="veranda" type="Sprite2D" parent="StaticBody2D/hause"]
+y_sort_enabled = true
+position = Vector2(-79, 74.5)
+texture = ExtResource("3_k7b1w")
+offset = Vector2(0, -27)
+
+[node name="veranda" parent="StaticBody2D/hause/veranda" instance=ExtResource("4_thk0d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/hause/veranda/veranda"]
+position = Vector2(1.75, -1.5)
+shape = SubResource("RectangleShape2D_ih6da")
+
+[node name="table1" type="Sprite2D" parent="StaticBody2D/hause"]
+position = Vector2(-354, 44)
+texture = ExtResource("5_oe0dj")
+offset = Vector2(0, -2)
+
+[node name="potato" type="Sprite2D" parent="StaticBody2D/hause/table1"]
+position = Vector2(4, -20)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_cr57l")
+
+[node name="potato" parent="StaticBody2D/hause/table1/potato" instance=ExtResource("4_thk0d")]
+position = Vector2(-0.5, 34.14)
+scale = Vector2(2.345, 3.56)
+skew = 0.734784
+
+[node name="table2" type="Sprite2D" parent="StaticBody2D/hause"]
+position = Vector2(-256.667, 78)
+texture = ExtResource("7_gkns8")
+offset = Vector2(0, -12)
+
+[node name="chair1" type="Sprite2D" parent="StaticBody2D/hause"]
+position = Vector2(-320, 88)
+texture = ExtResource("8_7f4b6")
+offset = Vector2(0, -25)
+
+[node name="chair2" type="Sprite2D" parent="StaticBody2D/hause"]
+position = Vector2(-187.5, 80)
+texture = ExtResource("9_5axig")
+offset = Vector2(0, -16)
+
+[node name="chair3" type="Sprite2D" parent="StaticBody2D/hause"]
+position = Vector2(260.5, 78)
+texture = ExtResource("9_5axig")
+offset = Vector2(0, -16)
+
+[node name="Sprite2D6" type="Sprite2D" parent="StaticBody2D/hause"]
+
+[node name="ladder" type="Area2D" parent="StaticBody2D/hause"]
+position = Vector2(313.5, 42.688)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/hause/ladder"]
+position = Vector2(1.25, -1.50026)
+shape = SubResource("RectangleShape2D_7erkl")
+
+[node name="miguel" type="Sprite2D" parent="StaticBody2D/hause"]
+y_sort_enabled = true
+position = Vector2(169.5, 39)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("11_w2u2a")
+offset = Vector2(0, -20)
+flip_h = true
+script = ExtResource("12_5n6ja")
+
+[node name="miguel" parent="StaticBody2D/hause/miguel" instance=ExtResource("4_thk0d")]
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/hause/miguel/miguel"]
+position = Vector2(-1.16669, -0.5)
+shape = SubResource("RectangleShape2D_n38en")
+
+[node name="bucket" type="Sprite2D" parent="StaticBody2D/hause"]
+position = Vector2(-48, 28)
+texture = ExtResource("12_ycqll")
+
+[node name="bucket" parent="StaticBody2D/hause/bucket" instance=ExtResource("4_thk0d")]
+position = Vector2(-0.5, 4)
+scale = Vector2(2.34, 1.005)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-1, -100)
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(0.5, 228.5, 61.5, 169, 752.5, 169, 813, 227.5, 0.5, 228.5, 72, 228.5, 84, 216.5, 101.5, 216.5, 124.5, 213.5, 185, 213.5, 178, 226, 206, 226.5, 210, 218.5, 230, 218.5, 225.5, 227, 652.5, 227, 659, 216.5, 678, 216.5, 673.5, 224, 810, 226.5, 750, 170, 725.5, 170, 717, 182, 703, 170, 384, 170, 380, 179, 371, 179, 367.5, 170, 349.5, 170, 341.5, 177, 334, 169.5, 329.5, 169.5, 318.5, 180, 259, 180, 257, 182, 254.5, 180, 190.5, 180, 190.5, 171, 174.5, 171, 170, 175, 162, 175, 157.5, 170.5, 132.5, 170.5, 132.5, 179.5, 115, 179.5, 110.5, 170, 62, 170, 50, 181.5, 76.5, 181.5, 49, 201.5, 30, 201.5)
+
+[node name="player" parent="." instance=ExtResource("10_hokkb")]
+position = Vector2(1405, 305)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="player" node_paths=PackedStringArray("map")]
+position = Vector2(0, -25)
+limit_left = 0
+limit_top = 0
+script = ExtResource("11_gquow")
+map = NodePath("../../StaticBody2D/hause")
+
+[connection signal="body_entered" from="StaticBody2D/hause/ladder" to="." method="_on_ladder_body_entered"]
+[connection signal="body_exited" from="StaticBody2D/hause/ladder" to="." method="_on_ladder_body_exited"]

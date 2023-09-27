@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="10_yrcif"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vask0"]
-size = Vector2(117, 56)
+size = Vector2(117, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkjba"]
 size = Vector2(10, 2.0625)
@@ -54,7 +54,7 @@ position = Vector2(162.667, 21.3333)
 scale = Vector2(0.666667, 0.666667)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/ladder"]
-position = Vector2(208.999, 4.57764e-05)
+position = Vector2(208.999, 2.00005)
 shape = SubResource("RectangleShape2D_vask0")
 
 [node name="salami" type="Sprite2D" parent="StaticBody2D/Attic"]

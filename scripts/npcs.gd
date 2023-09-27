@@ -35,9 +35,9 @@ func _process(delta):
 					"salami":
 						match npcConv:
 							0:
-								text_box.queue_text("hi, i'm your brother, Salami--red
+								text_box.queue_text("hi, i'm your brother, Salami
 								do you need anything?")
-								text_box.queue_questionResponse("where are we?")
+								text_box.queue_questionResponse("where am i?")
 								text_box.queue_text("we are in the attic of the house obviously
 								(he is looking down on you)")
 								text_box.queue_questionResponse("well, what are we doing here?")
@@ -154,18 +154,6 @@ func _process(delta):
 									text_box.queue_text("gabriel approaches the rat to pet it")
 									globals.nearRat=true
 									endOfChat(npcConv+1)
-					"sussy":
-						match npcConv:
-							0:
-
-								text_box.queue_text("(keep in mind \"it's ok to like muscular men\"- gabriel)
-								(its in gabriel's interest to avoid women)
-								hi im Sussy")
-								text_box.queue_questionResponse("i play league of legends")
-								text_box.queue_text("that explains the smell
-								take a shower
-								and dont come near me")
-								endOfChat(npcConv+1)
 					"noodle":
 						match npcConv:
 							0:
@@ -179,7 +167,7 @@ func _process(delta):
 								if textReady():
 									conversation(["no, i personally was born run over by a traktor",
 
-									"yes, i im very racist. i hate everyone run over by anything but men. in fact i have every person with a slightly darker RGBA skin color than mine",
+									"yes, i im very racist. i hate everyone run over by anything but men. in fact i hate every person with a slightly darker RGBA skin color than mine",
 
 									"fair enough",
 
@@ -209,8 +197,7 @@ func _process(delta):
 								"(he is so happy to see those biscuits and crisps)
 								(he ate all the biscuits and crisps)",
 							
-								"those are your siblings
-								also
+								"your siblings
 								see that one in the corner?
 								he's Schnitzel
 								go to him and say the word \"crazy\" "])
@@ -282,14 +269,6 @@ func _process(delta):
 								A RUBBER ROOM WITH RATS.
 								AND RATS MAKE ME CRAZY.")
 								inChat=false
-					"sussy":
-						match npcConv:
-							0:
-
-								text_box.queue_text("dont get near me you filthy League of Legends player
-								(i mean.......)
-								(you smell really really bad)")
-								endOfChat(npcConv+1)
 					"flapjack2":
 						match npcConv:
 							0:
@@ -421,7 +400,19 @@ func _process(delta):
 									"don't you want to suck my di--fast--0.04
 									:)"])
 							2:
-								endOfChat()
+								endOfChat(npcConv+1)
+					"sussy":
+						match npcConv:
+							0:
+
+								text_box.queue_text("(keep in mind \"it's ok to like muscular men\"- gabriel)
+								(its in gabriel's interest to avoid women)
+								hi im Sussy")
+								text_box.queue_questionResponse("i play league of legends")
+								text_box.queue_text("that explains the smell
+								take a shower
+								and dont come near me")
+								endOfChat(npcConv+1)
 
 					"bucket":
 						match npcConv:
@@ -458,6 +449,14 @@ func _process(delta):
 											endOfChat(0)
 			"home3":
 				match npcName:
+					"sussy":
+						match npcConv:
+							0:
+
+								text_box.queue_text("dont get near me you filthy League of Legends player
+								(i mean.......)
+								(you really stink)")
+								endOfChat(npcConv+1)
 					"fiddlesticks":
 						match npcConv:
 							0:
@@ -522,14 +521,47 @@ func _process(delta):
 								if textReady():
 									npcConv+=1
 							3:
-								text_box.queue_text("gabriel ate the huge pile of cockroaches with such an unnatural dexterity no cockroach escaped his furry")
+								text_box.queue_text("gabriel ate the huge pile of cockroaches with an unnatural dexterity
+								no cockroach exscaped his hunger")
 								endOfChat()
 								get_parent().queue_free()
 					"garbage":
 						match npcConv:
 							0:
-								text_box.queue_text("garbage")
-								endOfChat()
+								text_box.queue_text("delicious pile of garbage")
+								text_box.queue_questionResponse("go ahead
+								gabriel please calm down")
+								npcConv+=1
+							1:
+								if textReady():
+									text_box.queue_text("gabriel devoured the entire pile of garbage
+									he was never so happy before
+									food here food there food everywhere")
+									endOfChat()
+									get_parent().queue_free()
+					"wall":
+						match npcConv:
+							0:
+								text_box.queue_text("an appetizing brick wall")
+								text_box.queue_questionResponse("give up trying to stop gabriel
+								eat the wall")
+								npcConv+=1
+							1:
+								if textReady():
+									text_box.queue_text("gabriel is literally eating his way through life
+									nothing can stop gabriel")
+									endOfChat()
+									get_parent().queue_free()
+					"stopSign":
+						match npcConv:
+							0:
+								text_box.queue_text("a gorgeous stop sign")
+								npcConv+=1
+							1:
+								if textReady():
+									text_box.queue_text("the stop sign stood no chance")
+									endOfChat()
+									get_parent().queue_free()
 
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat
@@ -561,8 +593,8 @@ func conversation(stringArray:Array[String],correctAnswers:Array[int]=[]):
 				if correctAnswers.has(text_box.IndexChosen):#if you chose the right answer continue
 					npcConv+=1
 				elif stringArray2.is_empty():
-					npcConv+=777
-				else:
+					endOfChat(npcConv+1)
+				else:	#this means there are still some lines of dialogue
 					endOfChat()
 
 

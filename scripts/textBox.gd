@@ -118,6 +118,7 @@ func displayText(lbl:Label)->void:
 					"-fast":
 						fastText=true
 					_:
+						before=before.substr(1)
 						setTexture(before)
 						start_symbol.text = ""
 			
@@ -169,7 +170,6 @@ func setTexture(texture)->void:
 		textureRect.texture = null
 	else:
 		textureRect.texture = load("res://images/" + texture + ".png")
-
 func colorRed(lbl:Label)->void:
 	#lbl.add_theme_color_override("font_color",Color(180,0,0))
 	lbl.add_theme_color_override("font_color",Color(180,0,0))

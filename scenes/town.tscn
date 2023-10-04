@@ -1,25 +1,697 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddrgqu2sxk87"]
+[gd_scene load_steps=21 format=3 uid="uid://ddrgqu2sxk87"]
 
 [ext_resource type="Texture2D" uid="uid://dw07tqvmil2lt" path="res://images/town.png" id="1_hub5g"]
+[ext_resource type="Script" path="res://scripts/town.gd" id="1_qvn2q"]
 [ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="2_i51m2"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="3_ctmel"]
+[ext_resource type="Texture2D" uid="uid://c3xc3xkhrlfyt" path="res://images/stranger1.png" id="4_8myk4"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="6_4r8rr"]
+[ext_resource type="Texture2D" uid="uid://doql5j0g3x27m" path="res://images/basket1.png" id="7_v6fpa"]
+[ext_resource type="Texture2D" uid="uid://c1t3vnvm5m4ww" path="res://images/stranger2.png" id="8_kxhhb"]
+[ext_resource type="Texture2D" uid="uid://yvldr5ss48pq" path="res://images/basket2.png" id="9_7jlp6"]
+[ext_resource type="Texture2D" uid="uid://dqtrvvq0hm0uu" path="res://images/basket3.png" id="10_pgwpu"]
+[ext_resource type="Texture2D" uid="uid://dbedlbmxkcch8" path="res://images/basket4.png" id="11_fx2h8"]
+[ext_resource type="Texture2D" uid="uid://cj71bk3b7jn2n" path="res://images/basket5.png" id="12_7fop1"]
+[ext_resource type="Texture2D" uid="uid://cynswhdf3kxhl" path="res://images/crowd.png" id="13_ebyvw"]
+[ext_resource type="Script" path="res://scripts/crowd.gd" id="14_cremy"]
+[ext_resource type="Texture2D" uid="uid://ro1iy085u7sh" path="res://images/stranger3.png" id="15_fo3ab"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eg06r"]
+size = Vector2(9.97304, 20.7917)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tiahh"]
+size = Vector2(17.8603, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gd20j"]
+atlas = ExtResource("13_ebyvw")
+region = Rect2(0, 0, 32, 63)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hoql"]
+atlas = ExtResource("13_ebyvw")
+region = Rect2(32, 0, 32, 63)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fav8k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gd20j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hoql")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="town" type="Node2D"]
 texture_filter = 1
+script = ExtResource("1_qvn2q")
 
-[node name="Town" type="Sprite2D" parent="."]
-position = Vector2(2279, 476)
+[node name="town" type="Sprite2D" parent="."]
+position = Vector2(2286, 476)
 scale = Vector2(2, 2)
 texture = ExtResource("1_hub5g")
 
-[node name="player" parent="Town" instance=ExtResource("2_i51m2")]
+[node name="player" parent="town" instance=ExtResource("2_i51m2")]
 position = Vector2(-1018, -31)
 scale = Vector2(1, 1)
 
-[node name="Camera2D" type="Camera2D" parent="Town/player" node_paths=PackedStringArray("map")]
+[node name="Camera2D" type="Camera2D" parent="town/player" node_paths=PackedStringArray("map")]
 position = Vector2(0, -25)
 offset = Vector2(0, -30)
 limit_left = 0
 limit_top = 0
 script = ExtResource("3_ctmel")
 map = NodePath("../..")
+
+[node name="stranger1" type="Sprite2D" parent="town"]
+y_sort_enabled = true
+position = Vector2(-887, -30)
+texture = ExtResource("4_8myk4")
+offset = Vector2(0, -30)
+flip_h = true
+
+[node name="stranger1" parent="town/stranger1" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/stranger1/stranger1"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="stranger2" type="Sprite2D" parent="town"]
+y_sort_enabled = true
+position = Vector2(-607.5, -30)
+texture = ExtResource("15_fo3ab")
+offset = Vector2(0, -25)
+flip_h = true
+
+[node name="stranger2" parent="town/stranger2" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/stranger2/stranger2"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="stranger3" type="Sprite2D" parent="town"]
+y_sort_enabled = true
+position = Vector2(-232, -30)
+texture = ExtResource("8_kxhhb")
+offset = Vector2(0, -25)
+flip_h = true
+
+[node name="stranger3" parent="town/stranger3" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/stranger3/stranger3"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="baskets" type="Node2D" parent="town"]
+
+[node name="basketOfApples" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(-853, -36.5)
+texture = ExtResource("7_v6fpa")
+flip_h = true
+
+[node name="basketOfApples" parent="town/baskets/basketOfApples" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.145, 2.12)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfApples/basketOfApples"]
+position = Vector2(1.06987, 0)
+shape = SubResource("RectangleShape2D_tiahh")
+
+[node name="basketOfCorks" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(-568, -30)
+texture = ExtResource("9_7jlp6")
+flip_h = true
+
+[node name="basketOfCorks" parent="town/baskets/basketOfCorks" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfCorks/basketOfCorks"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="basketOfRocks" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(-193, -30)
+texture = ExtResource("10_pgwpu")
+flip_h = true
+
+[node name="basketOfRocks" parent="town/baskets/basketOfRocks" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfRocks/basketOfRocks"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="basketOfMetal" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(120, -30.5)
+texture = ExtResource("11_fx2h8")
+
+[node name="basketOfMetal" parent="town/baskets/basketOfMetal" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfMetal/basketOfMetal"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="basketOfSnakes" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(174.5, -30.5)
+texture = ExtResource("12_7fop1")
+flip_h = true
+
+[node name="basketOfSnakes" parent="town/baskets/basketOfSnakes" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfSnakes/basketOfSnakes"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="basketOfCorks2" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(207.5, -31)
+texture = ExtResource("9_7jlp6")
+flip_h = true
+
+[node name="basketOfCorks2" parent="town/baskets/basketOfCorks2" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfCorks2/basketOfCorks2"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="basketOfApples2" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(235, -32)
+texture = ExtResource("7_v6fpa")
+flip_h = true
+
+[node name="basketOfApples2" parent="town/baskets/basketOfApples2" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.145, 2.12)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfApples2/basketOfApples2"]
+position = Vector2(1.06987, 0)
+shape = SubResource("RectangleShape2D_tiahh")
+
+[node name="basketOfMetal2" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(262, -33.5)
+texture = ExtResource("11_fx2h8")
+flip_h = true
+
+[node name="basketOfMetal2" parent="town/baskets/basketOfMetal2" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfMetal2/basketOfMetal2"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="basketOfSnakes2" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(290, -31)
+texture = ExtResource("12_7fop1")
+flip_h = true
+
+[node name="basketOfSnakes2" parent="town/baskets/basketOfSnakes2" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfSnakes2/basketOfSnakes2"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="basketOfSnakes3" type="Sprite2D" parent="town/baskets"]
+y_sort_enabled = true
+position = Vector2(318, -31.5)
+texture = ExtResource("12_7fop1")
+flip_h = true
+
+[node name="basketOfSnakes3" parent="town/baskets/basketOfSnakes3" instance=ExtResource("6_4r8rr")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="town/baskets/basketOfSnakes3/basketOfSnakes3"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_eg06r")
+
+[node name="croud" type="Node2D" parent="town"]
+y_sort_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(-18, -56)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(-5, -69.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(29.5, -58)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(6.5, -57)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(14, -64.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(43.5, -64)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(53.5, -52)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(64.5, -62.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D9" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(68, -50.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D10" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(81, -64)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D11" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(115.5, -52.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D12" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(92.5, -51.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D13" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(100, -59)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D14" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(129.5, -58.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D15" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(139.5, -46.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D16" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(150.5, -57)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D17" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(158.5, -47)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D18" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(171.5, -60.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D19" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(206, -49)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D20" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(183, -48)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D21" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(190.5, -55.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D22" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(220, -55)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D23" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(230, -43)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D24" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(241, -53.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D25" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(230.5, -49)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D26" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(243.5, -62.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D27" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(278, -51)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D28" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(255, -50)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D29" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(262.5, -57.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D30" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(292, -57)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D31" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(302, -45)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D32" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(313, -55.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D33" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(322.5, -46.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D34" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(335.5, -60)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D35" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(370, -48.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D36" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(347, -47.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D37" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(354.5, -55)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D38" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(384, -54.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D39" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(394, -42.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D40" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(405, -53)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D41" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(413, -45)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D42" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(426, -58.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D43" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(460.5, -47)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D44" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(437.5, -46)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D45" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(445, -53.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D46" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(474.5, -53)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D47" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(484.5, -41)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")
+
+[node name="AnimatedSprite2D48" type="AnimatedSprite2D" parent="town/croud"]
+y_sort_enabled = true
+position = Vector2(495.5, -51.5)
+sprite_frames = SubResource("SpriteFrames_fav8k")
+frame = 1
+frame_progress = 0.431021
+offset = Vector2(0, -31)
+script = ExtResource("14_cremy")

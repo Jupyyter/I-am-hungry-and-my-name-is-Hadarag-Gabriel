@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjslxs2nfkoew"]
+[gd_scene load_steps=22 format=3 uid="uid://bjslxs2nfkoew"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r4nhh"]
 [ext_resource type="Texture2D" uid="uid://cedf53w8n3pcu" path="res://images/terrareIdle.png" id="2_0h1bk"]
@@ -70,6 +70,86 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 8), Vector2i(1, 8), Vector2i(2, 8), Vector2i(3, 8)]
+}
+
+[sub_resource type="Animation" id="Animation_8uclu"]
+resource_name = "idleEatBasketOfApples"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 3), Vector2i(5, 3), Vector2i(6, 3), Vector2i(7, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_2vira"]
+resource_name = "idleEatBasketOfCorks"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 4), Vector2i(5, 4), Vector2i(6, 4), Vector2i(7, 4)]
+}
+
+[sub_resource type="Animation" id="Animation_ne2cn"]
+resource_name = "idleEatBasketOfMetal"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 5), Vector2i(5, 5), Vector2i(6, 5), Vector2i(7, 5)]
+}
+
+[sub_resource type="Animation" id="Animation_qyu1l"]
+resource_name = "idleEatBasketOfRocks"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 6), Vector2i(5, 6), Vector2i(6, 6), Vector2i(7, 6)]
+}
+
+[sub_resource type="Animation" id="Animation_wn6si"]
+resource_name = "idleEatBasketOfSnakes"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7)]
 }
 
 [sub_resource type="Animation" id="Animation_vagu8"]
@@ -211,6 +291,11 @@ _data = {
 "idle": SubResource("Animation_8bafa"),
 "idleBlood0": SubResource("Animation_c6sln"),
 "idleBlood1": SubResource("Animation_5qlq3"),
+"idleEatBasketOfApples": SubResource("Animation_8uclu"),
+"idleEatBasketOfCorks": SubResource("Animation_2vira"),
+"idleEatBasketOfMetal": SubResource("Animation_ne2cn"),
+"idleEatBasketOfRocks": SubResource("Animation_qyu1l"),
+"idleEatBasketOfSnakes": SubResource("Animation_wn6si"),
 "idleEatCat": SubResource("Animation_vagu8"),
 "idleEatFlapjack": SubResource("Animation_7cf0j"),
 "idleEatRat": SubResource("Animation_iqrcb"),

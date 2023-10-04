@@ -177,7 +177,6 @@ shape = SubResource("RectangleShape2D_3u8bd")
 position = Vector2(97.3333, 44.6667)
 texture = ExtResource("11_1flva")
 offset = Vector2(0, -21)
-flip_h = true
 hframes = 2
 script = ExtResource("10_5cfh6")
 animationPlayer = NodePath("AnimationPlayer")

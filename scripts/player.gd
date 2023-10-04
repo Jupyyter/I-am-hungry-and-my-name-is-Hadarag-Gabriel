@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name player
 
-var speedMultiplier:int=3
+var speedMultiplier:int=5
 var speed:int=150
 var flipped:bool=false
 var nearLadder:bool=false
@@ -49,8 +49,10 @@ func get_input()->void:
 		collisionshape2D.scale.x=1
 
 func changeMode(mode:String):
-	if ["Knife","Blood1","Blood0","EatRat","EatCat","EatFlapjack"].has(mode):
+	if animationPlayer.get_animation_list().has("idle"+mode) or animationPlayer.get_animation_list().has("walk"+mode):
 		globals.playerAnimation=mode
+		if mode.begins_with("Eat"):
+			inAnimation=true
 
 func animationReset():
 	globals.playerAnimation=""
@@ -65,3 +67,13 @@ func _on_animation_player_animation_finished(anim_name:StringName):
 		"idleEatFlapjack":
 			animationReset()
 			get_tree().change_scene_to_file("scenes/intro.tscn")
+		"idleEatBasketOfSnakes":
+			animationReset()
+		"idleEatBasketOfApples":
+			animationReset()
+		"idleEatBasketOfRocks":
+			animationReset()
+		"idleEatBasketOfMetal":
+			animationReset()
+		"idleEatBasketOfCorks":
+			animationReset()

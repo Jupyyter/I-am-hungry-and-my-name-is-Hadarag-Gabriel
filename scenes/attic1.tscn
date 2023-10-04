@@ -16,15 +16,14 @@ size = Vector2(117, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vkjba"]
 size = Vector2(10, 2.0625)
 
-[node name="attic1" type="Node2D" node_paths=PackedStringArray("nodesToRemove", "nodesToAdd", "rat")]
+[node name="attic1" type="Node2D" node_paths=PackedStringArray("nodesToRemove", "nodesToAdd")]
 z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(1, 1)
+position = Vector2(3, 1)
 script = ExtResource("1_qligt")
 nodesToRemove = [NodePath("StaticBody2D/Attic/salami")]
 nodesToAdd = [NodePath("StaticBody2D/Attic/rat")]
-rat = NodePath("StaticBody2D/Attic/rat")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true

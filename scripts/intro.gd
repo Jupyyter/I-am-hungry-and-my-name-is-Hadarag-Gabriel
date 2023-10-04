@@ -21,16 +21,22 @@ func _ready():
 		idk lets start--red")
 
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#called when the textBox has just finished showing an entire conversation
 	if(text_box.current_state==text_box.State.ready):
 		if globals.nearFlapjack2:
-			house.visible=true
-			text_box.queue_text("after gabriel ate flapjack, he was kicked out from his home
-			what adventures awaits him outside?
-			how many humans will he eat throughout the game?
-			find out in the next episode")
+			if house.visible==true:
+				get_tree().change_scene_to_file("scenes/alley.tscn")
+			else:
+				house.visible=true
+				text_box.queue_text("after gabriel ate flapjack, he was kicked out from his home
+				homeless? (imagine the blue large headed alien)
+				oh wait
+				homeless?--megamind
+				what adventures awaits him outside?
+				how many humans will he eat throughout the game?
+				:)")
 		else:
 			get_tree().change_scene_to_file("scenes/attic1.tscn")
+#its 4:24 AM, i havent slept yet and i have to go to school in 3 hours and 20 
+#sleepless?

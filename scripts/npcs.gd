@@ -14,11 +14,11 @@ var parent #usually Sprite2D
 func _ready():
 	currentScene=globals.getCurrentScene().name
 	npcName=self.name
-	parent=self.get_parent()
 	if !globals.convState.has(npcName+currentScene):
 		globals.convState[npcName+currentScene]=npcConv
+		globals.npcTriggered[npcName]=false
+		globals.npcRef[npcName]=self.get_parent()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if nearNpc and ((textReady() and Input.is_action_just_pressed("ui_accept")) or inChat):
 		npcConv=globals.convState[npcName+currentScene]
@@ -26,9 +26,9 @@ func _process(delta):
 		#guess what does this code do
 		if flipCharacter:
 			if globals.getPlayer().global_position.x>self.global_position.x:
-				parent.flip_h=false
+				globals.npcRef[npcName].flip_h=false
 			else:
-				parent.flip_h=true
+				globals.npcRef[npcName].flip_h=true
 		match currentScene:
 			"attic1":
 				match npcName:
@@ -70,12 +70,12 @@ func _process(delta):
 							1:
 								if textReady():
 									text_box.queue_text("gabriel reaches for Jerry")
-									globals.nearRat=true
+									globals.npcTriggered[npcName]=true
 									endOfChat(npcConv+1)
 
 
 					"bed":
-						if globals.nearRat:
+						if globals.npcTriggered["rat"]:
 							match npcConv:
 								0:
 									text_box.queue_text("bed")
@@ -104,7 +104,7 @@ func _process(delta):
 			"attic2":
 				match npcName:
 					"cat":
-						if globals.nearRat:
+						if globals.npcTriggered["rat"]:
 							match npcConv:
 								0:
 									text_box.queue_text("this is Garfield
@@ -119,7 +119,7 @@ func _process(delta):
 												text_box.queue_text("too bad")
 											1:
 												text_box.queue_text(":)")
-										globals.nearCat=true
+										globals.npcTriggered[npcName]=true
 										endOfChat(npcConv+1)
 						else:
 							text_box.queue_text("gabriel is too hungry to look at the dead cat")
@@ -154,7 +154,7 @@ func _process(delta):
 							3:
 								if textReady():
 									text_box.queue_text("gabriel approaches the rat to pet it")
-									globals.nearRat=true
+									globals.npcTriggered[npcName]=true
 									endOfChat(npcConv+1)
 					"noodle":
 						match npcConv:
@@ -232,7 +232,7 @@ func _process(delta):
 									endOfChat()
 											
 					"bed":
-						if globals.nearCat:
+						if globals.npcTriggered["cat"]:
 							match npcConv:
 								0:
 									text_box.queue_text("bed")
@@ -561,6 +561,152 @@ func _process(delta):
 							1:
 								if textReady():
 									text_box.queue_text("the stop sign stood no chance")
+									endOfChat()
+									get_parent().queue_free()
+			"town":
+				match npcName:
+					"stranger1":
+						match npcConv:
+							0:
+								text_box.queue_text("i saw you eating a brick wall and a stop sign
+								i am very impressed.
+								i was like 😲
+								can you eat this basket of apples in 2 secods?")
+								text_box.queue_questionResponse("pfff. childs play")
+								npcConv+=1
+							1:
+								if textReady():
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+1)
+					"stranger2":
+						match npcConv:
+							0:
+								text_box.queue_text("good morning sir
+								your story of eating that stop sign inspired me
+								thank you
+								can you eat this basket of rocks in 1 secod?")
+								text_box.queue_questionResponse("my pleasure")
+								npcConv+=1
+							1:
+								if textReady():
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+1)
+					"stranger3":
+						match npcConv:
+							0:
+								text_box.queue_text("omg its mister gabriel himself
+								big fan big fan
+								is it true the you restarted a pc once?")
+								text_box.queue_questionResponse("yes")
+								text_box.queue_text("omg i knew it
+								you are my idol
+								when i grow up, i want to eat brick walls just like you
+								can you eat this basket of corks in 0.5 secod?")
+								text_box.queue_questionResponse("i can eat it in less then 0.1 seconds")
+								npcConv+=1
+							1:
+								if textReady():
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+1)
+					"basketOfApples":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of apples in: 0.407 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfCorks":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of corks in: 0.201 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfRocks":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of rocks in: 0.0791 seconds
+									congratulations")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfMetal":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of metals in: 0.0111 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfSnakes":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of snakes in: 0.00587 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfCorks2":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of corks in: 0.000971 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfApples2":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of apples in: 0.00000755 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfMetal2":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of metals in: 0.000000615 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfSnakes2":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of snakes in: 0.000000000931 seconds")
+									endOfChat()
+									get_parent().queue_free()
+					"basketOfSnakes3":
+						match npcConv:
+							0:
+								globals.npcTriggered[npcName]=true
+								npcConv=+1
+							1:
+								if !globals.getPlayer().inAnimation:
+									text_box.queue_text("you ate the basket of snakes in: 0.000000000000548 seconds")
 									endOfChat()
 									get_parent().queue_free()
 

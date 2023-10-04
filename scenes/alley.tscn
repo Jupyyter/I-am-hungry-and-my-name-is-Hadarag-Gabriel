@@ -47,90 +47,95 @@ size = Vector2(35, 24)
 size = Vector2(14.1651, 23.236)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8sone"]
-size = Vector2(98.5, 67.75)
+size = Vector2(98.5, 28)
 
 [node name="alley" type="Node2D"]
 texture_filter = 1
 
-[node name="Alley" type="Sprite2D" parent="."]
+[node name="alley" type="StaticBody2D" parent="."]
+
+[node name="alley" type="Sprite2D" parent="alley"]
 position = Vector2(1734, 210)
 scale = Vector2(2, 2)
 texture = ExtResource("1_feh3h")
 
-[node name="player" parent="Alley" instance=ExtResource("2_5xmrl")]
+[node name="player" parent="alley/alley" instance=ExtResource("2_5xmrl")]
 position = Vector2(-807, 35)
 scale = Vector2(1, 1)
 
-[node name="Camera2D" type="Camera2D" parent="Alley/player" node_paths=PackedStringArray("map")]
+[node name="Camera2D" type="Camera2D" parent="alley/alley/player" node_paths=PackedStringArray("map")]
 position = Vector2(0, -25)
 limit_left = 0
 limit_top = 0
 script = ExtResource("3_yoe2i")
 map = NodePath("../..")
 
-[node name="cockroach" type="AnimatedSprite2D" parent="Alley"]
+[node name="cockroach" type="AnimatedSprite2D" parent="alley/alley"]
 position = Vector2(-498, 35)
 sprite_frames = SubResource("SpriteFrames_gc1rg")
 frame = 1
 frame_progress = 0.380739
 script = ExtResource("5_konau")
 
-[node name="cockroach" parent="Alley/cockroach" instance=ExtResource("6_bjh5s")]
+[node name="cockroach" parent="alley/alley/cockroach" instance=ExtResource("6_bjh5s")]
 position = Vector2(-1, 0.5)
 scale = Vector2(2.245, 1.255)
 flipCharacter = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Alley/cockroach/cockroach"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alley/alley/cockroach/cockroach"]
 position = Vector2(1.11359, 0.398407)
 scale = Vector2(0.445434, 0.796813)
 shape = SubResource("RectangleShape2D_7ynec")
 
-[node name="garbage" type="Sprite2D" parent="Alley"]
+[node name="garbage" type="Sprite2D" parent="alley/alley"]
 position = Vector2(-170.5, 22.5)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("7_eof1q")
 
-[node name="garbage" parent="Alley/garbage" instance=ExtResource("6_bjh5s")]
+[node name="garbage" parent="alley/alley/garbage" instance=ExtResource("6_bjh5s")]
 scale = Vector2(2.565, 1.37)
 flipCharacter = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Alley/garbage/garbage"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alley/alley/garbage/garbage"]
 position = Vector2(0.454865, 2.43308)
 shape = SubResource("RectangleShape2D_0olb7")
 
-[node name="wall" type="Sprite2D" parent="Alley"]
+[node name="wall" type="Sprite2D" parent="alley/alley"]
 position = Vector2(129, 35)
 texture = ExtResource("8_mpba0")
 offset = Vector2(0, -35)
 
-[node name="wall" parent="Alley/wall" instance=ExtResource("6_bjh5s")]
+[node name="wall" parent="alley/alley/wall" instance=ExtResource("6_bjh5s")]
 position = Vector2(3, -1.5)
 scale = Vector2(2.565, 1.37)
 flipCharacter = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Alley/wall/wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alley/alley/wall/wall"]
 position = Vector2(-0.194946, -1.52588e-05)
 shape = SubResource("RectangleShape2D_0olb7")
 
-[node name="stopSign" type="Sprite2D" parent="Alley"]
+[node name="stopSign" type="Sprite2D" parent="alley/alley"]
 position = Vector2(415, 35)
 texture = ExtResource("9_koci0")
 offset = Vector2(0, -37)
 
-[node name="stopSign" parent="Alley/stopSign" instance=ExtResource("6_bjh5s")]
+[node name="stopSign" parent="alley/alley/stopSign" instance=ExtResource("6_bjh5s")]
 scale = Vector2(2.565, 1.37)
 flipCharacter = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Alley/stopSign/stopSign"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alley/alley/stopSign/stopSign"]
 position = Vector2(0.454865, 3.64966)
 shape = SubResource("RectangleShape2D_0olb7")
 
-[node name="alleyExit" type="Area2D" parent="Alley"]
+[node name="alleyExit" type="Area2D" parent="alley/alley"]
 script = ExtResource("10_q0fgn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Alley/alleyExit"]
-position = Vector2(914.5, 28.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alley/alley/alleyExit"]
+position = Vector2(906.5, 34)
 shape = SubResource("RectangleShape2D_8sone")
 
-[connection signal="body_entered" from="Alley/alleyExit" to="Alley/alleyExit" method="_on_body_entered"]
-[connection signal="body_exited" from="Alley/alleyExit" to="Alley/alleyExit" method="_on_body_exited"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="alley"]
+polygon = PackedVector2Array(1, 307, 24, 236, 3777, 235, 3772, 320, 1, 307, 3766, 308, 3768, 248, 28, 248)
+
+[connection signal="body_entered" from="alley/alley/alleyExit" to="alley/alley/alleyExit" method="_on_body_entered"]
+[connection signal="body_exited" from="alley/alley/alleyExit" to="alley/alley/alleyExit" method="_on_body_exited"]

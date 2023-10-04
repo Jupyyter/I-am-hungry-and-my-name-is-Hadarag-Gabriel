@@ -25,13 +25,11 @@ size = Vector2(12, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dgy80"]
 size = Vector2(10, 2.0625)
 
-[node name="attic2" type="Node2D" node_paths=PackedStringArray("nodesToRemove", "nodesToAdd", "rat", "cat")]
+[node name="attic2" type="Node2D" node_paths=PackedStringArray("nodesToRemove", "nodesToAdd")]
 y_sort_enabled = true
 script = ExtResource("1_yktym")
 nodesToRemove = [NodePath("StaticBody2D/Attic/snitel"), NodePath("StaticBody2D/Attic/salami"), NodePath("StaticBody2D/Attic/noodle")]
 nodesToAdd = [NodePath("StaticBody2D/Attic/rat"), NodePath("StaticBody2D/Attic/cat")]
-rat = NodePath("StaticBody2D/Attic/rat")
-cat = NodePath("StaticBody2D/Attic/cat")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true

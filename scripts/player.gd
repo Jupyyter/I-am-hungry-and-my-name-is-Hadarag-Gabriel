@@ -2,25 +2,32 @@ extends CharacterBody2D
 
 class_name player
 
-var speedMultiplier:int=5
+var speedMultiplier:float=5
 var speed:int=150
 var flipped:bool=false
 var nearLadder:bool=false
 var atticStartPos=Vector2i(147,227)
 var inAnimation:bool=false
+var intestinalBlockage:bool=false
 @onready var animationPlayer:AnimationPlayer =$AnimationPlayer
 @onready var collisionshape2D:CollisionShape2D =$CollisionShape2D
 @onready var sprite2D:Sprite2D =$Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	speedMultiplier=5
 
 
 func _process(delta):
 	get_input()
 
 func _physics_process(delta):
+	if intestinalBlockage:
+		print(speedMultiplier)
+		speedMultiplier-=0.1
+		if speedMultiplier<=0:
+			intestinalBlockage=false
+			speedMultiplier=0
 	move_and_slide()
 
 func get_input()->void:

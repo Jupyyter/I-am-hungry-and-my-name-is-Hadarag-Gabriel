@@ -707,6 +707,10 @@ func _process(delta):
 							1:
 								if !globals.getPlayer().inAnimation:
 									text_box.queue_text("you ate the basket of snakes in: 0.000000000000548 seconds")
+									npcConv+=1
+							2:
+								if textReady():
+									globals.getPlayer().intestinalBlockage=true
 									endOfChat()
 									get_parent().queue_free()
 

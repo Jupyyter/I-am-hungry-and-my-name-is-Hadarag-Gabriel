@@ -274,7 +274,7 @@ func _process(delta):
 					"flapjack2":
 						match npcConv:
 							0:
-								globals.nearFlapjack2=true
+								globals.npcTriggered[npcName]=true
 								endOfChat(npcConv+1)
 					"flapjack":
 						match npcConv:
@@ -290,7 +290,7 @@ func _process(delta):
 							1:
 								if textReady():
 									text_box.queue_text("flapjack started crying")
-									globals.flapjackCry=true
+									globals.npcTriggered["flapjack"]=true
 									endOfChat(npcConv+1)
 					"salami":
 						match npcConv:

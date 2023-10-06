@@ -59,7 +59,7 @@ func _process(delta):
 				if nearLadder:
 					get_tree().change_scene_to_file("scenes/home3.tscn")
 
-			if globals.nearFlapjack2==true and flapjack2!=null and text_box.current_state==text_box.State.ready:
+			if globals.npcTriggered["flapjack2"]==true and flapjack2!=null and text_box.current_state==text_box.State.ready:
 				globals.getPlayer().changeMode("EatFlapjack")
 				#globals.nearFlapjack2=false
 

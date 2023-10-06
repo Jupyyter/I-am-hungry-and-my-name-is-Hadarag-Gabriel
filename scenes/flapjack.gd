@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if globals.flapjackCry:
+	if globals.npcTriggered["flapjack"]==true:
 		animationPlayer.play("crying")
 	else:
 		animationPlayer.play("normal")

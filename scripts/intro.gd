@@ -10,6 +10,9 @@ func _ready():
 		very
 		very
 		hungry--red")
+	elif globals.inHospital:
+		text_box.queue_text(":)")
+		self.visible=false
 	else:
 		text_box.queue_text("this is Gabriel
 		intelligence: not much

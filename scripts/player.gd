@@ -9,12 +9,14 @@ var nearLadder:bool=false
 var atticStartPos=Vector2i(147,227)
 var inAnimation:bool=false
 var intestinalBlockage:bool=false
+@onready var timer:Timer=$Timer
 @onready var animationPlayer:AnimationPlayer =$AnimationPlayer
 @onready var collisionshape2D:CollisionShape2D =$CollisionShape2D
 @onready var sprite2D:Sprite2D =$Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	timer.stop()
 	speedMultiplier=5
 
 
@@ -23,11 +25,11 @@ func _process(delta):
 
 func _physics_process(delta):
 	if intestinalBlockage:
-		print(speedMultiplier)
 		speedMultiplier-=0.1
 		if speedMultiplier<=0:
 			intestinalBlockage=false
 			speedMultiplier=0
+			timer.start()
 	move_and_slide()
 
 func get_input()->void:
@@ -84,3 +86,10 @@ func _on_animation_player_animation_finished(anim_name:StringName):
 			animationReset()
 		"idleEatBasketOfCorks":
 			animationReset()
+		"idleIntestinalBlockage":
+			get_tree().change_scene_to_file("scenes/intro.tscn")
+
+func _on_timer_timeout():
+	timer.stop()
+	globals.getPlayer().changeMode("IntestinalBlockage")
+	globals.inHospital=true

@@ -3,7 +3,6 @@ extends Node
 var playerAnimation:String=""
 var levelStart:bool=true
 var knifeTaken:bool=false
-var flapjackCry:bool=false
 var inHospital:bool=false
 #used to remember where the text was left of on every npc
 var convState:Dictionary

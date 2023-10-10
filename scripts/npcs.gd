@@ -14,10 +14,10 @@ var parent #usually Sprite2D
 func _ready():
 	currentScene=globals.getCurrentScene().name
 	npcName=self.name
+	globals.npcRef[npcName]=self.get_parent()
 	if !globals.convState.has(npcName+currentScene):
 		globals.convState[npcName+currentScene]=npcConv
 		globals.npcTriggered[npcName]=false
-		globals.npcRef[npcName]=self.get_parent()
 
 func _process(delta):
 	if nearNpc and ((textReady() and Input.is_action_just_pressed("ui_accept")) or inChat):
@@ -88,12 +88,12 @@ func _process(delta):
 										match text_box.IndexChosen:
 											0:
 												globals.levelStart=true
-												get_tree().change_scene_to_file("scenes/attic2.tscn")
+												get_tree().change_scene_to_file("scenes/intro.tscn")
 												globals.knifeTaken=false
 												endOfChat(npcConv+1)
 											1:
 												globals.levelStart=true
-												get_tree().change_scene_to_file("scenes/attic2.tscn")
+												get_tree().change_scene_to_file("scenes/intro.tscn")
 												globals.knifeTaken=false
 												endOfChat(npcConv+1)
 											2:
@@ -245,11 +245,11 @@ func _process(delta):
 										match text_box.IndexChosen:
 											0:
 												globals.levelStart=true
-												get_tree().change_scene_to_file("scenes/attic3.tscn")
+												get_tree().change_scene_to_file("scenes/intro.tscn")
 												endOfChat()
 											1:
 												globals.levelStart=true
-												get_tree().change_scene_to_file("scenes/attic3.tscn")
+												get_tree().change_scene_to_file("scenes/intro.tscn")
 												endOfChat()
 											2:
 												endOfChat(0)
@@ -295,7 +295,7 @@ func _process(delta):
 					"salami":
 						match npcConv:
 							0:
-								text_box.queue_text("imagine sleeping 4 years")
+								text_box.queue_text("imagine sleeping 6 years")
 								npcConv+=1
 							1:
 								if textReady():
@@ -544,7 +544,12 @@ func _process(delta):
 						match npcConv:
 							0:
 								text_box.queue_text("an appetizing brick wall")
-								text_box.queue_questionResponse("give up trying to stop gabriel
+								text_box.queue_questionResponse("consume the wall
+								feast upon the wall
+								ingest the wall
+								chow down on the wall
+								munch on the wall
+								devour the wall
 								eat the wall")
 								npcConv+=1
 							1:
@@ -602,7 +607,8 @@ func _process(delta):
 								you are my idol
 								when i grow up, i want to eat brick walls just like you
 								can you eat this basket of corks in 0.5 secod?")
-								text_box.queue_questionResponse("i can eat it in less then 0.1 seconds")
+								text_box.queue_questionResponse("i can eat it in less then 0.1 seconds
+								i can eat your whole family in less than 0.1 seconds")
 								npcConv+=1
 							1:
 								if textReady():

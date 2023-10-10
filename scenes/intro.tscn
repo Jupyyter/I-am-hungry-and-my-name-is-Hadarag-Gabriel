@@ -10,10 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://cedf53w8n3pcu" path="res://images/terrareIdle.png" id="8_svy5f"]
 [ext_resource type="Texture2D" uid="uid://d3sfckm76lqai" path="res://images/verands2.png" id="9_cwkxm"]
 
-[node name="intro" type="Node2D" node_paths=PackedStringArray("house")]
+[node name="intro" type="Node2D" node_paths=PackedStringArray("house", "gabriel")]
 texture_filter = 1
 script = ExtResource("1_2v2we")
 house = NodePath("Home3")
+gabriel = NodePath("Terrare")
 
 [node name="Terrare" type="Sprite2D" parent="."]
 texture_filter = 1

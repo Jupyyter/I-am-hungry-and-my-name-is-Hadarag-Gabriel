@@ -1019,3 +1019,11 @@ frame = 1
 frame_progress = 0.431021
 offset = Vector2(0, -31)
 script = ExtResource("14_cremy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+position = Vector2(2286, 476)
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(-1147.5, -60, 1298.5, -76.5, 1277, 41, -1140, -14.5, 1142.5, -14.5, 1142.5, -44, -1140, -44.5, -1140, -14.5)

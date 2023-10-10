@@ -1,21 +1,36 @@
 extends Node2D
 @export var house:Sprite2D
+@export var gabriel:Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if globals.npcTriggered["flapjack2"]==true:
+	if globals.inHospital:
+		text_box.queue_text("oops
+		gabriel doesnt feel too well
+		after that, gabriel went to the hospital:
+		you are going to brasil")
+		self.visible=false
+	elif globals.npcTriggered.has("flapjack2") and globals.npcTriggered["flapjack2"]==true:
 		text_box.queue_text("this is Gabriel
 		he is
 		very
 		very
 		very
 		hungry--red")
-	elif globals.inHospital:
-		text_box.queue_text("oops
-		gabriel doesnt feel too well
-		you are going to brasil")
-		self.visible=false
+
+	elif globals.npcTriggered.has("cat") and globals.npcTriggered["cat"]:
+		gabriel.visible=false
+		text_box.queue_text("after that, gabriel slept
+		and slept and slept
+		and slept for 4 years")
+
+	elif globals.npcTriggered.has("rat") and  globals.npcTriggered["rat"]:
+		gabriel.visible=false
+		text_box.queue_text("gabriel is sleeping
+		gabriel is waking up")
+
 	else:
+		gabriel.visible=true
 		text_box.queue_text("this is Gabriel
 		intelligence: not much
 		math skills: 3/10
@@ -29,7 +44,8 @@ func _ready():
 func _process(delta):
 	#called when the textBox has just finished showing an entire conversation
 	if(text_box.current_state==text_box.State.ready):
-		if globals.npcTriggered["flapjack2"]==true:
+
+		if globals.npcTriggered.has("flapjack2") and globals.npcTriggered["flapjack2"]:
 			if house.visible==true:
 				get_tree().change_scene_to_file("scenes/alley.tscn")
 			else:
@@ -41,6 +57,13 @@ func _process(delta):
 				what adventures awaits him outside?
 				how many humans will he eat throughout the game?
 				:)")
+
+		elif globals.npcTriggered.has("cat") and globals.npcTriggered["cat"]:
+			get_tree().change_scene_to_file("scenes/attic3.tscn")
+
+		elif globals.npcTriggered.has("rat") and  globals.npcTriggered["rat"]:
+			get_tree().change_scene_to_file("scenes/attic2.tscn")
+
 		else:
 			get_tree().change_scene_to_file("scenes/attic1.tscn")
 #its 4:24 AM, i havent slept yet and i have to go to school in 3 hours and 20 

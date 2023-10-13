@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://brct6yvtb3utb"]
+
+[ext_resource type="Script" path="res://scripts/hospitalRoom1.gd" id="1_5ouvu"]
+[ext_resource type="Texture2D" uid="uid://ba8uyv6gii1dt" path="res://images/hospital.png" id="2_ji12l"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="3_ce7py"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="4_uunvi"]
+
+[node name="hospitalRoom1" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_5ouvu")
+
+[node name="hospitalRoom1" type="Sprite2D" parent="."]
+position = Vector2(961, 680)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ji12l")
+
+[node name="player" parent="hospitalRoom1" instance=ExtResource("3_ce7py")]
+position = Vector2(-149.5, -161)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="hospitalRoom1/player" node_paths=PackedStringArray("map")]
+position = Vector2(0, -25)
+limit_left = 0
+limit_top = -30
+script = ExtResource("4_uunvi")
+map = NodePath("../..")

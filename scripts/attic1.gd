@@ -11,7 +11,7 @@ var nearLadder:bool=false
 
 func _ready():
 	#after sleeping, reset character sprite and position
-	if globals.levelStart:
+	if globals.firstTime(self.name):
 		match self.name:
 			"attic1":
 				globals.getPlayer().position=Vector2(161,234)
@@ -20,7 +20,6 @@ func _ready():
 			"attic3":
 				globals.getPlayer().position=Vector2(1110,366)
 		globals.knifeTaken=false
-		globals.levelStart=false
 		globals.getPlayer().animationReset()
 	removeAddNodes()
 	if globals.knifeTaken:
@@ -106,7 +105,7 @@ func addNodes():
 ⠀⡟⡀⠀⠀⣿⢹⣿⣿⣿⣿⣿⣿⣇⣿⣯⣀⣷⠶⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣹⠟⢀⣿⠁⣿⣿⣿⣿⣿⣿⣿⠀⠈⢳⡄⠀⠙⡄⠀⠀⠀⠀
 ⢸⡏⠁⠀⠀⣿⢸⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⢸⡟⠀⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⢻⡄⠀⢱⠀⠀⠀⠀
 ⢸⣴⡀⠀⠀⣿⢸⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡟⠁⠀⡇⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠹⣆⠀⠇⠀⠀⠀
-⢈⣸⡔⠀⠀⣿⡞⣿⣿⣿⣿⣿⣿⣻⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠋⠀⠀⢸⡯⣿⣯⣿⣿⣿⣿⡇⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀
+⢈⣸⡔⠀⠀⣿⡞⣿⣿⣿⣿⣿⣿⣻⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠋⠀ ⠀⢸⡯⣿⣯⣿⣿⣿⣿⡇⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀
 ⠚⡥⣄⠀⠀⢻⡇⣿⣿⣿⣿⣿⣿⣧⠻⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠖⢒⣉⣭⣭⣕⣲⣤⠖⠒⠀⠀⠀⠀⠀⠀⢸⠁⣿⣟⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀
 ⠰⠛⠁⠀⠀⠘⣷⣿⣿⣿⣿⣿⣿⡝⣦⣱⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣰⣞⣷⠿⠛⠋⢉⣠⢟⡋⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⢉⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠘⣧⠀⠀
 ⠠⢀⠠⠀⠀⠀⢿⡟⣿⣿⣿⣿⣿⣷⠈⠳⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⣿⣿⢿⢵⠛⠁⠀⠀⠀⢠⠖⠛⡏⠀⠀⣼⠃⣸⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠘⣧⠀

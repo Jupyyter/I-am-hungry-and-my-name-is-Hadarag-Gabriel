@@ -87,12 +87,10 @@ func _process(delta):
 									if textReady():
 										match text_box.IndexChosen:
 											0:
-												globals.levelStart=true
 												get_tree().change_scene_to_file("scenes/intro.tscn")
 												globals.knifeTaken=false
 												endOfChat(npcConv+1)
 											1:
-												globals.levelStart=true
 												get_tree().change_scene_to_file("scenes/intro.tscn")
 												globals.knifeTaken=false
 												endOfChat(npcConv+1)
@@ -244,11 +242,9 @@ func _process(delta):
 									if textReady():
 										match text_box.IndexChosen:
 											0:
-												globals.levelStart=true
 												get_tree().change_scene_to_file("scenes/intro.tscn")
 												endOfChat()
 											1:
-												globals.levelStart=true
 												get_tree().change_scene_to_file("scenes/intro.tscn")
 												endOfChat()
 											2:
@@ -719,6 +715,12 @@ func _process(delta):
 									globals.getPlayer().intestinalBlockage=true
 									endOfChat()
 									get_parent().queue_free()
+			"hospitalRoom1":
+				match npcName:
+					"doctor1":
+						pass
+					"doctor2":
+						pass
 
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat

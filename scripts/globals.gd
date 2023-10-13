@@ -1,7 +1,7 @@
 extends Node
 
 var playerAnimation:String=""
-var levelStart:bool=true
+var levelStart:Array[String]
 var knifeTaken:bool=false
 var inHospital:bool=false
 #used to remember where the text was left of on every npc
@@ -32,6 +32,15 @@ func removeNode(node:Node,delete:bool=false):
 		node.get_parent().remove_child(node)
 	else:
 		node.queue_free()
+
+#retruns true if it's the first time you enter the scene
+func firstTime(str:String)->bool:
+	if !levelStart.has(str):
+		levelStart.push_back(str)
+		return true
+	else:
+		return false
+
 # ↜(͛𖤐෴𖤐)͛ψ
 
 """

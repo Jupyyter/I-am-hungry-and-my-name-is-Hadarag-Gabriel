@@ -87,7 +87,8 @@ func _on_animation_player_animation_finished(anim_name:StringName):
 		"idleEatBasketOfCorks":
 			animationReset()
 		"idleIntestinalBlockage":
-			get_tree().change_scene_to_file("scenes/intro.tscn")
+			animationReset()
+			get_tree().change_scene_to_file("scenes/hospitalRoom1.tscn")
 
 func _on_timer_timeout():
 	timer.stop()

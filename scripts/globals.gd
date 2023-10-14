@@ -2,11 +2,10 @@ extends Node
 
 var playerAnimation:String=""
 var levelStart:Array[String]
-var knifeTaken:bool=false
 var inHospital:bool=false
 #used to remember where the text was left of on every npc
 var convState:Dictionary
-#use this to activate complex behaviour on other script instead of mixing test and actual code
+#use this to activate complex behaviour on other script instead of mixing text with actual code
 var npcTriggered:Dictionary
 var npcRef:Dictionary
 

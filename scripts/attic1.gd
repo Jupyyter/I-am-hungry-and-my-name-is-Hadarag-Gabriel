@@ -3,28 +3,39 @@ extends Node2D
 @export var nodesToRemove:Array[Node2D]
 @export var nodesToAdd:Array[Node2D]
 var parentOfNodes:Array[Node2D]
-@export var flapjack2:Node2D
 var nearLadder:bool=false
 
 #text_box is autoloaded since im using it in every lvl
 @onready var textBox :textBoxClass = get_node("/root/text_box")
 
 func _ready():
-	#after sleeping, reset character sprite and position
-	if globals.firstTime(self.name):
-		match self.name:
-			"attic1":
-				globals.getPlayer().position=Vector2(161,234)
-			"attic2":
-				globals.getPlayer().position=Vector2(161,234)
-			"attic3":
-				globals.getPlayer().position=Vector2(1110,366)
-		globals.knifeTaken=false
-		globals.getPlayer().animationReset()
 	removeAddNodes()
-	if globals.knifeTaken:
-		removeNodes()
-		addNodes()
+	match self.name:
+		"attic1":
+			if globals.firstTime(self.name):
+				#after sleeping, reset character sprite and position
+				globals.getPlayer().position=Vector2(161,234)
+				globals.getPlayer().animationReset()
+
+			if globals.npcTriggered.has("potato") and globals.npcTriggered["potato"]:
+				removeNodes()
+				addNodes()
+		"attic2":
+			if globals.firstTime(self.name):
+				globals.getPlayer().position=Vector2(161,234)
+				globals.getPlayer().animationReset()
+
+			if globals.npcTriggered.has("beans") and globals.npcTriggered["beans"]:
+				removeNodes()
+				addNodes()
+		"attic3":
+			if globals.firstTime(self.name):
+				globals.getPlayer().position=Vector2(1110,366)
+				globals.getPlayer().animationReset()
+
+			if globals.npcTriggered.has("knife") and globals.npcTriggered["knife"]:
+				removeNodes()
+				addNodes()
 
 func _process(delta):
 	match self.name:
@@ -58,9 +69,12 @@ func _process(delta):
 				if nearLadder:
 					get_tree().change_scene_to_file("scenes/home3.tscn")
 
-			if globals.npcTriggered["flapjack2"]==true and flapjack2!=null and text_box.current_state==text_box.State.ready:
+			if globals.npcTriggered["flapjack"]==true:
+				globals.npcRef["flapjack"].get_child(1).play("crying")
+
+			if globals.npcTriggered["flapjack2"]==true and text_box.current_state==text_box.State.ready:
+				globals.npcRef["flapjack2"].get_child(1).play("noHead")
 				globals.getPlayer().changeMode("EatFlapjack")
-				#globals.nearFlapjack2=false
 
 
 func _on_ladder_body_entered(body:Node2D):
@@ -100,12 +114,12 @@ func addNodes():
 ⣿⣿⣿⡿⢁⣾⡝⢹⣿⣷⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⢸⣿⣿⡿⠻⣀⣘⣛⣛⣛⠳⠿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⢠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⣿⣿⡿⢁⡾⢃⣷⣾⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⠈⡇⣿⣿⣿⣿⣿⣿⣿⠿⠃⠀⠀⡼⢋⣡⡾⠟⠛⠉⠛⣟⠿⣿⣦⣸⣿⣿⣿⣿⣿⣿⣿⣄⠀⠀⠳⡄⠀⠀⠀⠀⠀⠀⠀⠀
 ⣿⣿⢃⣾⠁⢸⣿⣿⣿⣿⣿⣿⣿⢸⣿⣿⣿⣿⣿⠀⠹⠹⡿⠿⠛⠛⠋⠁⠀⠀⠀⠀⠀⢞⣿⣄⡠⠶⠦⠤⠬⠤⠼⠛⣻⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠹⡄⠀⠀⠀⠀⠀⠀⠀
-⣿⠃⣼⠗⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠻⣿⣿⣿⣿⠿⠟⠛⢳⡶⣤⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡜⢧⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀
-⡏⢸⡟⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⡇⢀⣾⡿⡏⠁⠀⣠⡤⠔⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⡇⣿⡟⣿⣿⣿⣿⣿⣿⡇⠈⢧⡀⠀⠘⣄⠀⠀⠀⠀⠀
-⠀⡟⡀⠀⠀⣿⢹⣿⣿⣿⣿⣿⣿⣇⣿⣯⣀⣷⠶⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣹⠟⢀⣿⠁⣿⣿⣿⣿⣿⣿⣿⠀⠈⢳⡄⠀⠙⡄⠀⠀⠀⠀
-⢸⡏⠁⠀⠀⣿⢸⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠀⢸⡟⠀⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⢻⡄⠀⢱⠀⠀⠀⠀
-⢸⣴⡀⠀⠀⣿⢸⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡟⠁⠀⡇⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠹⣆⠀⠇⠀⠀⠀
-⢈⣸⡔⠀⠀⣿⡞⣿⣿⣿⣿⣿⣿⣻⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠋⠀ ⠀⢸⡯⣿⣯⣿⣿⣿⣿⡇⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀
+⣿⠃⣼⠗⠀⣿⣿⣿⣿⣿⣿⣿⣿⠀⠻⣿⣿⣿⣿⠿⠟⠛⢳⡶⣤⠀⠀⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠀⠀ ⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⡜⢧⠀⠀⠘⣆⠀⠀⠀⠀⠀⠀
+⡏⢸⡟⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⡇⢀⣾⡿⡏⠁⠀⣠⡤⠔⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⢀⣾⡇⣿⡟⣿⣿⣿⣿⣿⣿⡇⠈⢧⡀⠀⠘⣄⠀⠀⠀⠀⠀
+⠀⡟⡀⠀⠀⣿⢹⣿⣿⣿⣿⣿⣿⣇⣿⣯⣀⣷⠶⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀⣹⠟⢀⣿⠁⣿⣿⣿⣿⣿⣿⣿⠀⠈⢳⡄⠀⠙⡄⠀⠀⠀⠀
+⢸⡏⠁⠀⠀⣿⢸⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠈⠁⠀⢸⡟⠀⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⢻⡄⠀⢱⠀⠀⠀⠀
+⢸⣴⡀⠀⠀⣿⢸⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀⠀⢀⡟⠁⠀⡇⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠹⣆⠀⠇⠀⠀⠀
+⢈⣸⡔⠀⠀⣿⡞⣿⣿⣿⣿⣿⣿⣻⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠔⠋⠀ ⠀⢸⡯⣿⣯⣿⣿⣿⣿⡇⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀
 ⠚⡥⣄⠀⠀⢻⡇⣿⣿⣿⣿⣿⣿⣧⠻⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠖⢒⣉⣭⣭⣕⣲⣤⠖⠒⠀⠀⠀⠀⠀⠀⢸⠁⣿⣟⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀
 ⠰⠛⠁⠀⠀⠘⣷⣿⣿⣿⣿⣿⣿⡝⣦⣱⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣰⣞⣷⠿⠛⠋⢉⣠⢟⡋⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⢉⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠘⣧⠀⠀
 ⠠⢀⠠⠀⠀⠀⢿⡟⣿⣿⣿⣿⣿⣷⠈⠳⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⣿⣿⢿⢵⠛⠁⠀⠀⠀⢠⠖⠛⡏⠀⠀⣼⠃⣸⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠘⣧⠀

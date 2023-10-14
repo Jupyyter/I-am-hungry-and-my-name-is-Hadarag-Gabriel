@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dmbvtkqic86oi"]
+[gd_scene load_steps=19 format=3 uid="uid://dmbvtkqic86oi"]
 
 [ext_resource type="Script" path="res://scripts/home1.gd" id="1_fgwgs"]
 [ext_resource type="Texture2D" uid="uid://c83xj8m7kski" path="res://images/home3.png" id="1_srlah"]
@@ -19,22 +19,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5qg3f"]
 size = Vector2(11.5, 3)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6sxbd"]
-size = Vector2(58.5, 21.6245)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_supry"]
 size = Vector2(10, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyt46"]
 size = Vector2(10, 2)
 
-[node name="home3" type="StaticBody2D" node_paths=PackedStringArray("knife", "nodesToRemove")]
+[node name="home3" type="StaticBody2D" node_paths=PackedStringArray("nodesToRemove")]
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(-1, 20)
 script = ExtResource("1_fgwgs")
-knife = NodePath("hause/table1/knife")
-nodesToRemove = [NodePath("hause/veranda"), NodePath("hause/fiddlesticks"), NodePath("hause/fiddlesticks/sassy")]
+nodesToRemove = [NodePath("hause/veranda"), NodePath("hause/sassy"), NodePath("hause/fiddlesticks")]
 
 [node name="hause" type="Sprite2D" parent="."]
 z_index = 1
@@ -106,13 +102,6 @@ offset = Vector2(0, -16)
 
 [node name="Sprite2D6" type="Sprite2D" parent="hause"]
 
-[node name="ladder" type="Area2D" parent="hause"]
-position = Vector2(313.5, 42.688)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/ladder"]
-position = Vector2(1.25, -1.50026)
-shape = SubResource("RectangleShape2D_6sxbd")
-
 [node name="fiddlesticks" type="Sprite2D" parent="hause"]
 position = Vector2(35.5, 74.5)
 scale = Vector2(0.75, 0.75)
@@ -126,17 +115,21 @@ flip_h = true
 position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_supry")
 
-[node name="sassy" type="Sprite2D" parent="hause/fiddlesticks"]
-position = Vector2(165.333, -7.33332)
-scale = Vector2(1.2, 1.2)
+[node name="sassy" type="Sprite2D" parent="hause"]
+position = Vector2(159.5, 69)
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("13_l5g5r")
 offset = Vector2(0, -20)
 
-[node name="sassy" parent="hause/fiddlesticks/sassy" instance=ExtResource("3_ev7yt")]
+[node name="sassy" parent="hause/sassy" instance=ExtResource("3_ev7yt")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/fiddlesticks/sassy/sassy"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hause/sassy/sassy"]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_jyt46")
+
+[node name="ladder" parent="hause" instance=ExtResource("3_ev7yt")]
+position = Vector2(311, 39)
+scale = Vector2(2.3125, 1.1825)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -153,6 +146,3 @@ limit_left = 0
 limit_top = -30
 script = ExtResource("10_8eryw")
 map = NodePath("../../hause")
-
-[connection signal="body_entered" from="hause/ladder" to="." method="_on_ladder_body_entered"]
-[connection signal="body_exited" from="hause/ladder" to="." method="_on_ladder_body_exited"]

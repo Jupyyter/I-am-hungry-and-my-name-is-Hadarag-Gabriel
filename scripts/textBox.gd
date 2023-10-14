@@ -2,7 +2,8 @@ extends CanvasLayer
 class_name textBoxClass
 
 #the higher the number, the slower the text will appear
-const CHAR_READ_RATE = 0.02
+var CHAR_READ_RATE:float = 0.02
+var originalCharReadRate:float
 
 @export var textureRect: TextureRect
 @export var textbox_container: MarginContainer
@@ -29,8 +30,8 @@ var LabelList:Array[Label]
 var currentStateList:Array[State]
 
 func _ready():
-
 	hide_textbox()
+	originalCharReadRate=CHAR_READ_RATE
 
 
 #displays all the queued texts
@@ -117,6 +118,10 @@ func displayText(lbl:Label)->void:
 						text_box.colorRed(lbl)
 					"-fast":
 						fastText=true
+					"-0.03":
+						CHAR_READ_RATE=0.03
+					"-0.01":
+						CHAR_READ_RATE=0.001
 					_:
 						before=before.substr(1)
 						setTexture(before)
@@ -150,6 +155,7 @@ func show_textbox()->void:
 
 func finishedTweening()->void:  #connedcted with tween's finished signal
 	end_symbol.text = ":)"
+	CHAR_READ_RATE=originalCharReadRate
 	if current_state==State.reading: # this is "if" absolutely needed in case a label finished tweening but the others don't and you press "ui_accept"
 		for lbl in LabelList2:
 			currentStateList[LabelList.find(lbl)] = State.finished

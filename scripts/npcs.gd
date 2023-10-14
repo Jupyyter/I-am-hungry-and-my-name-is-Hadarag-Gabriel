@@ -15,6 +15,8 @@ func _ready():
 	currentScene=globals.getCurrentScene().name
 	npcName=self.name
 	globals.npcRef[npcName]=self.get_parent()
+	
+	#if the npc is in a new scene, do some setup
 	if !globals.convState.has(npcName+currentScene):
 		globals.convState[npcName+currentScene]=npcConv
 		globals.npcTriggered[npcName]=false
@@ -88,11 +90,9 @@ func _process(delta):
 										match text_box.IndexChosen:
 											0:
 												get_tree().change_scene_to_file("scenes/intro.tscn")
-												globals.knifeTaken=false
 												endOfChat(npcConv+1)
 											1:
 												get_tree().change_scene_to_file("scenes/intro.tscn")
-												globals.knifeTaken=false
 												endOfChat(npcConv+1)
 											2:
 												endOfChat(0)
@@ -254,6 +254,14 @@ func _process(delta):
 							inChat=false
 			"attic3":
 				match npcName:
+					"bed":
+						if globals.npcTriggered.has("knife") and globals.npcTriggered["knife"]:
+							text_box.queue_text(":):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)--0.01--red")
+							inChat=false
+						else:
+							text_box.queue_text("but gabriel is still hungry")
+							inChat=false
+						
 					"snitel":
 						match npcConv:
 							0:
@@ -286,7 +294,7 @@ func _process(delta):
 							1:
 								if textReady():
 									text_box.queue_text("flapjack started crying")
-									globals.npcTriggered["flapjack"]=true
+									globals.npcTriggered[npcName]=true
 									endOfChat(npcConv+1)
 					"salami":
 						match npcConv:
@@ -305,6 +313,8 @@ func _process(delta):
 								
 			"home1":
 				match npcName:
+					"ladder":
+						get_tree().change_scene_to_file("scenes/attic1.tscn")
 					"bucket":
 						match npcConv:
 							0:
@@ -327,7 +337,7 @@ func _process(delta):
 					"potato":
 						match npcConv:
 							0:
-								if globals.knifeTaken==false:
+								if globals.npcTriggered[npcName]==false:
 									text_box.queue_text("potato")
 									text_box.queue_questionResponse("eat the poato :)
 									don't eat the potato
@@ -338,12 +348,12 @@ func _process(delta):
 									match text_box.IndexChosen:
 										0:
 											text_box.queue_text("you ate the raw potato
-											it was full of dirt, but gabriel ate it anyway
-											but gabriel is still hungry
-											but there is no more food
+											yummy yummy raw potato full of dirt
+											but gabriel hungry
+											no more food gabriel sad
 											(imagine beeng poor)
 											it might be amimir time (amimir = speel)")
-											globals.knifeTaken=true
+											globals.npcTriggered[npcName]=true
 											endOfChat(npcConv+1)
 										1:
 											text_box.queue_text("you accidentally ate the raw potato
@@ -352,7 +362,7 @@ func _process(delta):
 											but there is no more food
 											(imagine beeng poor)
 											it might be amimir time (amimir = speel)")
-											globals.knifeTaken=true
+											globals.npcTriggered[npcName]=true
 											endOfChat(npcConv+1)
 										2:
 											endOfChat(0)
@@ -380,6 +390,8 @@ func _process(delta):
 								
 			"home2":
 				match npcName:
+					"ladder":
+						get_tree().change_scene_to_file("scenes/attic2.tscn")
 					"veranda":
 						match npcConv:
 							0:
@@ -395,7 +407,7 @@ func _process(delta):
 									(how can you respond to that?)
 									(you cant)",
 									
-									"don't you want to suck my di--fast--0.04
+									"don't you want to suck my di--fast--0.03
 									:)"])
 							2:
 								endOfChat(npcConv+1)
@@ -420,7 +432,7 @@ func _process(delta):
 					"beans":
 						match npcConv:
 							0:
-								if globals.knifeTaken==false:
+								if globals.npcTriggered[npcName]==false:
 									text_box.queue_text("random beans")
 									text_box.queue_questionResponse("eat beans
 									don't eat beans
@@ -432,21 +444,22 @@ func _process(delta):
 										0:
 											text_box.queue_text("you ate the raw beans
 											did you know that raw beans are toxic?
-											...
 											amimir time")
-											globals.knifeTaken=true
+											globals.npcTriggered[npcName]=true
 											endOfChat(npcConv+1)
 										1:
 											text_box.queue_text("you accidentally ate the raw beans
 											did you know that raw beans are toxic?
 											...
 											amimir time")
-											globals.knifeTaken=true
+											globals.npcTriggered[npcName]=true
 											endOfChat(npcConv+1)
 										2:
 											endOfChat(0)
 			"home3":
 				match npcName:
+					"ladder":
+						get_tree().change_scene_to_file("scenes/attic3.tscn")
 					"sussy":
 						match npcConv:
 							0:
@@ -477,7 +490,7 @@ func _process(delta):
 					"knife":
 						match npcConv:
 							0:
-								if globals.knifeTaken==false:
+								if globals.npcTriggered[npcName]==false:
 									text_box.queue_text("this is obviously a pen")
 									text_box.queue_questionResponse("take the pen :)
 									don't take the pen
@@ -488,11 +501,11 @@ func _process(delta):
 									match text_box.IndexChosen:
 										0:
 											text_box.queue_text("you took the knife")
-											globals.knifeTaken=true
+											globals.npcTriggered[npcName]=true
 											npcConv+=1
 										1:
 											text_box.queue_text("you accidentally took the knife")
-											globals.knifeTaken=true
+											globals.npcTriggered[npcName]=true
 											npcConv+=1
 										2:
 											npcConv=0
@@ -721,6 +734,12 @@ func _process(delta):
 						pass
 					"doctor2":
 						pass
+					"door1":
+						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
+			"hallWay1":
+				match npcName:
+					"door1":
+						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
 
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat

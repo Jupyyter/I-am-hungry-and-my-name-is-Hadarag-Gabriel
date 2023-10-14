@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cyb4o3nxyu5tc"]
+[gd_scene load_steps=18 format=3 uid="uid://cyb4o3nxyu5tc"]
 
 [ext_resource type="Script" path="res://scripts/home1.gd" id="1_jjnm3"]
 [ext_resource type="Texture2D" uid="uid://h0sxtsrob7st" path="res://images/home.png" id="2_pfay3"]
@@ -19,17 +19,13 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ih6da"]
 size = Vector2(11.5, 3)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7erkl"]
-size = Vector2(58.5, 21.6245)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n38en"]
 size = Vector2(13.6667, 3)
 
-[node name="home1" type="Node2D" node_paths=PackedStringArray("knife")]
+[node name="home1" type="Node2D"]
 y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_jjnm3")
-knife = NodePath("StaticBody2D/hause/table1/potato")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true
@@ -96,13 +92,6 @@ offset = Vector2(0, -16)
 
 [node name="Sprite2D6" type="Sprite2D" parent="StaticBody2D/hause"]
 
-[node name="ladder" type="Area2D" parent="StaticBody2D/hause"]
-position = Vector2(313.5, 42.688)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/hause/ladder"]
-position = Vector2(1.25, -1.50026)
-shape = SubResource("RectangleShape2D_7erkl")
-
 [node name="miguel" type="Sprite2D" parent="StaticBody2D/hause"]
 y_sort_enabled = true
 position = Vector2(169.5, 39)
@@ -127,13 +116,17 @@ texture = ExtResource("12_ycqll")
 position = Vector2(-0.5, 4)
 scale = Vector2(2.34, 1.005)
 
+[node name="ladder" parent="StaticBody2D/hause" instance=ExtResource("4_thk0d")]
+position = Vector2(311, 39)
+scale = Vector2(2.3125, 1.1825)
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(-1, -100)
 scale = Vector2(2, 2)
 polygon = PackedVector2Array(0.5, 228.5, 61.5, 169, 752.5, 169, 813, 227.5, 0.5, 228.5, 72, 228.5, 84, 216.5, 101.5, 216.5, 124.5, 213.5, 185, 213.5, 178, 226, 206, 226.5, 210, 218.5, 230, 218.5, 225.5, 227, 652.5, 227, 659, 216.5, 678, 216.5, 673.5, 224, 810, 226.5, 750, 170, 725.5, 170, 717, 182, 703, 170, 384, 170, 380, 179, 371, 179, 367.5, 170, 349.5, 170, 341.5, 177, 334, 169.5, 329.5, 169.5, 318.5, 180, 259, 180, 257, 182, 254.5, 180, 190.5, 180, 190.5, 171, 174.5, 171, 170, 175, 162, 175, 157.5, 170.5, 132.5, 170.5, 132.5, 179.5, 115, 179.5, 110.5, 170, 62, 170, 50, 181.5, 76.5, 181.5, 49, 201.5, 30, 201.5)
 
 [node name="player" parent="." instance=ExtResource("10_hokkb")]
-position = Vector2(1405, 305)
+position = Vector2(1401, 307)
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="player" node_paths=PackedStringArray("map")]
@@ -142,6 +135,3 @@ limit_left = 0
 limit_top = 0
 script = ExtResource("11_gquow")
 map = NodePath("../../StaticBody2D/hause")
-
-[connection signal="body_entered" from="StaticBody2D/hause/ladder" to="." method="_on_ladder_body_entered"]
-[connection signal="body_exited" from="StaticBody2D/hause/ladder" to="." method="_on_ladder_body_exited"]

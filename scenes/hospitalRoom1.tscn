@@ -1,21 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://brct6yvtb3utb"]
+[gd_scene load_steps=9 format=3 uid="uid://brct6yvtb3utb"]
 
 [ext_resource type="Script" path="res://scripts/hospitalRoom1.gd" id="1_5ouvu"]
 [ext_resource type="Texture2D" uid="uid://ba8uyv6gii1dt" path="res://images/hospital.png" id="2_ji12l"]
 [ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="3_ce7py"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="4_uunvi"]
+[ext_resource type="Texture2D" uid="uid://c3gerwg8e2u8f" path="res://images/doctor1.png" id="5_3ashq"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="6_ua0v0"]
+[ext_resource type="Texture2D" uid="uid://imwincgmeef" path="res://images/doctor2.png" id="7_dgfll"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc3lo"]
+size = Vector2(9.97304, 20.7917)
 
 [node name="hospitalRoom1" type="Node2D"]
+y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_5ouvu")
 
 [node name="hospitalRoom1" type="Sprite2D" parent="."]
-position = Vector2(961, 680)
+y_sort_enabled = true
+position = Vector2(454, 585)
 scale = Vector2(2, 2)
 texture = ExtResource("2_ji12l")
 
 [node name="player" parent="hospitalRoom1" instance=ExtResource("3_ce7py")]
-position = Vector2(-149.5, -161)
+position = Vector2(-163, -157.5)
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="hospitalRoom1/player" node_paths=PackedStringArray("map")]
@@ -24,3 +32,39 @@ limit_left = 0
 limit_top = -30
 script = ExtResource("4_uunvi")
 map = NodePath("../..")
+
+[node name="doctor1" type="Sprite2D" parent="hospitalRoom1"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-21.5, -133.5)
+texture = ExtResource("5_3ashq")
+offset = Vector2(0, -30)
+
+[node name="doctor1" parent="hospitalRoom1/doctor1" instance=ExtResource("6_ua0v0")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hospitalRoom1/doctor1/doctor1"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_oc3lo")
+
+[node name="doctor2" type="Sprite2D" parent="hospitalRoom1"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-94.5, -131.5)
+texture = ExtResource("7_dgfll")
+offset = Vector2(0, -30)
+
+[node name="doctor2" parent="hospitalRoom1/doctor2" instance=ExtResource("6_ua0v0")]
+position = Vector2(0, -1)
+scale = Vector2(1.855, 1.175)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hospitalRoom1/doctor2/doctor2"]
+position = Vector2(0.407455, 1.09352)
+shape = SubResource("RectangleShape2D_oc3lo")
+
+[node name="door1" parent="hospitalRoom1" instance=ExtResource("6_ua0v0")]
+position = Vector2(33.5, -168.5)
+rotation = 0.890118
+scale = Vector2(1.71, 1.345)
+flipCharacter = false

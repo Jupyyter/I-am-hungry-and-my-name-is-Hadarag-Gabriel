@@ -740,6 +740,16 @@ func _process(delta):
 				match npcName:
 					"door1":
 						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
+					"bobiJoke":
+						match npcConv:
+							0:
+								text_box.queue_text("wanna hear a joke?")
+								text_box.queue_questionResponse("yes
+								no")
+								text_box.queue_text("what is worse then a baby in a dumpster?
+								a baby in multiple dumpsters
+								HAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHA")
+								endOfChat(npcConv+1)
 
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat

@@ -10,7 +10,7 @@ func _ready():
 		text_box.queue_text("oops
 		gabriel doesnt feel too well
 		after that, gabriel went to the hospital:
-		you are going to brasil")
+		at the hospital:")
 		self.visible=false
 	
 	#attic 3

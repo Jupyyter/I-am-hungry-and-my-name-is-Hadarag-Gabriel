@@ -8,7 +8,6 @@ var flipped:bool=false
 var nearLadder:bool=false
 var atticStartPos=Vector2i(147,227)
 var inAnimation:bool=false
-var intestinalBlockage:bool=false
 @onready var timer:Timer=$Timer
 @onready var animationPlayer:AnimationPlayer =$AnimationPlayer
 @onready var collisionshape2D:CollisionShape2D =$CollisionShape2D
@@ -24,12 +23,7 @@ func _process(delta):
 	get_input()
 
 func _physics_process(delta):
-	if intestinalBlockage:
-		speedMultiplier-=0.1
-		if speedMultiplier<=0:
-			intestinalBlockage=false
-			speedMultiplier=0
-			timer.start()
+
 	move_and_slide()
 
 func get_input()->void:
@@ -63,8 +57,12 @@ func changeMode(mode:String):
 		if mode.begins_with("Eat"):
 			inAnimation=true
 
-func animationReset():
-	globals.playerAnimation=""
+func animationReset(k:bool=true):
+	if k:
+		globals.playerAnimation=""
+	else:
+		globals.playerAnimation="Blood1"
+		inAnimation=false
 
 func _on_animation_player_animation_finished(anim_name:StringName):
 	inAnimation=false
@@ -88,9 +86,25 @@ func _on_animation_player_animation_finished(anim_name:StringName):
 			animationReset()
 		"idleIntestinalBlockage":
 			animationReset()
-			get_tree().change_scene_to_file("scenes/hospitalRoom1.tscn")
+		"idleEatBucket":
+			changeMode("Blood1")
+		"idleEatLeg":
+			changeMode("Blood1")
+		"idleEatLimbs":
+			changeMode("Blood1")
+		
+
+func intestinalBlockage():
+	var tween:Tween
+	tween=create_tween()
+	tween.tween_property(self, "speedMultiplier", 0, 2).set_trans(Tween.TRANS_CUBIC)
+	tween.connect("finished",fallOver)
+
+func fallOver():
+	timer.start()
+	globals.getPlayer().changeMode("IntestinalBlockage")
 
 func _on_timer_timeout():
 	timer.stop()
-	globals.getPlayer().changeMode("IntestinalBlockage")
+	get_tree().change_scene_to_file("scenes/intro.tscn")
 	globals.inHospital=true

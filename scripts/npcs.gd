@@ -19,7 +19,8 @@ func _ready():
 	#if the npc is in a new scene, do some setup
 	if !globals.convState.has(npcName+currentScene):
 		globals.convState[npcName+currentScene]=npcConv
-		globals.npcTriggered[npcName]=false
+		if !globals.npcTriggered.has(npcName):
+			globals.npcTriggered[npcName]=false
 
 func _process(delta):
 	if nearNpc and ((textReady() and Input.is_action_just_pressed("ui_accept")) or inChat):
@@ -725,21 +726,35 @@ func _process(delta):
 									npcConv+=1
 							2:
 								if textReady():
-									globals.getPlayer().intestinalBlockage=true
+									globals.getPlayer().intestinalBlockage()
 									endOfChat()
 									get_parent().queue_free()
 			"hospitalRoom1":
 				match npcName:
 					"doctor1":
-						pass
+						match npcConv:
+							0:
+								text_box.queue_text("if you bite people you go to brasil")
+								endOfChat(npcConv+1)
 					"doctor2":
-						pass
+						match npcConv:
+							0:
+								text_box.queue_text("you are my fist pokemon :)
+								be a good pokemon and dont eat people
+								(be sure not to eat people)")
+								endOfChat()
 					"door1":
 						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
 			"hallWay1":
 				match npcName:
 					"door1":
-						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
+						globals.npcTriggered[npcName]=true
+					"door2":
+						globals.npcTriggered[npcName]=true
+					"door3":
+						globals.npcTriggered[npcName]=true
+					"door4":
+						globals.npcTriggered[npcName]=true
 					"bobiJoke":
 						match npcConv:
 							0:
@@ -747,10 +762,69 @@ func _process(delta):
 								text_box.queue_questionResponse("yes
 								no")
 								text_box.queue_text("what is worse then a baby in a dumpster?
-								a baby in multiple dumpsters
+								A BABY IN MULTIPLE DUMPSTERS
 								HAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHA")
 								endOfChat(npcConv+1)
-
+			"bloodRoom":
+				match npcName:
+					"bobiJoke":
+						match npcConv:
+							0:
+								text_box.queue_text("hei sir wanna hear a joke?")
+								text_box.queue_questionResponse("yes
+								no")
+								text_box.queue_text("how does a cannibal sees a pregnant woman?
+								AS A KINDER-SURPRISE
+								HAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHA")
+								endOfChat(npcConv+1)
+					"door2":
+						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
+					"mundo":
+						match npcConv:
+							0:
+								text_box.queue_text("hi")
+								text_box.queue_questionResponse("hi")
+								npcConv+=1
+							1:
+								if textReady():
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+1)
+					"iulica":
+						match npcConv:
+							0:
+								text_box.queue_text("please sir that leg over there was passed in my family from generation to generation
+								its the most precious thing i have")
+								text_box.queue_questionResponse("i eat cats 4 fun
+								14")
+								npcConv+=1
+							1:
+								if textReady():
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+1)
+			"bloodRoom2":
+					match npcName:
+						"door3":
+							get_tree().change_scene_to_file("scenes/hallWay1.tscn")
+						"yuumi":
+							match npcConv:
+								0:
+									text_box.queue_text("hi")
+									text_box.queue_questionResponse("hi")
+									npcConv+=1
+								1:
+									if textReady():
+										globals.npcTriggered[npcName]=true
+										endOfChat(npcConv+1)
+						"adc":
+							match npcConv:
+								0:
+									text_box.queue_text("hi")
+									text_box.queue_questionResponse("hi")
+									npcConv+=1
+								1:
+									if textReady():
+										globals.npcTriggered[npcName]=true
+										endOfChat(npcConv+1)
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat
 

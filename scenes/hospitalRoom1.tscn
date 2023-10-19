@@ -16,14 +16,20 @@ y_sort_enabled = true
 texture_filter = 1
 script = ExtResource("1_5ouvu")
 
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+z_index = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(1, 326, 26, 205, 231, 190, 448, 189, 600, 331, 2, 325, 561, 325, 446, 195, 250, 195, 211, 234, 51, 234)
+
 [node name="hospitalRoom1" type="Sprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(454, 585)
+position = Vector2(281, 180)
 scale = Vector2(2, 2)
 texture = ExtResource("2_ji12l")
 
 [node name="player" parent="hospitalRoom1" instance=ExtResource("3_ce7py")]
-position = Vector2(-163, -157.5)
+position = Vector2(94.5, 47)
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="hospitalRoom1/player" node_paths=PackedStringArray("map")]
@@ -36,7 +42,7 @@ map = NodePath("../..")
 [node name="doctor1" type="Sprite2D" parent="hospitalRoom1"]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-21.5, -133.5)
+position = Vector2(65, 69)
 texture = ExtResource("5_3ashq")
 offset = Vector2(0, -30)
 
@@ -46,12 +52,13 @@ scale = Vector2(1.855, 1.175)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hospitalRoom1/doctor1/doctor1"]
 position = Vector2(0.407455, 1.09352)
+scale = Vector2(1, 0.28)
 shape = SubResource("RectangleShape2D_oc3lo")
 
 [node name="doctor2" type="Sprite2D" parent="hospitalRoom1"]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(-94.5, -131.5)
+position = Vector2(-8, 71)
 texture = ExtResource("7_dgfll")
 offset = Vector2(0, -30)
 
@@ -61,10 +68,11 @@ scale = Vector2(1.855, 1.175)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hospitalRoom1/doctor2/doctor2"]
 position = Vector2(0.407455, 1.09352)
+scale = Vector2(1, 0.215)
 shape = SubResource("RectangleShape2D_oc3lo")
 
 [node name="door1" parent="hospitalRoom1" instance=ExtResource("6_ua0v0")]
-position = Vector2(33.5, -168.5)
+position = Vector2(120, 34)
 rotation = 0.890118
 scale = Vector2(1.71, 1.345)
 flipCharacter = false

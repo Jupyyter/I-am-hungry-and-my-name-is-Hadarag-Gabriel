@@ -51,9 +51,11 @@ func _ready():
 func _process(delta):
 	#called when the textBox has just finished showing an entire conversation
 	if(text_box.current_state==text_box.State.ready):
+		if globals.inHospital:
+			get_tree().change_scene_to_file("scenes/hospitalRoom1.tscn")
 
 		#attic 3
-		if globals.npcTriggered.has("flapjack2") and globals.npcTriggered["flapjack2"]:
+		elif globals.npcTriggered.has("flapjack2") and globals.npcTriggered["flapjack2"]:
 			if house.visible==true:
 				get_tree().change_scene_to_file("scenes/alley.tscn")
 			else:

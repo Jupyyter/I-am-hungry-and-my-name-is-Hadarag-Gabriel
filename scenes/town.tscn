@@ -54,7 +54,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_hub5g")
 
 [node name="player" parent="town" instance=ExtResource("2_i51m2")]
-position = Vector2(-1018, -31)
+position = Vector2(366, -23)
 scale = Vector2(1, 1)
 
 [node name="Camera2D" type="Camera2D" parent="town/player" node_paths=PackedStringArray("map")]

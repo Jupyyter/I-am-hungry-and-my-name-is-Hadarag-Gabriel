@@ -1,0 +1,189 @@
+[gd_scene load_steps=18 format=3 uid="uid://dvr3j6lm6brbm"]
+
+[ext_resource type="Script" path="res://scripts/bloodRoom.gd" id="1_1nobc"]
+[ext_resource type="Texture2D" uid="uid://iba7vgynvja7" path="res://images/bloodRoom2.png" id="2_fm2uc"]
+[ext_resource type="Texture2D" uid="uid://cylncvs13a1up" path="res://images/yuumi.png" id="3_61q1h"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="4_no7fj"]
+[ext_resource type="Texture2D" uid="uid://bwmdmcbf2awvm" path="res://images/bed.png" id="5_88p2c"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="6_yufpw"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="7_d0c7r"]
+[ext_resource type="Texture2D" uid="uid://bpr4il5gywk0k" path="res://images/adc.png" id="8_m4gnp"]
+[ext_resource type="Texture2D" uid="uid://dl0cohso5huyr" path="res://images/bobiJoke.png" id="9_qfqbg"]
+
+[sub_resource type="Animation" id="Animation_x76ka"]
+resource_name = "noLimbs"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j2vqj"]
+resource_name = "normal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bytph"]
+_data = {
+"noLimbs": SubResource("Animation_x76ka"),
+"normal": SubResource("Animation_j2vqj")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srfc4"]
+size = Vector2(17, 5)
+
+[sub_resource type="Animation" id="Animation_uejy8"]
+resource_name = "normal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_usl1a"]
+resource_name = "scared"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dlav2"]
+_data = {
+"normal": SubResource("Animation_uejy8"),
+"scared": SubResource("Animation_usl1a")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kevti"]
+size = Vector2(11.5, 3)
+
+[node name="bloodRoom2" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_1nobc")
+
+[node name="bloodRoom2" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(392, 185)
+scale = Vector2(2, 2)
+texture = ExtResource("2_fm2uc")
+
+[node name="yuumi" type="Sprite2D" parent="bloodRoom2"]
+z_index = 1
+position = Vector2(11.5, 13.5)
+texture = ExtResource("3_61q1h")
+offset = Vector2(0, -21)
+hframes = 2
+
+[node name="yuumi" parent="bloodRoom2/yuumi" instance=ExtResource("4_no7fj")]
+position = Vector2(-4, -3)
+scale = Vector2(3.95, 2.09)
+flipCharacter = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bloodRoom2/yuumi"]
+libraries = {
+"": SubResource("AnimationLibrary_bytph")
+}
+
+[node name="Bed" type="Sprite2D" parent="bloodRoom2"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(149.5, 65.5)
+texture = ExtResource("5_88p2c")
+offset = Vector2(0, -11)
+
+[node name="Bed2" type="Sprite2D" parent="bloodRoom2"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(42.5, 65.5)
+texture = ExtResource("5_88p2c")
+offset = Vector2(0, -11)
+
+[node name="player" parent="bloodRoom2" instance=ExtResource("6_yufpw")]
+position = Vector2(-128.5, 44.5)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="bloodRoom2/player" node_paths=PackedStringArray("map")]
+position = Vector2(0, -25)
+limit_left = 0
+limit_top = -30
+script = ExtResource("7_d0c7r")
+map = NodePath("../..")
+
+[node name="adc" type="Sprite2D" parent="bloodRoom2"]
+z_index = 1
+position = Vector2(149.5, 27)
+texture = ExtResource("8_m4gnp")
+offset = Vector2(0, -21)
+hframes = 2
+
+[node name="adc" parent="bloodRoom2/adc" instance=ExtResource("4_no7fj")]
+position = Vector2(-0.5, 5)
+scale = Vector2(1.21, 1.165)
+flipCharacter = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bloodRoom2/adc/adc"]
+scale = Vector2(0.826446, 0.858369)
+shape = SubResource("RectangleShape2D_srfc4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="bloodRoom2/adc"]
+root_node = NodePath("../adc")
+libraries = {
+"": SubResource("AnimationLibrary_dlav2")
+}
+
+[node name="door3" parent="bloodRoom2" instance=ExtResource("4_no7fj")]
+position = Vector2(-178.5, 35)
+rotation = -0.98262
+scale = Vector2(3.215, 1.665)
+flipCharacter = false
+
+[node name="bobiJoke" type="Sprite2D" parent="bloodRoom2"]
+y_sort_enabled = true
+position = Vector2(-23.5, 74)
+texture = ExtResource("9_qfqbg")
+offset = Vector2(0, -27)
+flip_h = true
+
+[node name="bobiJoke" parent="bloodRoom2/bobiJoke" instance=ExtResource("4_no7fj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bloodRoom2/bobiJoke/bobiJoke"]
+position = Vector2(1.75, -1.5)
+shape = SubResource("RectangleShape2D_kevti")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+z_index = 1
+polygon = PackedVector2Array(0, 339, 56, 186, 732, 201, 792, 348, 0, 339, 391, 339, 391, 309, 545, 309, 593, 338, 630, 338, 600, 312, 769, 313, 722, 236, 563, 236, 531, 209, 490, 209, 490, 239, 343, 239, 307, 207, 80, 207)

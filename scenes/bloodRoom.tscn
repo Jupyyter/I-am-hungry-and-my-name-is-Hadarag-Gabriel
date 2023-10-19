@@ -1,0 +1,182 @@
+[gd_scene load_steps=17 format=3 uid="uid://dj2iaqxg4x2ub"]
+
+[ext_resource type="Script" path="res://scripts/bloodRoom.gd" id="1_jyj2w"]
+[ext_resource type="Texture2D" uid="uid://c1co302vxtk16" path="res://images/bloodRoom.png" id="2_3hm44"]
+[ext_resource type="Texture2D" uid="uid://biwl0wmthyjay" path="res://images/mundo.png" id="3_lr1ny"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="4_04lij"]
+[ext_resource type="Texture2D" uid="uid://bwmdmcbf2awvm" path="res://images/bed.png" id="5_saelc"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="6_3vijl"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="7_sswne"]
+[ext_resource type="Texture2D" uid="uid://chqqevbjyvwl1" path="res://images/iulian.png" id="8_vl3ug"]
+[ext_resource type="Texture2D" uid="uid://dl0cohso5huyr" path="res://images/bobiJoke.png" id="9_t2etw"]
+
+[sub_resource type="Animation" id="Animation_j2vqj"]
+resource_name = "bloodLetting"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_x76ka"]
+resource_name = "normal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bytph"]
+_data = {
+"bloodLetting": SubResource("Animation_j2vqj"),
+"normal": SubResource("Animation_x76ka")
+}
+
+[sub_resource type="Animation" id="Animation_b7c1u"]
+resource_name = "noLeg"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y6ply"]
+resource_name = "normal"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ju8cu"]
+_data = {
+"noLeg": SubResource("Animation_b7c1u"),
+"normal": SubResource("Animation_y6ply")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uug0j"]
+size = Vector2(11.5, 3)
+
+[node name="bloodRoom" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_jyj2w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(392, 185)
+scale = Vector2(2, 2)
+texture = ExtResource("2_3hm44")
+
+[node name="mundo" type="Sprite2D" parent="Sprite2D"]
+z_index = 1
+position = Vector2(-0.5, 8)
+texture = ExtResource("3_lr1ny")
+offset = Vector2(0, -21)
+hframes = 2
+
+[node name="mundo" parent="Sprite2D/mundo" instance=ExtResource("4_04lij")]
+position = Vector2(-1.65, 0)
+scale = Vector2(2.465, 2.09)
+flipCharacter = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/mundo"]
+libraries = {
+"": SubResource("AnimationLibrary_bytph")
+}
+
+[node name="Bed" type="Sprite2D" parent="Sprite2D"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(149.5, 65.5)
+texture = ExtResource("5_saelc")
+offset = Vector2(0, -11)
+
+[node name="Bed2" type="Sprite2D" parent="Sprite2D"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(42.5, 65.5)
+texture = ExtResource("5_saelc")
+offset = Vector2(0, -11)
+
+[node name="player" parent="Sprite2D" instance=ExtResource("6_3vijl")]
+position = Vector2(-144.5, 38)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D/player" node_paths=PackedStringArray("map")]
+position = Vector2(0, -25)
+limit_left = 0
+limit_top = -30
+script = ExtResource("7_sswne")
+map = NodePath("../..")
+
+[node name="iulica" type="Sprite2D" parent="Sprite2D"]
+z_index = 1
+position = Vector2(131.5, 6)
+texture = ExtResource("8_vl3ug")
+offset = Vector2(0, -21)
+hframes = 2
+
+[node name="iulica" parent="Sprite2D/iulica" instance=ExtResource("4_04lij")]
+position = Vector2(-1.65, 0)
+scale = Vector2(4.805, 2.075)
+flipCharacter = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/iulica"]
+libraries = {
+"": SubResource("AnimationLibrary_ju8cu")
+}
+
+[node name="bobiJoke" type="Sprite2D" parent="Sprite2D"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-96.5, 73.5)
+texture = ExtResource("9_t2etw")
+offset = Vector2(0, -27)
+flip_h = true
+
+[node name="bobiJoke" parent="Sprite2D/bobiJoke" instance=ExtResource("4_04lij")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/bobiJoke/bobiJoke"]
+position = Vector2(1.75, -1.5)
+shape = SubResource("RectangleShape2D_uug0j")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+z_index = 1
+polygon = PackedVector2Array(0, 339, 56, 186, 732, 201, 792, 348, 0, 339, 391, 339, 391, 309, 546, 309, 593, 338, 630, 338, 601, 309, 766, 309, 722, 236, 570, 237, 540, 209, 490, 209, 490, 233, 343, 233, 307, 207, 80, 207)
+
+[node name="door2" parent="." instance=ExtResource("4_04lij")]
+position = Vector2(54, 244)
+rotation = -0.98262
+scale = Vector2(3.215, 1.81)
+flipCharacter = false

@@ -116,6 +116,10 @@ func displayText(lbl:Label)->void:
 				match before:
 					"-red":
 						text_box.colorRed(lbl)
+					"-color1":
+						text_box.color1(lbl)
+					"-color2":
+						text_box.color2(lbl)
 					"-fast":
 						fastText=true
 					"-0.03":
@@ -177,8 +181,13 @@ func setTexture(texture)->void:
 	else:
 		textureRect.texture = load("res://images/" + texture + ".png")
 func colorRed(lbl:Label)->void:
-	#lbl.add_theme_color_override("font_color",Color(180,0,0))
 	lbl.add_theme_color_override("font_color",Color(180,0,0))
+
+func color1(lbl:Label)->void:
+	lbl.add_theme_color_override("font_color",Color("21776F"))
+
+func color2(lbl:Label)->void:
+	lbl.add_theme_color_override("font_color",Color("7E8423"))
 
 func colorReset(lbl:Label)->void:
 	#lbl.add_theme_color_override("font_color",Color.WHITE)

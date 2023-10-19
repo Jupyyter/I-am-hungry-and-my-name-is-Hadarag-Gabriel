@@ -1,17 +1,31 @@
 extends Node2D
+var npcConv:int=0
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	if globals.firstTime(self.name):
-		text_box.queue_text("why do we have a homeless eating Tom in the hospital?
-			sir, he is mister Gabriel, he once ate a brick wall, can i keep him?
-			ok
-			gabriel, sit
-			he is well trained, you can keep him
-			ty sir")
+		globals.getPlayer().changeMode("EatCatUp")
+		globals.getPlayer().position=Vector2(-76,45)
+	else:
+		npcConv=4
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	match npcConv:
+		0:
+			text_box.queue_text("why do we have a homeless eating Tom in the hospital?--color1
+				sir, he is mister Gabriel, he once ate a brick wall, can i keep him?--color2
+				gabriel, sit--color1")
+			npcConv+=1
+		1:
+			if textReady():
+				globals.getPlayer().changeMode("EatCatDown")
+				text_box.queue_text("good gabriel--color1
+					he is well trained, you can keep him--color1
+					ty sir--color2")
+				npcConv+=1
+		2:
+			if textReady():
+				globals.getPlayer().animationReset(false)
+				npcConv+=1
+
+func textReady():
+	return text_box.current_state==text_box.State.ready

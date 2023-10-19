@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=3 uid="uid://deijcje2ut5a3"]
+
+[ext_resource type="Script" path="res://scripts/bloodRoom.gd" id="1_v2h02"]
+[ext_resource type="Texture2D" uid="uid://c5bxqjrniyuk8" path="res://images/bloodRoom3.png" id="2_uslxe"]
+[ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="3_fbww0"]
+[ext_resource type="Script" path="res://scripts/fallowCam.gd" id="4_x3qt5"]
+[ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="5_b6sj4"]
+[ext_resource type="Texture2D" uid="uid://dl0cohso5huyr" path="res://images/bobiJoke.png" id="6_plitf"]
+[ext_resource type="Texture2D" uid="uid://bwmdmcbf2awvm" path="res://images/bed.png" id="7_g6krk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kevti"]
+size = Vector2(11.5, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnl2n"]
+size = Vector2(154, 34.2758)
+
+[node name="bloodRoom3" type="Node2D"]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_v2h02")
+
+[node name="bloodRoom3" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(392, 185)
+scale = Vector2(2, 2)
+texture = ExtResource("2_uslxe")
+
+[node name="player" parent="bloodRoom3" instance=ExtResource("3_fbww0")]
+position = Vector2(-143, 38)
+scale = Vector2(1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="bloodRoom3/player" node_paths=PackedStringArray("map")]
+position = Vector2(0, -25)
+limit_left = 0
+limit_top = -30
+script = ExtResource("4_x3qt5")
+map = NodePath("../..")
+
+[node name="door3" parent="bloodRoom3" instance=ExtResource("5_b6sj4")]
+position = Vector2(-178.5, 35)
+rotation = -0.98262
+scale = Vector2(3.215, 1.665)
+flipCharacter = false
+
+[node name="bobiJoke" type="Sprite2D" parent="bloodRoom3"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-117.5, 35.5)
+texture = ExtResource("6_plitf")
+offset = Vector2(0, -27)
+flip_h = true
+
+[node name="bobiJoke" parent="bloodRoom3/bobiJoke" instance=ExtResource("5_b6sj4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bloodRoom3/bobiJoke/bobiJoke"]
+position = Vector2(1.75, -1.5)
+shape = SubResource("RectangleShape2D_kevti")
+
+[node name="Bed2" type="Sprite2D" parent="bloodRoom3"]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(-7.5, 41.5)
+texture = ExtResource("7_g6krk")
+offset = Vector2(0, -11)
+flip_h = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+z_index = 1
+polygon = PackedVector2Array(0, 339, 56, 186, 732, 201, 792, 348, 0, 339, 782, 339, 705, 207, 80, 207)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = 2
+position = Vector2(377, 275)
+skew = 0.689405
+shape = SubResource("RectangleShape2D_qnl2n")

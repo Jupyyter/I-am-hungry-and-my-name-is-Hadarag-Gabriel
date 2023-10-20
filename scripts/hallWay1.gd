@@ -28,4 +28,4 @@ func _process(delta):
 		get_tree().change_scene_to_file("scenes/bloodRoom2.tscn")
 
 	if globals.npcTriggered.has("door4") and globals.npcTriggered["door4"]:
-		get_tree().change_scene_to_file("scenes/hospitalRoom1.tscn")
+		get_tree().change_scene_to_file("scenes/bloodRoom3.tscn")

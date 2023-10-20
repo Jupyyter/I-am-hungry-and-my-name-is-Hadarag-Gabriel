@@ -825,6 +825,10 @@ func _process(delta):
 									if textReady():
 										globals.npcTriggered[npcName]=true
 										endOfChat(npcConv+1)
+			"bloodRoom3":
+				match npcName:
+					"door4":
+						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat
 

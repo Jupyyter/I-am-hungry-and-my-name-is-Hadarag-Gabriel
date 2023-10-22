@@ -214,17 +214,23 @@ func choosingResponse()->int:
 	
 	if Input.is_action_just_pressed("ui_right"):
 		IndexChosen+=1
+		
 	if Input.is_action_just_pressed("ui_left"):
 		IndexChosen-=1
+
 	if IndexChosen > LabelList2.size()-1:
 		IndexChosen=LabelList2.size()-1
+
 	elif IndexChosen < 0:
 		IndexChosen=0
+
 	if !LabelList2[IndexChosen].has_theme_stylebox_override ("normal"):
 		LabelList2[IndexChosen].add_theme_stylebox_override("normal",createStyleBox())
+
 	elif IndexChosen!=lastIndexChosen:
 		LabelList2[lastIndexChosen].remove_theme_stylebox_override("normal")
 		lastIndexChosen=IndexChosen
+		
 	return IndexChosen
 
 #returns a reference to an object within the array

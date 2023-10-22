@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dj2iaqxg4x2ub"]
+[gd_scene load_steps=19 format=3 uid="uid://dj2iaqxg4x2ub"]
 
 [ext_resource type="Script" path="res://scripts/bloodRoom.gd" id="1_jyj2w"]
 [ext_resource type="Texture2D" uid="uid://c1co302vxtk16" path="res://images/bloodRoom.png" id="2_3hm44"]
@@ -9,9 +9,11 @@
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="7_sswne"]
 [ext_resource type="Texture2D" uid="uid://chqqevbjyvwl1" path="res://images/iulian.png" id="8_vl3ug"]
 [ext_resource type="Texture2D" uid="uid://dl0cohso5huyr" path="res://images/bobiJoke.png" id="9_t2etw"]
+[ext_resource type="Texture2D" uid="uid://wwrqch8natn5" path="res://images/snitel.png" id="10_kuxhv"]
 
 [sub_resource type="Animation" id="Animation_j2vqj"]
 resource_name = "bloodLetting"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,6 +29,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_x76ka"]
 resource_name = "normal"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -48,6 +51,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_b7c1u"]
 resource_name = "noLeg"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -63,6 +67,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_y6ply"]
 resource_name = "normal"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -84,6 +89,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uug0j"]
 size = Vector2(11.5, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qtski"]
+size = Vector2(12, 2)
 
 [node name="bloodRoom" type="Node2D"]
 y_sort_enabled = true
@@ -180,3 +188,17 @@ position = Vector2(54, 244)
 rotation = -0.98262
 scale = Vector2(3.215, 1.81)
 flipCharacter = false
+
+[node name="snitel" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(585, 325)
+scale = Vector2(2, 2)
+texture = ExtResource("10_kuxhv")
+offset = Vector2(0, -21)
+
+[node name="snitel" parent="snitel" instance=ExtResource("4_04lij")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="snitel/snitel"]
+position = Vector2(1, -1)
+shape = SubResource("RectangleShape2D_qtski")

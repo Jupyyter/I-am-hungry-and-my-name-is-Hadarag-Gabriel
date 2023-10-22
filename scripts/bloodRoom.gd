@@ -9,18 +9,24 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if globals.npcTriggered.has("mundo") and globals.npcTriggered["mundo"]:
+		if !globals.npcRef["mundo"].get_child(1).current_animation=="normal":
+			globals.getPlayer().changeMode("EatBucket")
 		globals.npcRef["mundo"].get_child(1).play("normal")
-		globals.getPlayer().changeMode("EatBucket")
-		globals.npcTriggered["mundo"]=false
+		if globals.getPlayer().inAnimation==false:
+			globals.npcTriggered["mundo"]=false
 
 	if globals.npcTriggered.has("iulica") and globals.npcTriggered["iulica"]:
+		if !globals.npcRef["iulica"].get_child(1).current_animation=="noLeg":
+			globals.getPlayer().changeMode("EatLeg")
 		globals.npcRef["iulica"].get_child(1).play("noLeg")
-		globals.getPlayer().changeMode("EatLeg")
-		globals.npcTriggered["iulica"]=false
+		if globals.getPlayer().inAnimation==false:
+			globals.npcTriggered["iulica"]=false
 
 	if globals.npcTriggered.has("yuumi") and globals.npcTriggered["yuumi"]:
+		if !globals.npcRef["yuumi"].get_child(1).current_animation=="noLimbs":
+			globals.getPlayer().changeMode("EatLimbs")
 		globals.npcRef["yuumi"].get_child(1).play("noLimbs")
 		globals.npcRef["adc"].get_child(1).play("scared")
-		globals.getPlayer().changeMode("EatLimbs")
-		globals.npcTriggered["yuumi"]=false
+		if globals.getPlayer().inAnimation==false:
+			globals.npcTriggered["yuumi"]=false
 	

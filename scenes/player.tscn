@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bjslxs2nfkoew"]
+[gd_scene load_steps=30 format=3 uid="uid://bjslxs2nfkoew"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_r4nhh"]
 [ext_resource type="Texture2D" uid="uid://cedf53w8n3pcu" path="res://images/terrareIdle.png" id="2_0h1bk"]
@@ -152,6 +152,22 @@ tracks/0/keys = {
 "values": [Vector2i(4, 7), Vector2i(5, 7), Vector2i(6, 7), Vector2i(7, 7)]
 }
 
+[sub_resource type="Animation" id="Animation_nbrfp"]
+resource_name = "idleEatBucket"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 9), Vector2i(5, 9), Vector2i(6, 9), Vector2i(7, 9)]
+}
+
 [sub_resource type="Animation" id="Animation_vagu8"]
 resource_name = "idleEatCat"
 length = 1.3
@@ -217,6 +233,38 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [Vector2i(4, 2), Vector2i(5, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_1j5gv"]
+resource_name = "idleEatLeg"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(8, 9), Vector2i(9, 9), Vector2i(10, 9), Vector2i(11, 9)]
+}
+
+[sub_resource type="Animation" id="Animation_rlg22"]
+resource_name = "idleEatLimbs"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(12, 9), Vector2i(13, 9), Vector2i(14, 9), Vector2i(15, 9)]
 }
 
 [sub_resource type="Animation" id="Animation_iqrcb"]
@@ -335,8 +383,8 @@ tracks/0/keys = {
 "values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3)]
 }
 
-[sub_resource type="Animation" id="Animation_rlg22"]
-resource_name = "idleEatLimbs"
+[sub_resource type="Animation" id="Animation_c0k53"]
+resource_name = "idleEatPotato"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -348,11 +396,11 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(12, 9), Vector2i(13, 9), Vector2i(14, 9), Vector2i(15, 9)]
+"values": [Vector2i(6, 2), Vector2i(7, 2), Vector2i(8, 2), Vector2i(9, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_1j5gv"]
-resource_name = "idleEatLeg"
+[sub_resource type="Animation" id="Animation_5w2k0"]
+resource_name = "idleEatBeans"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -364,23 +412,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(8, 9), Vector2i(9, 9), Vector2i(10, 9), Vector2i(11, 9)]
-}
-
-[sub_resource type="Animation" id="Animation_nbrfp"]
-resource_name = "idleEatBucket"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(4, 9), Vector2i(5, 9), Vector2i(6, 9), Vector2i(7, 9)]
+"values": [Vector2i(10, 2), Vector2i(11, 2), Vector2i(12, 2), Vector2i(13, 2)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_84bi6"]
@@ -394,6 +426,7 @@ _data = {
 "idleEatBasketOfMetal": SubResource("Animation_ne2cn"),
 "idleEatBasketOfRocks": SubResource("Animation_qyu1l"),
 "idleEatBasketOfSnakes": SubResource("Animation_wn6si"),
+"idleEatBeans": SubResource("Animation_5w2k0"),
 "idleEatBucket": SubResource("Animation_nbrfp"),
 "idleEatCat": SubResource("Animation_vagu8"),
 "idleEatCatDown": SubResource("Animation_kko5g"),
@@ -401,6 +434,7 @@ _data = {
 "idleEatFlapjack": SubResource("Animation_7cf0j"),
 "idleEatLeg": SubResource("Animation_1j5gv"),
 "idleEatLimbs": SubResource("Animation_rlg22"),
+"idleEatPotato": SubResource("Animation_c0k53"),
 "idleEatRat": SubResource("Animation_iqrcb"),
 "idleIntestinalBlockage": SubResource("Animation_b04w4"),
 "idleKnife": SubResource("Animation_oifcx"),

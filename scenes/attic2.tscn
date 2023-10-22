@@ -29,7 +29,7 @@ size = Vector2(10, 2.0625)
 y_sort_enabled = true
 script = ExtResource("1_yktym")
 nodesToRemove = [NodePath("StaticBody2D/Attic/snitel"), NodePath("StaticBody2D/Attic/salami"), NodePath("StaticBody2D/Attic/noodle")]
-nodesToAdd = [NodePath("StaticBody2D/Attic/rat"), NodePath("StaticBody2D/Attic/cat")]
+nodesToAdd = [NodePath("StaticBody2D/Attic/rat2"), NodePath("StaticBody2D/Attic/cat")]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 y_sort_enabled = true
@@ -105,13 +105,13 @@ position = Vector2(-294, 20)
 scale = Vector2(3.89, 1.465)
 flipCharacter = false
 
-[node name="rat" type="Sprite2D" parent="StaticBody2D/Attic"]
+[node name="rat2" type="Sprite2D" parent="StaticBody2D/Attic"]
 y_sort_enabled = true
 position = Vector2(-20.6667, 73.3333)
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("3_3y2x6")
 
-[node name="rat" parent="StaticBody2D/Attic/rat" instance=ExtResource("6_1umch")]
+[node name="rat2" parent="StaticBody2D/Attic/rat2" instance=ExtResource("6_1umch")]
 position = Vector2(-0.000305176, -1)
 scale = Vector2(1.77, 1.66)
 flipCharacter = false

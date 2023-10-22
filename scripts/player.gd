@@ -62,7 +62,7 @@ func animationReset(k:bool=true):
 		globals.playerAnimation=""
 	else:
 		globals.playerAnimation="Blood1"
-		inAnimation=false
+	inAnimation=false
 
 func _on_animation_player_animation_finished(anim_name:StringName):
 	inAnimation=false
@@ -92,7 +92,10 @@ func _on_animation_player_animation_finished(anim_name:StringName):
 			changeMode("Blood1")
 		"idleEatLimbs":
 			changeMode("Blood1")
-		
+		"idleEatBeans":
+			animationReset()
+		"idleEatPotato":
+			animationReset()
 
 func intestinalBlockage():
 	var tween:Tween

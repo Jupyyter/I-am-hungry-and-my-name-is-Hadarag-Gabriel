@@ -5,8 +5,12 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
+	#end
+	if globals.npcTriggered.has("mihai") and globals.npcTriggered["mihai"]:
+		self.visible=false
+		text_box.queue_text("so                :)")
 	#town
-	if globals.inHospital:
+	elif globals.inHospital:
 		text_box.queue_text("oops
 		gabriel doesnt feel too well
 		after that, gabriel went to the hospital:

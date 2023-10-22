@@ -38,30 +38,7 @@ func _process(delta):
 					"salami":
 						match npcConv:
 							0:
-								text_box.queue_text("hi, i'm your brother, Salami
-								do you need anything?")
-								text_box.queue_questionResponse("where am i?")
-								text_box.queue_text("we are in the attic of the house obviously
-								(he is looking down on you)")
-								text_box.queue_questionResponse("i mean... why am i here?")
-								text_box.queue_text("because this is our house, so you obviusly stay in it sometimes
-								(omg you are so inferiour to him)
-								(you got outplayed. you should change your strategy)")
-								npcConv+=1
-							1:
-								conversation(["stop avoiding questions, it's annoying",
-
-								"good mornin sir, i'm Gabriel, and i wish to inform you that I'm hungry and therefore, i would enjoy to ask you, kind sir, if you happened to keep ahold of any food currently. i would like to also ask you the privilege of knowing where am i currently located and what's the year in which we are currently living",
-
-								"i don't know what you are referring to
-								i answered to all your questions correspondingly
-								(you have been demolished)
-								(he's clearly much more intellectual than you)",
-
-								"yes, indeed, good sir, i'm sorry to inform you but i currently dont have any food and i believe there is no edible food around here. tho i'm delighted to inform you that we are located in France in the year 1779
-								have a good day sir"],
-								[1])
-							2:
+								text_box.queue_text("hi, i'm your brother, Salami")
 								endOfChat()
 					"rat":
 						match npcConv:
@@ -123,7 +100,7 @@ func _process(delta):
 						else:
 							text_box.queue_text("gabriel is too hungry to look at the dead cat")
 							endOfChat(0)
-					"rat":
+					"rat2":
 						match npcConv:
 							0:
 								text_box.queue_text("congratulations :)
@@ -348,25 +325,35 @@ func _process(delta):
 								if textReady():
 									match text_box.IndexChosen:
 										0:
-											text_box.queue_text("you ate the raw potato
-											yummy yummy raw potato full of dirt
-											but gabriel hungry
-											no more food gabriel sad
-											(imagine beeng poor)
-											it might be amimir time (amimir = speel)")
+											text_box.hide_textbox()
 											globals.npcTriggered[npcName]=true
-											endOfChat(npcConv+1)
+											npcConv+=1
 										1:
-											text_box.queue_text("you accidentally ate the raw potato
-											it was full of dirt, but gabriel ate it anyway
-											but gabriel is still hungry
-											but there is no more food
-											(imagine beeng poor)
-											it might be amimir time (amimir = speel)")
+											text_box.hide_textbox()
 											globals.npcTriggered[npcName]=true
-											endOfChat(npcConv+1)
+											npcConv+=2
 										2:
 											endOfChat(0)
+							2:
+								if globals.npcTriggered[npcName]==false:
+									text_box.queue_text("you ate the raw potato
+									yummy yummy raw potato full of dirt
+									but gabriel hungry
+									no more food gabriel sad
+									(imagine beeng poor)
+									it might be amimir time (amimir = speel)")
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+2)
+							3:
+								if globals.npcTriggered[npcName]==false:
+									text_box.queue_text("you accidentally ate the raw potato
+									yummy yummy raw potato full of dirt
+									but gabriel hungry
+									no more food gabriel sad
+									(imagine beeng poor)
+									it might be amimir time (amimir = speel)")
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+1)
 					"veranda":
 						match npcConv:
 							0:
@@ -443,20 +430,30 @@ func _process(delta):
 								if textReady():
 									match text_box.IndexChosen:
 										0:
-											text_box.queue_text("you ate the raw beans
-											did you know that raw beans are toxic?
-											amimir time")
+											text_box.hide_textbox()
 											globals.npcTriggered[npcName]=true
-											endOfChat(npcConv+1)
+											npcConv+=1
 										1:
-											text_box.queue_text("you accidentally ate the raw beans
+											text_box.hide_textbox()
+											globals.npcTriggered[npcName]=true
+											npcConv+=2
+										2:
+											endOfChat(0)
+							2:
+								if globals.npcTriggered[npcName]==false:
+									text_box.queue_text("you ate the raw beans
+									did you know that raw beans are toxic?
+									amimir time")
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+2)
+							3:
+								if globals.npcTriggered[npcName]==false:
+									text_box.queue_text("you accidentally ate the raw beans
 											did you know that raw beans are toxic?
 											...
 											amimir time")
-											globals.npcTriggered[npcName]=true
-											endOfChat(npcConv+1)
-										2:
-											endOfChat(0)
+									globals.npcTriggered[npcName]=true
+									endOfChat(npcConv+1)
 			"home3":
 				match npcName:
 					"ladder":
@@ -734,15 +731,15 @@ func _process(delta):
 					"doctor1":
 						match npcConv:
 							0:
-								text_box.queue_text("if you bite people you go to brasil")
+								text_box.queue_text("sad story
+								i once had a wife
+								but once she turned 15 she left me :(")
 								endOfChat(npcConv+1)
 					"doctor2":
 						match npcConv:
 							0:
-								text_box.queue_text("you are my fist pokemon :)
-								be a good pokemon and dont eat people
-								(be sure not to eat people)")
-								endOfChat()
+								text_box.queue_text("i was black wance")
+								endOfChat(npcConv+1)
 					"door1":
 						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
 			"hallWay1":
@@ -758,15 +755,33 @@ func _process(delta):
 					"bobiJoke":
 						match npcConv:
 							0:
-								text_box.queue_text("wanna hear a joke?")
-								text_box.queue_questionResponse("yes
-								no")
-								text_box.queue_text("what is worse then a baby in a dumpster?
-								A BABY IN MULTIPLE DUMPSTERS
-								HAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHA")
+								text_box.queue_text("hey
+								think af a number
+								between 1 and 20
+								add 32
+								multiply by 3
+								subtract 1
+								close your eyes
+								its dark isnt it?")
 								endOfChat(npcConv+1)
 			"bloodRoom":
 				match npcName:
+					"snitel":
+						match npcConv:
+							0:
+								text_box.queue_questionResponse("CRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZYCRAZY")
+								npcConv+=1
+							1:
+								if textReady():
+									match text_box.IndexChosen:
+										0:
+											text_box.queue_text("CRAZY?
+											I WAS CRAZY ONCE.
+											THEY LOCKED ME IN A ROOM.
+											A RUBBER ROOM.
+											A RUBBER ROOM WITH RATS.
+											AND RATS MAKE ME CRAZY.")
+									endOfChat()
 					"bobiJoke":
 						match npcConv:
 							0:
@@ -788,6 +803,11 @@ func _process(delta):
 							1:
 								if textReady():
 									globals.npcTriggered[npcName]=true
+									npcConv+=1
+							2:
+								text_box.hide_textbox()
+								if globals.npcTriggered[npcName]==false:
+									text_box.queue_text("you can say gabriel has a taste for blood ;)")
 									endOfChat(npcConv+1)
 					"iulica":
 						match npcConv:
@@ -803,13 +823,20 @@ func _process(delta):
 									endOfChat(npcConv+1)
 			"bloodRoom2":
 					match npcName:
+						"bobiJoke":
+							text_box.queue_text("wanna hear a joke?")
+							text_box.queue_questionResponse("yes
+								no")
+							text_box.queue_text("what is worse then a baby in a dumpster?
+								A BABY IN MULTIPLE DUMPSTERS
+								HAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHA")
 						"door3":
 							get_tree().change_scene_to_file("scenes/hallWay1.tscn")
 						"yuumi":
 							match npcConv:
 								0:
-									text_box.queue_text("hi")
-									text_box.queue_questionResponse("hi")
+									text_box.queue_text("(unconscious man)")
+									text_box.queue_questionResponse("borrow his limbs")
 									npcConv+=1
 								1:
 									if textReady():
@@ -827,8 +854,12 @@ func _process(delta):
 										endOfChat(npcConv+1)
 			"bloodRoom3":
 				match npcName:
+					"mihai":
+						globals.npcTriggered[npcName]=true
+						get_tree().change_scene_to_file("scenes/intro.tscn")
 					"door4":
-						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
+						text_box.queue_text("GABRIEL IS HUNGRY--red")
+						endOfChat()
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat
 

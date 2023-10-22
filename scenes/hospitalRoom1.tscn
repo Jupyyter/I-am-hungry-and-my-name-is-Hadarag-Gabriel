@@ -20,7 +20,7 @@ script = ExtResource("1_5ouvu")
 z_index = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(1, 326, 26, 205, 231, 190, 448, 189, 600, 331, 2, 325, 561, 325, 446, 195, 250, 195, 211, 234, 51, 234)
+polygon = PackedVector2Array(1, 326, 35, 192, 448, 189, 600, 331, 2, 325, 561, 325, 446, 195, 250, 195, 211, 234, 51, 234)
 
 [node name="hospitalRoom1" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -45,6 +45,7 @@ y_sort_enabled = true
 position = Vector2(65, 69)
 texture = ExtResource("5_3ashq")
 offset = Vector2(0, -30)
+flip_h = true
 
 [node name="doctor1" parent="hospitalRoom1/doctor1" instance=ExtResource("6_ua0v0")]
 position = Vector2(0, -1)

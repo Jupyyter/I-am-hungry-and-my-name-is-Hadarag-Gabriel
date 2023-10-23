@@ -455,6 +455,7 @@ script = ExtResource("1_r4nhh")
 z_index = 1
 z_as_relative = false
 texture_filter = 1
+position = Vector2(0, -32)
 texture = ExtResource("2_0h1bk")
 offset = Vector2(0, -32)
 hframes = 17

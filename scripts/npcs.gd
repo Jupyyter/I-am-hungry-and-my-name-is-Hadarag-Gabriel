@@ -80,7 +80,7 @@ func _process(delta):
 			"attic2":
 				match npcName:
 					"cat":
-						if globals.npcTriggered["rat"]:
+						if globals.npcTriggered["rat2"]:
 							match npcConv:
 								0:
 									text_box.queue_text("this is Garfield
@@ -335,7 +335,7 @@ func _process(delta):
 										2:
 											endOfChat(0)
 							2:
-								if globals.npcTriggered[npcName]==false:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the raw potato
 									yummy yummy raw potato full of dirt
 									but gabriel hungry
@@ -345,7 +345,7 @@ func _process(delta):
 									globals.npcTriggered[npcName]=true
 									endOfChat(npcConv+2)
 							3:
-								if globals.npcTriggered[npcName]==false:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you accidentally ate the raw potato
 									yummy yummy raw potato full of dirt
 									but gabriel hungry
@@ -440,14 +440,14 @@ func _process(delta):
 										2:
 											endOfChat(0)
 							2:
-								if globals.npcTriggered[npcName]==false:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the raw beans
 									did you know that raw beans are toxic?
 									amimir time")
 									globals.npcTriggered[npcName]=true
 									endOfChat(npcConv+2)
 							3:
-								if globals.npcTriggered[npcName]==false:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you accidentally ate the raw beans
 											did you know that raw beans are toxic?
 											...
@@ -731,9 +731,12 @@ func _process(delta):
 					"doctor1":
 						match npcConv:
 							0:
-								text_box.queue_text("sad story
-								i once had a wife
-								but once she turned 15 she left me :(")
+								text_box.queue_text("i once had a wife
+								she cook
+								she great whife
+								but when she turn 15 she fight back
+								me kill whife
+								me sad :(")
 								endOfChat(npcConv+1)
 					"doctor2":
 						match npcConv:
@@ -806,7 +809,7 @@ func _process(delta):
 									npcConv+=1
 							2:
 								text_box.hide_textbox()
-								if globals.npcTriggered[npcName]==false:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you can say gabriel has a taste for blood ;)")
 									endOfChat(npcConv+1)
 					"iulica":

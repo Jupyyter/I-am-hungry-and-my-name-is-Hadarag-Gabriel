@@ -59,7 +59,7 @@ func changeMode(mode:String):
 
 func animationReset(k:bool=true):
 	if k:
-		globals.playerAnimation=""
+		globals.playerAnimation="Normal"
 	else:
 		globals.playerAnimation="Blood1"
 	inAnimation=false
@@ -111,3 +111,9 @@ func _on_timer_timeout():
 	timer.stop()
 	get_tree().change_scene_to_file("scenes/intro.tscn")
 	globals.inHospital=true
+
+func animationFinished()->bool:
+	if globals.playerAnimation=="Blood0" or globals.playerAnimation=="Blood1" or globals.playerAnimation=="Normal":
+		return true
+	else:
+		return false

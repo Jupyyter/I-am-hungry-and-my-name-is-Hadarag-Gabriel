@@ -1,6 +1,6 @@
 extends Node
 
-var playerAnimation:String=""
+var playerAnimation:String="Normal"
 var levelStart:Array[String]
 var inHospital:bool=false
 #used to remember where the text was left of on every npc

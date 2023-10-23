@@ -55,9 +55,9 @@ func _process(delta):
 				if nearLadder:
 					get_tree().change_scene_to_file("scenes/home2.tscn")
 
-			if globals.npcTriggered.has("rat") and globals.npcTriggered["rat"] and globals.npcRef["rat"]!=null and text_box.current_state==text_box.State.ready:
+			if globals.npcTriggered.has("rat2") and globals.npcTriggered["rat2"] and globals.npcRef["rat2"]!=null and text_box.current_state==text_box.State.ready:
 				globals.getPlayer().changeMode("EatRat")
-				globals.removeNode(globals.npcRef["rat"],true)
+				globals.removeNode(globals.npcRef["rat2"],true)
 
 			if globals.npcTriggered.has("cat") and globals.npcTriggered["cat"]  and globals.npcRef["cat"]!=null and text_box.current_state==text_box.State.ready:
 				globals.getPlayer().changeMode("EatCat")

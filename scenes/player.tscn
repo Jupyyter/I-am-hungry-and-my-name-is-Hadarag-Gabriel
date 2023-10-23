@@ -21,23 +21,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_8bafa"]
-resource_name = "idle"
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_c6sln"]
 resource_name = "idleBlood0"
 loop_mode = 1
@@ -315,23 +298,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_13gb8"]
-resource_name = "walk"
-loop_mode = 1
-step = 0.25
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_2vk41"]
 resource_name = "walkBlood0"
 loop_mode = 1
@@ -415,10 +381,43 @@ tracks/0/keys = {
 "values": [Vector2i(10, 2), Vector2i(11, 2), Vector2i(12, 2), Vector2i(13, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_8bafa"]
+resource_name = "idleNormal"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_13gb8"]
+resource_name = "walkNormal"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_84bi6"]
 _data = {
 "RESET": SubResource("Animation_qvqhu"),
-"idle": SubResource("Animation_8bafa"),
 "idleBlood0": SubResource("Animation_c6sln"),
 "idleBlood1": SubResource("Animation_5qlq3"),
 "idleEatBasketOfApples": SubResource("Animation_8uclu"),
@@ -438,10 +437,11 @@ _data = {
 "idleEatRat": SubResource("Animation_iqrcb"),
 "idleIntestinalBlockage": SubResource("Animation_b04w4"),
 "idleKnife": SubResource("Animation_oifcx"),
-"walk": SubResource("Animation_13gb8"),
+"idleNormal": SubResource("Animation_8bafa"),
 "walkBlood0": SubResource("Animation_2vk41"),
 "walkBlood1": SubResource("Animation_e1nvh"),
-"walkKnife": SubResource("Animation_bj2ev")
+"walkKnife": SubResource("Animation_bj2ev"),
+"walkNormal": SubResource("Animation_13gb8")
 }
 
 [node name="player" type="CharacterBody2D" groups=["player"]]

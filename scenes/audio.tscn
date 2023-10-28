@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dysgmkxmlx3ev"]
+
+[ext_resource type="AudioStream" uid="uid://w61wdwqachid" path="res://sounds/grapefruit.mp3" id="1_d1gix"]
+[ext_resource type="Script" path="res://scripts/audio.gd" id="2_ei22i"]
+[ext_resource type="AudioStream" uid="uid://ci2n7a56303w" path="res://sounds/moan.mp3" id="3_islqr"]
+[ext_resource type="AudioStream" uid="uid://bbq8ggrpymyv6" path="res://sounds/wakeUp.mp3" id="4_2i7y4"]
+
+[node name="audio" type="AudioStreamPlayer" node_paths=PackedStringArray("textSound")]
+stream = ExtResource("1_d1gix")
+script = ExtResource("2_ei22i")
+textSound = NodePath("textSound")
+grapefruit = ExtResource("1_d1gix")
+wakeUp = ExtResource("3_islqr")
+moan = ExtResource("4_2i7y4")
+
+[node name="textSound" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[connection signal="finished" from="textSound" to="." method="textSoundFinished"]

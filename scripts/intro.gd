@@ -1,14 +1,15 @@
 extends Node2D
 @export var house:Sprite2D
+@export var bloodRoom4:Sprite2D
 @export var gabriel:Sprite2D
+var part:int=0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
 	#end
 	if globals.npcTriggered.has("mihai") and globals.npcTriggered["mihai"]:
-		self.visible=false
-		text_box.queue_text("so                :)")
+		pass
 	#town
 	elif globals.inHospital:
 		text_box.queue_text("oops
@@ -55,7 +56,23 @@ func _ready():
 func _process(delta):
 	#called when the textBox has just finished showing an entire conversation
 	if(text_box.current_state==text_box.State.ready):
-		if globals.inHospital:
+		if (globals.npcTriggered.has("mihai") and globals.npcTriggered["mihai"]):
+			match part:
+				0:
+					self.visible=false
+					text_box.queue_text("and so")
+					part+=1
+					print(part)
+				1:
+					print("aaaaaaa")
+					if textReady():
+						bloodRoom4.visible=true
+						self.visible=true
+						text_box.queue_text("gabriel ate a 3 month old baby
+						imagine eating a 3 month old baby")
+						part+=1
+
+		elif globals.inHospital:
 			get_tree().change_scene_to_file("scenes/hospitalRoom1.tscn")
 
 		#attic 3
@@ -83,9 +100,13 @@ func _process(delta):
 		#intro
 		else:
 			get_tree().change_scene_to_file("scenes/attic1.tscn")
-			
+
+
+func textReady():
+	return text_box.current_state==text_box.State.ready
 #its 4:24 AM, i havent slept yet and i have to go to school in 3 hours and 20 
 #sleepless?
+#yesterday i fell asleep around 6.30 am and overslept. because of that i missed the math test (integrals) (wtf americans dont do integrals by default in highschool:))
 """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠴⢚⡭⠖⠒⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠐⠦⠥⣒⣢⠤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⣠⠋⣴⣏⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠛⠿⣗⡤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

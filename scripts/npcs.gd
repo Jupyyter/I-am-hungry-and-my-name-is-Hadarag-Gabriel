@@ -39,19 +39,26 @@ func _process(delta):
 						match npcConv:
 							0:
 								text_box.queue_text("hi, i'm your brother, Salami")
-								endOfChat()
+								endOfChat(npcConv+1)
 					"rat":
 						match npcConv:
 							0:
 								text_box.queue_text("congratulations :)
 								you found Jerry")
 								text_box.queue_questionResponse("pet Jerry")
+								text_box.queue_text("gabriel reaches for Jerry")
 								npcConv+=1
 							1:
 								if textReady():
-									text_box.queue_text("gabriel reaches for Jerry")
+									text_box.hide_textbox()
 									globals.npcTriggered[npcName]=true
+									audio.playSound()
+									npcConv+=1
+							2:
+								if globals.getPlayer().animationFinished():
 									endOfChat(npcConv+1)
+									audio.stopSound()
+									globals.removeNode(self,true)
 
 
 					"bed":
@@ -95,8 +102,18 @@ func _process(delta):
 												text_box.queue_text("too bad")
 											1:
 												text_box.queue_text(":)")
+										npcConv+=1
+								2:
+									if textReady():
+										text_box.hide_textbox()
 										globals.npcTriggered[npcName]=true
+										audio.playSound()
+										npcConv+=1
+								3:
+									if globals.getPlayer().animationFinished():
 										endOfChat(npcConv+1)
+										audio.stopSound()
+										globals.removeNode(self,true)
 						else:
 							text_box.queue_text("gabriel is too hungry to look at the dead cat")
 							endOfChat(0)
@@ -113,6 +130,7 @@ func _process(delta):
 								if textReady():
 									match text_box.IndexChosen:
 										0:
+											text_box.queue_text("gabriel approaches the rat to pet it")
 											npcConv+=2
 										1:
 											text_box.queue_text("you sure?")
@@ -124,14 +142,21 @@ func _process(delta):
 									match text_box.IndexChosen:
 										0:
 											npcConv+=1
-											text_box.queue_text("(i don't believe you)")
+											text_box.queue_text("(i don't believe you)
+											gabriel approaches the rat to pet it")
 										1:
 											npcConv+=1
 							3:
 								if textReady():
-									text_box.queue_text("gabriel approaches the rat to pet it")
+									text_box.hide_textbox()
 									globals.npcTriggered[npcName]=true
+									audio.playSound()
+									npcConv+=1
+							4:
+								if globals.getPlayer().animationFinished():
 									endOfChat(npcConv+1)
+									audio.stopSound()
+									globals.removeNode(self,true)
 					"noodle":
 						match npcConv:
 							0:
@@ -165,15 +190,10 @@ func _process(delta):
 							1:
 								conversation(["what happened in the timeskip?",
 
-								"(give Salami some crisps and biscuits)",
-
 								"what are these strangers doing in my house?",
 
 								"Miguel died
 								his last words where \"i need more bullets, please sir give me more bullets\"",
-
-								"(he is so happy to see those biscuits and crisps)
-								(he ate all the biscuits and crisps)",
 							
 								"your siblings
 								see that one in the corner?
@@ -296,7 +316,7 @@ func _process(delta):
 					"bucket":
 						match npcConv:
 							0:
-								text_box.queue_text("buckets")
+								text_box.queue_text("some buckets")
 								inChat=false
 					"miguel":
 						match npcConv:
@@ -327,15 +347,18 @@ func _process(delta):
 										0:
 											text_box.hide_textbox()
 											globals.npcTriggered[npcName]=true
+											audio.playSound()
 											npcConv+=1
 										1:
 											text_box.hide_textbox()
 											globals.npcTriggered[npcName]=true
+											audio.playSound()
 											npcConv+=2
 										2:
 											endOfChat(0)
 							2:
 								if globals.getPlayer().animationFinished():
+									audio.stopSound()
 									text_box.queue_text("you ate the raw potato
 									yummy yummy raw potato full of dirt
 									but gabriel hungry
@@ -346,6 +369,7 @@ func _process(delta):
 									endOfChat(npcConv+2)
 							3:
 								if globals.getPlayer().animationFinished():
+									audio.stopSound()
 									text_box.queue_text("you accidentally ate the raw potato
 									yummy yummy raw potato full of dirt
 									but gabriel hungry
@@ -392,7 +416,7 @@ func _process(delta):
 									"i want to play Raid Shadow Legends, one of the biggest mobile role-playing games of 2019 and it's totally free! Currently almost 10 million users have joined Raid over the last six months, and it's one of the most impressive games in its class with detailed models, environments and smooth 60 frames per second animations! All the champions in the game can be customized with unique gear that changes your strategic buffs and abilities! The dungeon bosses have some ridiculous skills of their own and figuring out the perfect party and strategy to overtake them's a lot of fun! Currently with over 300,000 reviews, Raid has almost a perfect score on the Play Store! The community is growing fast and the highly anticipated new faction wars feature is now live, you might even find my squad out there in the arena! It's easier to start now than ever with rates program for new players you get a new daily login reward for the first 90 days that you play in the game! So what are you waiting for? Go to the video description, click on the special links and you'll get 50,000 silver and a free epic champion as part of the new player program to start your journey! Good luck and I'll see you there!",
 
 									":)
-									(how can you respond to that?)
+									(how can you respond to \":)\"?)
 									(you cant)",
 									
 									"don't you want to suck my di--fast--0.03
@@ -415,7 +439,7 @@ func _process(delta):
 					"bucket":
 						match npcConv:
 							0:
-								text_box.queue_text("more buckets")
+								text_box.queue_text("some 4 buckets")
 								inChat=false
 					"beans":
 						match npcConv:
@@ -430,10 +454,12 @@ func _process(delta):
 								if textReady():
 									match text_box.IndexChosen:
 										0:
+											audio.playSound()
 											text_box.hide_textbox()
 											globals.npcTriggered[npcName]=true
 											npcConv+=1
 										1:
+											audio.playSound()
 											text_box.hide_textbox()
 											globals.npcTriggered[npcName]=true
 											npcConv+=2
@@ -441,6 +467,7 @@ func _process(delta):
 											endOfChat(0)
 							2:
 								if globals.getPlayer().animationFinished():
+									audio.stopSound()
 									text_box.queue_text("you ate the raw beans
 									did you know that raw beans are toxic?
 									amimir time")
@@ -448,6 +475,7 @@ func _process(delta):
 									endOfChat(npcConv+2)
 							3:
 								if globals.getPlayer().animationFinished():
+									audio.stopSound()
 									text_box.queue_text("you accidentally ate the raw beans
 											did you know that raw beans are toxic?
 											...
@@ -480,10 +508,12 @@ func _process(delta):
 						match npcConv:
 							0:
 								text_box.queue_text("did you know cannibalism is not illegal?")
+								text_box.queue_text("(yeah imagine something like eating your own brother wtf)")
+								endOfChat(npcConv+1)
 					"bucket":
 						match npcConv:
 							0:
-								text_box.queue_text("even more buckets")
+								text_box.queue_text("quite a few buckets")
 								inChat=false
 					"knife":
 						match npcConv:
@@ -521,18 +551,23 @@ func _process(delta):
 								if textReady():
 									match text_box.IndexChosen:
 										0:
-											npcConv+=2
+											npcConv+=1
 										1:
 											text_box.queue_text("(should have thought about that before you ate your brother)")
 											npcConv+=1
 							2:
 								if textReady():
+									text_box.hide_textbox()
+									audio.playSound()
+									globals.npcTriggered[npcName]=true
 									npcConv+=1
 							3:
-								text_box.queue_text("gabriel ate the huge pile of cockroaches with an unnatural dexterity
-								no cockroach exscaped his hunger")
-								endOfChat()
-								get_parent().queue_free()
+								if globals.getPlayer().animationFinished():
+									text_box.queue_text("gabriel ate the huge pile of cockroaches with an unnatural dexterity
+									no cockroach exscaped his hunger")
+									audio.stopSound()
+									endOfChat()
+									get_parent().queue_free()
 					"garbage":
 						match npcConv:
 							0:
@@ -542,11 +577,19 @@ func _process(delta):
 								npcConv+=1
 							1:
 								if textReady():
+									text_box.hide_textbox()
+									audio.playSound()
+									globals.npcTriggered[npcName]=true
+									npcConv+=1
+							2:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("gabriel devoured the entire pile of garbage
 									he was never so happy before
 									food here food there food everywhere")
+									audio.stopSound()
 									endOfChat()
 									get_parent().queue_free()
+
 					"wall":
 						match npcConv:
 							0:
@@ -561,9 +604,16 @@ func _process(delta):
 								npcConv+=1
 							1:
 								if textReady():
+									text_box.hide_textbox()
+									audio.playSound()
+									globals.npcTriggered[npcName]=true
+									npcConv+=1
+							2:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("gabriel is literally eating his way through life
 									nothing can stop gabriel")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"stopSign":
 						match npcConv:
@@ -572,7 +622,14 @@ func _process(delta):
 								npcConv+=1
 							1:
 								if textReady():
+									text_box.hide_textbox()
+									audio.playSound()
+									globals.npcTriggered[npcName]=true
+									npcConv+=1
+							2:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("the stop sign stood no chance")
+									audio.stopSound()
 									endOfChat()
 									get_parent().queue_free()
 			"town":
@@ -595,7 +652,7 @@ func _process(delta):
 							0:
 								text_box.queue_text("good morning sir
 								your story of eating that stop sign inspired me
-								thank you
+								thank you you changedmy life
 								can you eat this basket of rocks in 1 secod?")
 								text_box.queue_questionResponse("my pleasure")
 								npcConv+=1
@@ -625,101 +682,121 @@ func _process(delta):
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of apples in: 0.407 seconds")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"basketOfCorks":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of corks in: 0.201 seconds")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"basketOfRocks":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of rocks in: 0.0791 seconds
 									congratulations")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"basketOfMetal":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of metals in: 0.0111 seconds")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"basketOfSnakes":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of snakes in: 0.00587 seconds")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"basketOfCorks2":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of corks in: 0.000971 seconds")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"basketOfApples2":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound("moan")
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of apples in: 0.00000755 seconds")
 									endOfChat()
+									audio.stopSound()
 									get_parent().queue_free()
 					"basketOfMetal2":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of metals in: 0.000000615 seconds")
+									audio.stopSound()
 									endOfChat()
 									get_parent().queue_free()
 					"basketOfSnakes2":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
-								if !globals.getPlayer().inAnimation:
+								if globals.getPlayer().animationFinished():
 									text_box.queue_text("you ate the basket of snakes in: 0.000000000931 seconds")
+									audio.stopSound()
 									endOfChat()
 									get_parent().queue_free()
 					"basketOfSnakes3":
 						match npcConv:
 							0:
 								globals.npcTriggered[npcName]=true
+								audio.playSound()
 								npcConv=+1
 							1:
 								if !globals.getPlayer().inAnimation:
 									text_box.queue_text("you ate the basket of snakes in: 0.000000000000548 seconds")
+									audio.stopSound()
 									npcConv+=1
 							2:
 								if textReady():
@@ -733,15 +810,18 @@ func _process(delta):
 							0:
 								text_box.queue_text("i once had a wife
 								she cook
-								she great whife
+								she great wife
+								me ride wife
 								but when she turn 15 she fight back
-								me kill whife
-								me sad :(")
+								me hit wife
+								wife die
+								think about wife
+								think about wife :(")
 								endOfChat(npcConv+1)
 					"doctor2":
 						match npcConv:
 							0:
-								text_box.queue_text("i was black wance")
+								text_box.queue_text("i was black once")
 								endOfChat(npcConv+1)
 					"door1":
 						get_tree().change_scene_to_file("scenes/hallWay1.tscn")
@@ -752,9 +832,17 @@ func _process(delta):
 					"door2":
 						globals.npcTriggered[npcName]=true
 					"door3":
-						globals.npcTriggered[npcName]=true
+						if globals.npcTriggered.has("mundo") and globals.npcTriggered["mundo"]:
+							globals.npcTriggered[npcName]=true
+						else:
+							text_box.queue_text("gabriel dosent know how to open this door yet")
+							endOfChat()
 					"door4":
-						globals.npcTriggered[npcName]=true
+						if globals.npcTriggered.has("yuumi") and globals.npcTriggered["yuumi"]:
+							globals.npcTriggered[npcName]=true
+						else:
+							text_box.queue_text("gabriel dosent know how to open this door yet")
+							endOfChat()
 					"bobiJoke":
 						match npcConv:
 							0:
@@ -800,16 +888,17 @@ func _process(delta):
 					"mundo":
 						match npcConv:
 							0:
-								text_box.queue_text("hi")
-								text_box.queue_questionResponse("hi")
+								text_box.queue_text("(bucket filled with jucuy bood)")
 								npcConv+=1
 							1:
 								if textReady():
+									audio.playSound()
 									globals.npcTriggered[npcName]=true
 									npcConv+=1
 							2:
 								text_box.hide_textbox()
 								if globals.getPlayer().animationFinished():
+									audio.stopSound()
 									text_box.queue_text("you can say gabriel has a taste for blood ;)")
 									endOfChat(npcConv+1)
 					"iulica":
@@ -822,17 +911,26 @@ func _process(delta):
 								npcConv+=1
 							1:
 								if textReady():
+									audio.playSound()
 									globals.npcTriggered[npcName]=true
+									npcConv+=1
+							2:	
+								text_box.hide_textbox()
+								if globals.getPlayer().animationFinished():
+									audio.stopSound()
 									endOfChat(npcConv+1)
 			"bloodRoom2":
 					match npcName:
 						"bobiJoke":
-							text_box.queue_text("wanna hear a joke?")
-							text_box.queue_questionResponse("yes
-								no")
-							text_box.queue_text("what is worse then a baby in a dumpster?
-								A BABY IN MULTIPLE DUMPSTERS
-								HAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHA")
+							match npcConv:
+								0:
+									text_box.queue_text("wanna hear a joke?")
+									text_box.queue_questionResponse("yes
+										no")
+									text_box.queue_text("what is worse then a baby in a dumpster?
+										A BABY IN MULTIPLE DUMPSTERS
+										HAHAHAHAHHAHAHAHAHAHAHAHAHAHHAHAHAHAHAHAHAHAHA")
+									endOfChat(npcConv+1)
 						"door3":
 							get_tree().change_scene_to_file("scenes/hallWay1.tscn")
 						"yuumi":
@@ -843,7 +941,13 @@ func _process(delta):
 									npcConv+=1
 								1:
 									if textReady():
+										audio.playSound()
 										globals.npcTriggered[npcName]=true
+										npcConv+=1
+								2:
+									text_box.hide_textbox()
+									if globals.getPlayer().animationFinished():
+										audio.stopSound()
 										endOfChat(npcConv+1)
 						"adc":
 							match npcConv:
@@ -863,6 +967,7 @@ func _process(delta):
 					"door4":
 						text_box.queue_text("GABRIEL IS HUNGRY--red")
 						endOfChat()
+
 		globals.convState[npcName+currentScene]=npcConv
 		text_box.inChat=inChat
 
@@ -918,6 +1023,8 @@ func endOfChat(npcConvv:int=-1):
 	if text_box.text_queue.is_empty() and text_box.conv_queue.is_empty(): #i should be executed for this
 		text_box.hide_textbox()#this is morally wrong in many ways
 		#the reason i do this is because in between some statements text text_box.current_state==text_box.State.ready and it makes the textbox disappear for 1 frame and it looks bad
+#5am new record
+#https://cdn.discordapp.com/attachments/969231182304784446/1166194592174055444/image.png?ex=65499a59&is=65372559&hm=7b00bca663bdece811d1083fbc48cc03070be3b82cf9c3925ad1da932786d9c4&
 #:):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)
 """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⣿⣟⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀

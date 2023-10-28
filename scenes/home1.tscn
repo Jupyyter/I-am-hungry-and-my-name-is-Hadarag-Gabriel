@@ -115,6 +115,7 @@ texture = ExtResource("12_ycqll")
 [node name="bucket" parent="StaticBody2D/hause/bucket" instance=ExtResource("4_thk0d")]
 position = Vector2(-0.5, 4)
 scale = Vector2(2.34, 1.005)
+flipCharacter = false
 
 [node name="ladder" parent="StaticBody2D/hause" instance=ExtResource("4_thk0d")]
 position = Vector2(311, 39)

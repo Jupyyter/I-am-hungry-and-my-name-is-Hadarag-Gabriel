@@ -290,6 +290,18 @@ func visibleRacio1():
 	for lbl in LabelList2:
 		lbl.visible_ratio=1
 
+func isReady()->bool:
+	if current_state==State.ready:
+		return true
+	else:
+		return false
+
+func isReading()->bool:
+	if current_state==State.reading:
+		return true
+	else:
+		return false
+
 #4 AM :)
 #https://en.wikipedia.org/wiki/Circadian_rhythm_sleep_disorder
 #i feel like this:

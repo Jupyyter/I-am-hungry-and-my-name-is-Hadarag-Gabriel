@@ -12,6 +12,7 @@
 
 [sub_resource type="Animation" id="Animation_x76ka"]
 resource_name = "noLimbs"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,6 +28,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_j2vqj"]
 resource_name = "normal"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -170,6 +172,7 @@ scale = Vector2(3.215, 1.665)
 flipCharacter = false
 
 [node name="bobiJoke" type="Sprite2D" parent="bloodRoom2"]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(-23.5, 74)
 texture = ExtResource("9_qfqbg")

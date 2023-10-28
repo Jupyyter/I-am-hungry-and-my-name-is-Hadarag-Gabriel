@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 class_name player
 
-var speedMultiplier:float=5
-var speed:int=150
+var speedMultiplier:float=1
+var speed:int=100
 var flipped:bool=false
 var nearLadder:bool=false
 var atticStartPos=Vector2i(147,227)
@@ -95,6 +95,14 @@ func _on_animation_player_animation_finished(anim_name:StringName):
 		"idleEatBeans":
 			animationReset()
 		"idleEatPotato":
+			animationReset()
+		"idleEatGarbage":
+			animationReset()
+		"idleEatStopSign":
+			animationReset()
+		"idleEatCockroach":
+			animationReset()
+		"idleEatWall":
 			animationReset()
 
 func intestinalBlockage():

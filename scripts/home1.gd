@@ -6,10 +6,14 @@ var parentOfNodes:Array[Node2D]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	if globals.npcTriggered.has("potato") and globals.npcRef["potato"]!=null and globals.npcTriggered["potato"]==true:
+		globals.npcRef["potato"].visible=false
+	elif globals.npcTriggered.has("beans") and globals.npcRef["beans"]!=null and globals.npcTriggered["beans"]==true:
+		globals.npcRef["beans"].visible=false
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
+# Called every frame. 'delta' is the elapsed time since the previous  frame.
 func _process(delta):
 	match self.name:
 		"home1":

@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name player
 
 var speedMultiplier:float=1
-var speed:int=100
+var speed:int=75
 var flipped:bool=false
 var nearLadder:bool=false
 var atticStartPos=Vector2i(147,227)

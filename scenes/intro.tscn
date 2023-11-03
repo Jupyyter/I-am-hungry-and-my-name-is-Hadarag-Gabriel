@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cs4dladq175p6"]
+[gd_scene load_steps=17 format=3 uid="uid://cs4dladq175p6"]
 
 [ext_resource type="Script" path="res://scripts/intro.gd" id="1_2v2we"]
 [ext_resource type="Texture2D" uid="uid://033trq21imjg" path="res://images/terrare.png" id="2_lvnot"]
@@ -10,13 +10,23 @@
 [ext_resource type="Texture2D" uid="uid://cedf53w8n3pcu" path="res://images/terrareIdle.png" id="8_svy5f"]
 [ext_resource type="Texture2D" uid="uid://d3sfckm76lqai" path="res://images/verands2.png" id="9_cwkxm"]
 [ext_resource type="Texture2D" uid="uid://bcn15ybinlsyn" path="res://images/bloodRoom4.png" id="10_f2esh"]
+[ext_resource type="Texture2D" uid="uid://7274t3m5gye8" path="res://images/hallWay.png" id="11_r2xun"]
+[ext_resource type="Texture2D" uid="uid://b5qbr0xrxuvsp" path="res://images/scytheDoctor.png" id="12_ec5l8"]
+[ext_resource type="Texture2D" uid="uid://54cd8sowlnjf" path="res://images/britishDoctor.png" id="13_wc54h"]
+[ext_resource type="Texture2D" uid="uid://deg3qcjj73d5x" path="res://images/angryIulica.png" id="14_l1gnx"]
+[ext_resource type="Texture2D" uid="uid://cylncvs13a1up" path="res://images/yuumi.png" id="15_6bclt"]
+[ext_resource type="Texture2D" uid="uid://c77vouxwr723e" path="res://images/town2.png" id="16_ip371"]
 
-[node name="intro" type="Node2D" node_paths=PackedStringArray("house", "bloodRoom4", "gabriel")]
+[node name="intro" type="Node2D" node_paths=PackedStringArray("house", "bloodRoom4", "gabriel", "hallWay", "town2", "hallWay2", "hallWay3")]
 texture_filter = 1
 script = ExtResource("1_2v2we")
 house = NodePath("Home3")
 bloodRoom4 = NodePath("bloodRoom4")
 gabriel = NodePath("Terrare")
+hallWay = NodePath("hallWay")
+town2 = NodePath("town2")
+hallWay2 = NodePath("hallWay2")
+hallWay3 = NodePath("hallWay3")
 
 [node name="Terrare" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -54,7 +64,7 @@ position = Vector2(275.5, 38.5)
 texture = ExtResource("9_cwkxm")
 
 [node name="TerrareIdle" type="Sprite2D" parent="Home3"]
-position = Vector2(356.5, 36)
+position = Vector2(361.5, 3)
 texture = ExtResource("8_svy5f")
 hframes = 17
 vframes = 12
@@ -64,3 +74,71 @@ visible = false
 position = Vector2(393, 226)
 scale = Vector2(2, 2)
 texture = ExtResource("10_f2esh")
+
+[node name="hallWay" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-122, 205)
+scale = Vector2(2, 2)
+texture = ExtResource("11_r2xun")
+
+[node name="TerrareIdle" type="Sprite2D" parent="hallWay"]
+position = Vector2(336, -16)
+texture = ExtResource("8_svy5f")
+hframes = 17
+vframes = 12
+frame = 136
+
+[node name="bobiJoke" type="Sprite2D" parent="hallWay"]
+position = Vector2(280.5, 18.5)
+texture = ExtResource("12_ec5l8")
+
+[node name="britishDoctor" type="Sprite2D" parent="hallWay"]
+position = Vector2(89, 38.5)
+texture = ExtResource("13_wc54h")
+
+[node name="angryIulica" type="Sprite2D" parent="hallWay"]
+position = Vector2(228, 38)
+texture = ExtResource("14_l1gnx")
+
+[node name="yuumi" type="Sprite2D" parent="hallWay"]
+z_index = 1
+position = Vector2(176.5, 50)
+texture = ExtResource("15_6bclt")
+offset = Vector2(0, -21)
+flip_h = true
+hframes = 2
+frame = 1
+
+[node name="town2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(238, 131)
+scale = Vector2(2, 2)
+texture = ExtResource("16_ip371")
+
+[node name="hallWay2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-131, 253)
+scale = Vector2(2, 2)
+texture = ExtResource("11_r2xun")
+
+[node name="TerrareIdle" type="Sprite2D" parent="hallWay2"]
+position = Vector2(304, -12)
+texture = ExtResource("8_svy5f")
+flip_h = true
+hframes = 17
+vframes = 12
+frame = 171
+
+[node name="hallWay3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-131, 253)
+scale = Vector2(2, 2)
+texture = ExtResource("11_r2xun")
+
+[node name="TerrareIdle" type="Sprite2D" parent="hallWay3"]
+position = Vector2(191, -6.5)
+texture = ExtResource("8_svy5f")
+flip_h = true
+hframes = 17
+vframes = 12
+frame = 172

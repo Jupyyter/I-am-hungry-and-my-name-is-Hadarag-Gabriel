@@ -415,9 +415,7 @@ func _process(delta):
 
 									"i want to play Raid Shadow Legends, one of the biggest mobile role-playing games of 2019 and it's totally free! Currently almost 10 million users have joined Raid over the last six months, and it's one of the most impressive games in its class with detailed models, environments and smooth 60 frames per second animations! All the champions in the game can be customized with unique gear that changes your strategic buffs and abilities! The dungeon bosses have some ridiculous skills of their own and figuring out the perfect party and strategy to overtake them's a lot of fun! Currently with over 300,000 reviews, Raid has almost a perfect score on the Play Store! The community is growing fast and the highly anticipated new faction wars feature is now live, you might even find my squad out there in the arena! It's easier to start now than ever with rates program for new players you get a new daily login reward for the first 90 days that you play in the game! So what are you waiting for? Go to the video description, click on the special links and you'll get 50,000 silver and a free epic champion as part of the new player program to start your journey! Good luck and I'll see you there!",
 
-									":)
-									(how can you respond to \":)\"?)
-									(you cant)",
+									"me monke me want food im afraid to touch grass unlimited food glitch? i dont go outside yellow ball in the sky shooting lasers to slowly kill me",
 									
 									"don't you want to suck my di--fast--0.03
 									:)"])
@@ -846,7 +844,7 @@ func _process(delta):
 					"bobiJoke":
 						match npcConv:
 							0:
-								text_box.queue_text("hey
+								text_box.queue_text("hei my name is bobbyJoke
 								think af a number
 								between 1 and 20
 								add 32
@@ -936,7 +934,8 @@ func _process(delta):
 						"yuumi":
 							match npcConv:
 								0:
-									text_box.queue_text("(unconscious man)")
+									text_box.queue_text("(this is georgeWashingMachine)
+									(he is unconscious)")
 									text_box.queue_questionResponse("borrow his limbs")
 									npcConv+=1
 								1:

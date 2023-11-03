@@ -2,6 +2,10 @@ extends Node2D
 @export var house:Sprite2D
 @export var bloodRoom4:Sprite2D
 @export var gabriel:Sprite2D
+@export var hallWay:Sprite2D
+@export var town2:Sprite2D
+@export var hallWay2:Sprite2D
+@export var hallWay3:Sprite2D
 var part:int=0
 
 # Called when the node enters the scene tree for the first time.
@@ -62,14 +66,44 @@ func _process(delta):
 					self.visible=false
 					text_box.queue_text("and so")
 					part+=1
-					print(part)
 				1:
-					print("aaaaaaa")
 					if textReady():
 						bloodRoom4.visible=true
 						self.visible=true
 						text_box.queue_text("gabriel ate a 3 month old baby
 						imagine eating a 3 month old baby")
+						part+=1
+				2:
+					if textReady():
+						bloodRoom4.visible=false
+						hallWay.visible=true
+						text_box.queue_text("after gabriel ate a 3 month old snack, he was kicked out of the hospital
+						he then reformed and became a vegetarian")
+						part+=1
+				3:
+					if textReady():
+						hallWay.visible=false
+						town2.visible=true
+						text_box.queue_text("gabriel beeng a vegetarian:")
+						part+=1
+				4:
+					if textReady():
+						town2.visible=false
+						hallWay2.visible=true
+						text_box.queue_text("after 2 years gabriel returned to the hospital")
+						part+=1
+				5:
+					if textReady():
+						hallWay2.visible=false
+						hallWay3.visible=true
+						text_box.queue_text("then he tripped and died
+						he was in a hospital but nobody liked gabriel so they let him die")
+						part+=1
+				6:
+					if textReady():
+						hallWay3.visible=false
+						text_box.queue_text("the end
+						moral of the story: dont trip and die")
 						part+=1
 
 		elif globals.inHospital:

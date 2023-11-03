@@ -13,8 +13,8 @@ config_version=5
 config/name="I am hungry and my name is Hadarag Gabriel"
 run/main_scene="res://scenes/intro.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
-boot_splash/image="res://images/f566e54cfd5c3af5009a0711f89749de.png"
-config/icon="res://images/f566e54cfd5c3af5009a0711f89749de.png"
+boot_splash/show_image=false
+config/icon="res://images/icon.png"
 
 [autoload]
 

@@ -20,6 +20,8 @@ func _ready():
 			if globals.npcTriggered.has("potato") and globals.npcTriggered["potato"]:
 				removeNodes()
 				addNodes()
+				if globals.npcTriggered.has("rat") and globals.npcTriggered["rat"]:
+					globals.npcRef["rat"].queue_free()
 		"attic2":
 			if globals.firstTime(self.name):
 				globals.getPlayer().position=Vector2(161,234)
@@ -28,6 +30,10 @@ func _ready():
 			if globals.npcTriggered.has("beans") and globals.npcTriggered["beans"]:
 				removeNodes()
 				addNodes()
+				if globals.npcTriggered.has("rat2") and globals.npcTriggered["rat2"]:
+					globals.npcRef["rat2"].queue_free()
+				if globals.npcTriggered.has("cat") and globals.npcTriggered["cat"]:
+					globals.npcRef["cat"].queue_free()
 		"attic3":
 			if globals.firstTime(self.name):
 				globals.getPlayer().position=Vector2(1110,366)
@@ -45,23 +51,11 @@ func _process(delta):
 				if nearLadder:
 					get_tree().change_scene_to_file("scenes/home1.tscn")
 
-			if globals.npcTriggered["rat"]  and globals.npcRef["rat"]!=null and globals.npcRef["rat"].visible and text_box.current_state==text_box.State.ready:
-				globals.getPlayer().changeMode("EatRat")
-				globals.npcRef["rat"].visible=false
-
 		"attic2":
 
 			if(Input.is_action_just_pressed("ui_accept")) :
 				if nearLadder:
 					get_tree().change_scene_to_file("scenes/home2.tscn")
-
-			if globals.npcTriggered["rat2"]  and globals.npcRef["rat2"]!=null and globals.npcRef["rat2"].visible and text_box.current_state==text_box.State.ready:
-				globals.getPlayer().changeMode("EatRat")
-				globals.npcRef["rat2"].visible=false
-
-			if globals.npcTriggered["cat"]  and globals.npcRef["cat"]!=null and globals.npcRef["cat"].visible and text_box.current_state==text_box.State.ready:
-				globals.getPlayer().changeMode("EatCat")
-				globals.npcRef["cat"].visible=false
 
 		"attic3":
 
@@ -122,9 +116,9 @@ func addNodes():
 ⢈⣸⡔⠀⠀⣿⡞⣿⣿⣿⣿⣿⣿⣻⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠔⠋⠀ ⠀⢸⡯⣿⣯⣿⣿⣿⣿⡇⠀⠀⠀⠀⠹⣆⠀⠀⠀⠀
 ⠚⡥⣄⠀⠀⢻⡇⣿⣿⣿⣿⣿⣿⣧⠻⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠖⢒⣉⣭⣭⣕⣲⣤⠖⠒⠀⠀⠀⠀⠀⠀⢸⠁⣿⣟⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠘⣧⠀⠀⠀
 ⠰⠛⠁⠀⠀⠘⣷⣿⣿⣿⣿⣿⣿⡝⣦⣱⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣰⣞⣷⠿⠛⠋⢉⣠⢟⡋⠀⠀⠀⠀⠀⠀⠀⠀⠀⡿⢉⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠘⣧⠀⠀
-⠠⢀⠠⠀⠀⠀⢿⡟⣿⣿⣿⣿⣿⣷⠈⠳⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⣿⣿⢿⢵⠛⠁⠀⠀⠀⢠⠖⠛⡏⠀⠀⣼⠃⣸⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠘⣧⠀
+⠠⢀⠠⠀⠀⠀⢿⡟⣿⣿⣿⣿⣿⣷⠈⠳⣿⡄⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⣿⣿⢿⢵⠛⠁⠀⠀⠀⢠⠖⠛⡏⠀⠀⣼⠃⣸⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠘⣧⠀
 ⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⠳⣄⠀⠽⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡏⠙⣿⠀⢧⠀⠀⠀⢠⠏⠀⢸⠁⢀⣼⡿⠋⣙⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠘⣧
-⠠⠀⠁⠀⠀⣰⠃⢻⣿⣿⣿⣿⣿⣿⣇⠈⠓⠦⣬⣧⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⡀⢹⡀⠀⢧⠀⠀⢸⠀⠀⢿⣠⣿⠏⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠘
+⠠⠀⠁⠀⠀⣰⠃⢻⣿⣿⣿⣿⣿⣿⣇⠈⠓⠦⣬⣧⡄⠀⠀⠀⠀⠀⠀⠀⠀⠻⡀⢹⡀⠀⢧⠀⠀⢸⠀⠀⢿⣠⣿⠏⠀⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠀⠘
 ⠀⠀⠀⠀⢠⢏⠀⢈⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠙⠦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠙⣄⢧⠀⠈⢳⡀⢸⠀⠀⢺⣿⠃⠀⢰⣿⣿⣿⣿⣿⣿⣿⢻⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀
 ⠠⠀⠀⠀⡞⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⠀⠀⠈⠙⢲⣦⣄⣀⣀⠀⠀⠀⠈⢫⣆⠀⠀⢳⣾⠀⠀⢸⠇⠀⠀⣾⣿⣿⣿⣿⣿⣿⡿⠘⣿⣿⣿⣇⢀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⡼⠁⠀⢀⣿⣿⡿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⣀⠀⠀⢻⡀⠙⠛⠿⢿⣿⣶⣶⣿⣄⠀⠀⢹⠀⠀⢸⠀⠀⢠⣿⣿⣻⣿⣿⣿⣿⠇⠀⢹⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀

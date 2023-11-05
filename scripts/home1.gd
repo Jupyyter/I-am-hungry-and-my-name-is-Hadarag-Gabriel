@@ -16,21 +16,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous  frame.
 func _process(delta):
 	match self.name:
-		"home1":
-			if globals.npcTriggered.has("potato") and globals.npcTriggered["potato"]==true:
-				if globals.npcRef["potato"].visible:
-					globals.getPlayer().changeMode("EatPotato")
-				globals.npcRef["potato"].visible=false
-
-		"home2":
-			if globals.npcTriggered.has("beans") and globals.npcTriggered["beans"]==true:
-				if globals.npcRef["beans"].visible:
-					globals.getPlayer().changeMode("EatBeans")
-				globals.npcRef["beans"].visible=false
 
 		"home3":
-			if globals.npcTriggered.has("knife") and globals.npcTriggered["knife"]==true and globals.npcRef["knife"].visible==true:
-				globals.npcRef["knife"].visible=false
+			if globals.npcTriggered.has("knife") and globals.npcTriggered["knife"]==true:
 				globals.getPlayer().changeMode("Knife")
 				makeDark()
 				removeNodes()

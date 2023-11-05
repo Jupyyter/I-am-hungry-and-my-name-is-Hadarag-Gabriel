@@ -1,12 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://deijcje2ut5a3"]
+[gd_scene load_steps=8 format=3 uid="uid://deijcje2ut5a3"]
 
 [ext_resource type="Script" path="res://scripts/bloodRoom.gd" id="1_g8lj3"]
 [ext_resource type="Texture2D" uid="uid://c5bxqjrniyuk8" path="res://images/bloodRoom3.png" id="2_73yov"]
 [ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="3_6ppdt"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="4_h4cfn"]
 [ext_resource type="PackedScene" uid="uid://dq3qjwhrl4stg" path="res://scenes/npcs.tscn" id="5_p0h87"]
-[ext_resource type="Texture2D" uid="uid://cb53xik8trp30" path="res://images/mihai.png" id="7_unp85"]
-[ext_resource type="Texture2D" uid="uid://bwmdmcbf2awvm" path="res://images/bed.png" id="7_uo1dt"]
+[ext_resource type="Texture2D" uid="uid://ct8xoh3kgppxx" path="res://images/mihaiInBed.png" id="6_raex3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qnl2n"]
 size = Vector2(154, 34.2758)
@@ -39,22 +38,8 @@ rotation = -0.98262
 scale = Vector2(3.215, 1.665)
 flipCharacter = false
 
-[node name="Bed2" type="Sprite2D" parent="bloodRoom3"]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(-7.5, 41.5)
-texture = ExtResource("7_uo1dt")
-offset = Vector2(0, -11)
-flip_h = true
-
-[node name="mihai" type="Sprite2D" parent="bloodRoom3/Bed2"]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(10, -14)
-texture = ExtResource("7_unp85")
-
-[node name="mihai" parent="bloodRoom3/Bed2/mihai" instance=ExtResource("5_p0h87")]
-position = Vector2(-9.5, 15.5)
+[node name="mihai" parent="bloodRoom3" instance=ExtResource("5_p0h87")]
+position = Vector2(-7, 43)
 scale = Vector2(3.825, 2.245)
 flipCharacter = false
 
@@ -69,3 +54,11 @@ z_index = 2
 position = Vector2(377, 275)
 skew = 0.689405
 shape = SubResource("RectangleShape2D_qnl2n")
+
+[node name="MihaiInBed" type="Sprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+position = Vector2(377, 290)
+scale = Vector2(2, 2)
+texture = ExtResource("6_raex3")
+offset = Vector2(0, -22)

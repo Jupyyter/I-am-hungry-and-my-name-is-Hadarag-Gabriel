@@ -1,7 +1,6 @@
-[gd_scene load_steps=19 format=3 uid="uid://bjv5rnjgqdnh3"]
+[gd_scene load_steps=18 format=3 uid="uid://bjv5rnjgqdnh3"]
 
 [ext_resource type="Texture2D" uid="uid://ca2q52pi3bjr1" path="res://images/alley.png" id="1_feh3h"]
-[ext_resource type="Script" path="res://scripts/alley.gd" id="1_y56mx"]
 [ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="2_5xmrl"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="3_yoe2i"]
 [ext_resource type="Texture2D" uid="uid://cn7ox0382tjw3" path="res://images/Cockroach.png" id="4_jn8vd"]
@@ -52,7 +51,6 @@ size = Vector2(98.5, 28)
 
 [node name="alley" type="Node2D"]
 texture_filter = 1
-script = ExtResource("1_y56mx")
 
 [node name="alley" type="StaticBody2D" parent="."]
 

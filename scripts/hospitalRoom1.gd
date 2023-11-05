@@ -19,7 +19,9 @@ func _process(delta):
 			if textReady():
 				globals.getPlayer().changeMode("EatCatDown")
 				text_box.queue_text("good gabriel--color1
-					he is well trained, you can keep him--color1
+					now bark--color1")
+				text_box.queue_questionResponse("wof wooof WoOF OWOf OWFO WOF WOOFFFF WOOOOOOOOOOFFF")
+				text_box.queue_text("he is well trained, you can keep him--color1
 					ty sir--color2")
 				npcConv+=1
 		2:

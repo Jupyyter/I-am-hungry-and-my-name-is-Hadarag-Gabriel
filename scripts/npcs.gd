@@ -873,6 +873,7 @@ func _process(delta):
 								text_box.queue_text("please sir that leg over there was passed in my family from generation to generation
 								its the most precious thing i have")
 								text_box.queue_questionResponse("i eat cats 4 fun
+								bark
 								14")
 								npcConv+=1
 							1:
@@ -918,7 +919,7 @@ func _process(delta):
 							match npcConv:
 								0:
 									text_box.queue_text("hi")
-									text_box.queue_questionResponse("hi")
+									text_box.queue_questionResponse("woof")
 									npcConv+=1
 								1:
 									if textReady():

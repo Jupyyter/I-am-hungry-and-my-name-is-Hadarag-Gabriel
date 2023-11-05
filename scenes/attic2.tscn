@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://txcyc4jvg0bt"]
+[gd_scene load_steps=16 format=3 uid="uid://txcyc4jvg0bt"]
 
 [ext_resource type="Texture2D" uid="uid://bo0srpnpw4f1y" path="res://images/attic2.png" id="1_hmrm0"]
 [ext_resource type="Script" path="res://scripts/attic1.gd" id="1_yktym"]
@@ -12,9 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://bjslxs2nfkoew" path="res://scenes/player.tscn" id="7_gjn45"]
 [ext_resource type="Script" path="res://scripts/fallowCam.gd" id="8_c3abr"]
 [ext_resource type="Texture2D" uid="uid://btmekuxcr5vnu" path="res://images/cat.png" id="11_ea5dy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqg81"]
-size = Vector2(117, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kf7tw"]
 size = Vector2(10, 3)
@@ -53,14 +50,6 @@ texture_filter = 1
 position = Vector2(-342, 71.3333)
 texture = ExtResource("4_4akdx")
 offset = Vector2(0, -101)
-
-[node name="ladder" type="Area2D" parent="StaticBody2D/Attic"]
-position = Vector2(162.667, 21.3333)
-scale = Vector2(0.666667, 0.666667)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Attic/ladder"]
-position = Vector2(204.999, 3.00005)
-shape = SubResource("RectangleShape2D_uqg81")
 
 [node name="noodle" type="Sprite2D" parent="StaticBody2D/Attic"]
 position = Vector2(64.6667, 31.3333)
@@ -126,6 +115,11 @@ position = Vector2(-0.000305176, -1)
 scale = Vector2(3.44, 1.875)
 flipCharacter = false
 
+[node name="ladder" parent="StaticBody2D/Attic" instance=ExtResource("6_1umch")]
+position = Vector2(300, 23.333)
+scale = Vector2(2.655, 2.19)
+flipCharacter = false
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 visible = false
 z_index = 2
@@ -142,6 +136,3 @@ limit_left = 0
 limit_top = -30
 script = ExtResource("8_c3abr")
 map = NodePath("../../StaticBody2D/Attic")
-
-[connection signal="body_entered" from="StaticBody2D/Attic/ladder" to="." method="_on_ladder_body_entered"]
-[connection signal="body_exited" from="StaticBody2D/Attic/ladder" to="." method="_on_ladder_body_exited"]

@@ -8,12 +8,13 @@ var nearLadder:bool=false
 #text_box is autoloaded since im using it in every lvl
 @onready var textBox :textBoxClass = get_node("/root/text_box")
 
+#after sleeping, reset character sprite and position
+#entering and reeantering the attic logic
 func _ready():
 	removeAddNodes()
 	match self.name:
 		"attic1":
 			if globals.firstTime(self.name):
-				#after sleeping, reset character sprite and position
 				globals.getPlayer().position=Vector2(161,234)
 				globals.getPlayer().animationReset()
 
@@ -45,23 +46,7 @@ func _ready():
 
 func _process(delta):
 	match self.name:
-		"attic1":
-
-			if(Input.is_action_just_pressed("ui_accept")) :
-				if nearLadder:
-					get_tree().change_scene_to_file("scenes/home1.tscn")
-
-		"attic2":
-
-			if(Input.is_action_just_pressed("ui_accept")) :
-				if nearLadder:
-					get_tree().change_scene_to_file("scenes/home2.tscn")
-
 		"attic3":
-
-			if(Input.is_action_just_pressed("ui_accept")) :
-				if nearLadder:
-					get_tree().change_scene_to_file("scenes/home3.tscn")
 
 			if globals.npcTriggered["flapjack"]==true:
 				globals.npcRef["flapjack"].get_child(1).play("crying")
@@ -69,16 +54,6 @@ func _process(delta):
 			if globals.npcTriggered["flapjack2"]==true and text_box.current_state==text_box.State.ready:
 				globals.npcRef["flapjack2"].get_child(1).play("noHead")
 				globals.getPlayer().changeMode("EatFlapjack")
-
-
-func _on_ladder_body_entered(body:Node2D):
-	if body is CharacterBody2D:
-		nearLadder=true
-
-
-func _on_ladder_body_exited(body:Node2D):
-	if body is CharacterBody2D:
-		nearLadder=false
 
 
 #before

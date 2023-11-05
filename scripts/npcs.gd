@@ -58,7 +58,8 @@ func _process(delta):
 									endOfChat(npcConv+1)
 									globals.removeNode(self,true)
 
-
+					"ladder":
+						get_tree().change_scene_to_file("scenes/home1.tscn")
 					"bed":
 						if globals.npcTriggered["rat"]:
 							match npcConv:
@@ -150,7 +151,8 @@ func _process(delta):
 							4:
 								if globals.getPlayer().animationFinished():
 									endOfChat(npcConv+1)
-									
+					"ladder":
+						get_tree().change_scene_to_file("scenes/home2.tscn")
 					"noodle":
 						match npcConv:
 							0:
@@ -246,6 +248,8 @@ func _process(delta):
 							inChat=false
 			"attic3":
 				match npcName:
+					"ladder":
+						get_tree().change_scene_to_file("scenes/home3.tscn")
 					"bed":
 						if globals.npcTriggered.has("knife") and globals.npcTriggered["knife"]:
 							text_box.queue_text(":):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):):)--0.01--red")

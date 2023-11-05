@@ -16,12 +16,12 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous  frame.
 func _process(delta):
 	match self.name:
-
 		"home3":
-			if globals.npcTriggered.has("knife") and globals.npcTriggered["knife"]==true:
+			if globals.npcRef["knife"]!=null and globals.npcTriggered.has("knife") and globals.npcTriggered["knife"]==true:
 				globals.getPlayer().changeMode("Knife")
 				makeDark()
 				removeNodes()
+				globals.removeNode(globals.npcRef["knife"],true)
 
 func makeDark():
 	self.modulate=Color("a2a2a2")
